@@ -1,0 +1,82 @@
+package stefany.piccaro.submission.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Entity
+@Table(name = "reviews")
+public class Review {
+
+    // ----- Properties -----
+    @Id
+    @GeneratedValue
+    @Column(name = "review_id")
+    private UUID reviewId;
+
+    @Column(nullable = false)
+    private int rating;
+
+    @Column(columnDefinition = "TEXT")
+    private String comment;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+
+    // ----- Relationships -----
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User guest;
+
+    @ManyToOne
+    @JoinColumn(name = "property_id", nullable = false)
+    private Property property;
+
+
+    // ----- Constructors -----
+    public Review() {}
+
+    public Review(int rating, String comment, LocalDateTime createdAt,
+                  User guest, Property property) {
+        this.rating = rating;
+        this.comment = comment;
+        this.createdAt = createdAt;
+        this.guest = guest;
+        this.property = property;
+    }
+
+
+    // ----- Getters/Setters -----
+    public UUID getReviewId() { return reviewId; }
+
+    public int getRating() { return rating; }
+    public void setRating(int rating) { this.rating = rating; }
+
+    public String getComment() { return comment; }
+    public void setComment(String comment) { this.comment = comment; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public User getGuest() { return guest; }
+    public void setGuest(User guest) { this.guest = guest; }
+
+    public Property getProperty() { return property; }
+    public void setProperty(Property property) { this.property = property; }
+
+
+    // ----- String Conversion -----
+    @Override
+    public String toString() {
+        return "Review{" +
+                "reviewId=" + reviewId +
+                ", rating=" + rating +
+                ", comment='" + comment + '\'' +
+                ", createdAt=" + createdAt +
+                ", userId=" + (guest != null ? guest.getUserId() : null) +
+                ", propertyId=" + (property != null ? property.getPropertyId() : null) +
+                '}';
+    }
+}
