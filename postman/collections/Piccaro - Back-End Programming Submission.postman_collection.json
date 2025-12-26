@@ -1,0 +1,447 @@
+{
+  "info": {
+    "_postman_id": "2163f26c-93b9-41f6-9d8c-99ec230b894d",
+    "name": "Piccaro - Back-End Programming Submission",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46133175"
+  },
+  "item": [
+    {
+      "name": "Get Current Auth Info",
+      "id": "93b6ceee-fe49-48cf-ba1b-c2de8ddc20eb",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{JWT_TOKEN}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/auth/info",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "info"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login as Super Admin",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
+            "exec": [
+              "let jsonData = pm.response.json();\r",
+              "\r",
+              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
+              "} else {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "7b2e51a4-37f9-49c3-b83b-0fc46f7f3c98",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"super.admin@example.com\",\r\n    \"password\": \"SuperAdmin123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login as Basic Admin",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
+            "exec": [
+              "let jsonData = pm.response.json();\r",
+              "\r",
+              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
+              "} else {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "ed2ac491-0a27-4f83-b934-b42da6dbbae5",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"basic.admin@example.com\",\r\n    \"password\": \"BasicAdmin123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login as Guest User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
+            "exec": [
+              "let jsonData = pm.response.json();\r",
+              "\r",
+              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
+              "} else {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "57469faf-f91c-46e0-bb39-aac806cfa76d",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"guest.user@example.com\",\r\n    \"password\": \"GuestUser123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login as Host User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
+            "exec": [
+              "let jsonData = pm.response.json();\r",
+              "\r",
+              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
+              "} else {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "1ac7527b-cf95-4380-9d94-ef642c19148b",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"host.user@example.com\",\r\n    \"password\": \"HostUser123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login as Guest & Host User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
+            "exec": [
+              "let jsonData = pm.response.json();\r",
+              "\r",
+              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
+              "} else {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "f5455678-4f94-4451-8300-0a96efd376c5",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"guest.host@example.com\",\r\n    \"password\": \"GuestHost123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login as Blocked User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
+            "exec": [
+              "let jsonData = pm.response.json();\r",
+              "\r",
+              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
+              "} else {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "ea1a872b-94b1-4479-9c46-ee46d51719ab",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"blocked.user@example.com\",\r\n    \"password\": \"BlockedUser123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login with Incorrect Credentials",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
+            "exec": [
+              "let jsonData = pm.response.json();\r",
+              "\r",
+              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
+              "} else {\r",
+              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "f9aa2128-68c5-431c-bcd5-f8003f76b7c5",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"super.admin@example.com\",\r\n    \"password\": \"IncorrectPassword\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Amenities",
+      "id": "f9ebc96e-88fa-434e-ae36-88b9cfb86364",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{JWT_TOKEN}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/amenity/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "amenity",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "fc1bfd02-4d8a-4b7d-870d-58f4cf9d73bc",
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "3b2c0981-7643-4c5f-b627-7a7c32797b9a",
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "10aed551-4a05-40ac-ba86-9813272adced",
+      "key": "JWT_TOKEN",
+      "value": ""
+    }
+  ]
+}

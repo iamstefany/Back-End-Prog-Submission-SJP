@@ -1,0 +1,14 @@
+{
+  "workspace": {
+    "id": "670f7797-e05d-4157-82b8-949a66945da5"
+  },
+  "entities": {
+    "collections": [
+      "..\\postman\\collections\\Piccaro - Back-End Programming Submission.postman_collection.json"
+    ],
+    "environments": [],
+    "specs": [],
+    "flows": [],
+    "globals": []
+  }
+}
