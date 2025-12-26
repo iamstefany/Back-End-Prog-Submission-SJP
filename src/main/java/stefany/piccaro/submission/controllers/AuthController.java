@@ -1,32 +1,46 @@
 package stefany.piccaro.submission.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import stefany.piccaro.submission.dto.LoginRequestDTO;
-import stefany.piccaro.submission.dto.LoginResponseDTO;
-import stefany.piccaro.submission.dto.SignUpRequestDTO;
-import stefany.piccaro.submission.dto.SignUpResponseDTO;
+import stefany.piccaro.submission.dto.*;
 import stefany.piccaro.submission.entities.Role;
+import stefany.piccaro.submission.entities.User;
 import stefany.piccaro.submission.exceptions.ForbiddenException;
+import stefany.piccaro.submission.exceptions.UnauthorizedException;
 import stefany.piccaro.submission.exceptions.ValidationException;
+import stefany.piccaro.submission.security.JWTTools;
 import stefany.piccaro.submission.services.AuthService;
 import stefany.piccaro.submission.services.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+
+    @Autowired
+    private JWTTools jwtTools;
     @Autowired
     private AuthService authService;
     @Autowired
     private UserService userService;
 
+    @GetMapping("/info")
+    public AuthInfoDTO info(HttpServletRequest request) {
+        return authService.getAuthInfo(request);
+    }
+
     @PostMapping("/login")
     public LoginResponseDTO login(@RequestBody LoginRequestDTO body) {
-        return new LoginResponseDTO(this.authService.attemptLogin(body));
+        return new LoginResponseDTO(authService.attemptLogin(body));
     }
 
     @PostMapping("/register/{role}")

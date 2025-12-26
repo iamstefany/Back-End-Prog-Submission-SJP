@@ -12,4 +12,10 @@ public class HealthController {
     public String check() {
         return "OK"; // Just checking if the API is reachable
     }
+
+    @GetMapping("/500")
+    public String error500() {
+        int a = 1 / 0; // This will cause a division by zero error
+        return "OK";
+    }
 }
