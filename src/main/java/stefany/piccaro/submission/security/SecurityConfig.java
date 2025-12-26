@@ -18,7 +18,7 @@ import java.util.List;
 
 @EnableWebSecurity
 @Configuration
-@EnableMethodSecurity // Obbligatoria per poter utilizzare le annotazioni @PreAuthorize e @PostAuthorize
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean

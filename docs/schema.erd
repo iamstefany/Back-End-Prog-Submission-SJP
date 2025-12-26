@@ -4,8 +4,8 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -600.3517,
-    "scrollLeft": -548.4216,
+    "scrollTop": -507.3074,
+    "scrollLeft": -310.998,
     "zoomLevel": 0.4,
     "show": 431,
     "database": 4,
@@ -2090,7 +2090,7 @@
         "comment": "",
         "dataType": "DATETIME",
         "default": "",
-        "options": 0,
+        "options": 8,
         "ui": {
           "keys": 0,
           "widthName": 60,
@@ -2099,7 +2099,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1766775376073,
+          "updateAt": 1766781864479,
           "createAt": 1766775361968
         }
       },
@@ -2110,7 +2110,7 @@
         "comment": "",
         "dataType": "BOOLEAN",
         "default": "",
-        "options": 0,
+        "options": 8,
         "ui": {
           "keys": 0,
           "widthName": 69,
@@ -2119,7 +2119,7 @@
           "widthDefault": 60
         },
         "meta": {
-          "updateAt": 1766775379149,
+          "updateAt": 1766781864946,
           "createAt": 1766775362241
         }
       },

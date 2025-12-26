@@ -46,16 +46,30 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             String accessToken = authorizationHeader.replace("Bearer ", "");
             jwtTools.verifyToken(accessToken);
 
-            // Extract roles from token and set authorities
-            int rolesBitmask = jwtTools.getRolesFromToken(accessToken);
-            List<GrantedAuthority> authorities = Arrays.stream(Role.values())
-                    .filter(r -> Role.hasRole(rolesBitmask, r)) // use your helper
-                    .map(r -> new SimpleGrantedAuthority("ROLE_" + r.name()))
-                    .collect(Collectors.toList());
-
             // Get user ID from token, find user, and set authentication in Security Context
             UUID userId = jwtTools.getUserIDFromToken(accessToken);
             User found = userService.findById(userId);
+
+            List<GrantedAuthority> authorities = new ArrayList<>();
+
+            if (found != null) {
+                // Grant authorities only if user is not blocked
+                boolean isBlocked = found.getIsBlocked();
+
+                if (!isBlocked) {
+                    // Extract roles from token and set authorities
+                    int rolesBitmask = jwtTools.getRolesFromToken(accessToken);
+                    authorities = Arrays.stream(Role.values())
+                            .filter(r -> Role.hasRole(rolesBitmask, r)) // use your helper
+                            .map(r -> new SimpleGrantedAuthority("ROLE_" + r.name()))
+                            .collect(Collectors.toList());
+                }
+                else {
+                    throw new UnauthorizedException("Your account is blocked.");
+                }
+            } else {
+                throw new UnauthorizedException("User not found.");
+            }
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(userId, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);

@@ -37,6 +37,7 @@ public class UserService {
         Optional<User> found = userRepository.findByEmail(request.email());
 
         User user;
+
         // New user
         if (found.isEmpty()) {
             user = new User(request.email(), bcrypt.encode(request.password()),
