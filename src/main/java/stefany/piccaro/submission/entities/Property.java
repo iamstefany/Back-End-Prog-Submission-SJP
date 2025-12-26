@@ -17,19 +17,19 @@ public class Property {
     @Column(name = "property_id")
     private UUID propertyId;
 
-    @Column(nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false)
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(nullable = false)
+    @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(nullable = false)
+    @Column(name = "country", nullable = false)
     private String country;
 
     @Column(name = "price_per_night", nullable = false)
@@ -49,9 +49,9 @@ public class Property {
 
 
     // ----- Relationships -----
-    @ManyToOne // N Properties -> 1 Host
-    @JoinColumn(name = "host_user_id", nullable = false)
-    private Host host;
+    @ManyToOne // N Properties -> 1 User
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @OneToMany(mappedBy = "property") // 1 Property -> N Bookings
     @JsonIgnore
@@ -76,7 +76,7 @@ public class Property {
     public Property(String title, String description, String address,
                     String city, String country, BigDecimal pricePerNight,
                     int maxGuests, boolean automaticConfirmation,
-                    LocalTime checkInTime, LocalTime checkOutTime, Host host) {
+                    LocalTime checkInTime, LocalTime checkOutTime, User user) {
         this.title = title;
         this.description = description;
         this.address = address;
@@ -87,7 +87,7 @@ public class Property {
         this.automaticConfirmation = automaticConfirmation;
         this.checkInTime = checkInTime;
         this.checkOutTime = checkOutTime;
-        this.host = host;
+        this.user = user;
     }
 
 
@@ -124,8 +124,8 @@ public class Property {
     public LocalTime getCheckOutTime() { return checkOutTime; }
     public void setCheckOutTime(LocalTime checkOutTime) { this.checkOutTime = checkOutTime; }
 
-    public Host getHost() { return host; }
-    public void setHost(Host host) { this.host = host; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
     public List<Booking> getBookings() { return bookings; }
     public void setBookings(List<Booking> bookings) { this.bookings = bookings; }
@@ -152,7 +152,7 @@ public class Property {
                 ", automaticConfirmation=" + automaticConfirmation +
                 ", checkInTime=" + checkInTime +
                 ", checkOutTime=" + checkOutTime +
-                ", hostId=" + (host != null ? host.getUserId() : null) +
+                ", userId=" + (user != null ? user.getUserId() : null) +
                 '}';
     }
 }

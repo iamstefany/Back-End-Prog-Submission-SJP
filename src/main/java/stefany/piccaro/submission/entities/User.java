@@ -1,13 +1,14 @@
 package stefany.piccaro.submission.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // For Guest/Host/Admin subclasses
-public abstract class User {
+public class User {
 
     // ----- Properties -----
     @Id
@@ -15,10 +16,10 @@ public abstract class User {
     @Column(name = "user_id")
     private UUID userId;
 
-    @Column(nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "first_name", nullable = false)
@@ -36,8 +37,31 @@ public abstract class User {
     @Column(name = "is_blocked", nullable = false)
     private boolean isBlocked = false;
 
-    @Column(nullable = false)
+    @Column(name = "roles", nullable = false)
     private int roles;
+
+
+    // ----- Relationships -----
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private GuestProfile guestProfile;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private HostProfile hostProfile;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private AdminProfile adminProfile;
+
+    @OneToMany(mappedBy = "user") // 1 User -> N Reviews
+    @JsonIgnore
+    private List<Review> reviews;
+
+    @OneToMany(mappedBy = "user") // 1 User -> N Bookings
+    @JsonIgnore
+    private List<Booking> bookings;
+
+    @OneToMany(mappedBy = "user") // 1 User -> N Properties
+    @JsonIgnore
+    private List<Property> properties;
 
 
     // ----- Utilities -----
@@ -48,6 +72,18 @@ public abstract class User {
 
     // ----- Constructors -----
     public User() {}
+
+    public User(User user) {
+        this.userId = user.getUserId();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.profileImageUrl = user.getProfileImageUrl();
+        this.registrationDate = user.getRegistrationDate();
+        this.isBlocked = user.getIsBlocked();
+        this.roles = user.getRoles();
+    }
 
     public User(String email, String password, String firstName, String lastName,
                 String profileImageUrl, LocalDateTime registrationDate, boolean isBlocked, int roles) {
@@ -83,28 +119,43 @@ public abstract class User {
     public LocalDateTime getRegistrationDate() { return registrationDate; }
     public void setRegistrationDate(LocalDateTime registrationDate) { this.registrationDate = registrationDate; }
 
-    public boolean isBlocked() { return isBlocked; }
+    public boolean getIsBlocked() { return isBlocked; }
     public void setBlocked(boolean blocked) { isBlocked = blocked; }
 
     public int getRoles() { return roles; }
     public void setRoles(int roles) { this.roles = roles; }
 
+    public GuestProfile getGuestProfile() { return guestProfile; }
+    public void setGuestProfile(GuestProfile guestProfile) { this.guestProfile = guestProfile; }
+
+    public HostProfile getHostProfile() { return hostProfile; }
+    public void setHostProfile(HostProfile hostProfile) { this.hostProfile = hostProfile; }
+
+    public AdminProfile getAdminProfile() { return adminProfile; }
+    public void setAdminProfile(AdminProfile adminProfile) { this.adminProfile = adminProfile; }
+
+    public List<Review> getReviews() { return reviews; }
+    public void setReviews(List<Review> reviews) { this.reviews = reviews; }
+
+    public List<Booking> getBookings() { return bookings; }
+    public void setBookings(List<Booking> bookings) { this.bookings = bookings; }
+
+    public List<Property> getProperties() { return properties; }
+    public void setProperties(List<Property> properties) { this.properties = properties; }
+
 
     // ----- String Conversion -----
     @Override
     public String toString() {
-        return "User{" + innerPropertiesToString() + "}";
-    }
-
-    protected String innerPropertiesToString() {
-        return "userId=" + userId +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", profileImageUrl='" + profileImageUrl + '\'' +
-                ", registrationDate='" + registrationDate + '\'' +
-                ", isBlocked='" + isBlocked + '\'' +
-                ", roles=" + roles;
+        return "User{" +
+                    "userId=" + userId +
+                    ", email='" + email + '\'' +
+                    ", firstName='" + firstName + '\'' +
+                    ", lastName='" + lastName + '\'' +
+                    ", profileImageUrl='" + profileImageUrl + '\'' +
+                    ", registrationDate='" + registrationDate + '\'' +
+                    ", isBlocked='" + isBlocked + '\'' +
+                    ", roles=" + roles +
+                "}";
     }
 }
-

@@ -15,10 +15,10 @@ public class Review {
     @Column(name = "review_id")
     private UUID reviewId;
 
-    @Column(nullable = false)
+    @Column(name = "rating", nullable = false)
     private int rating;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "comment", columnDefinition = "TEXT")
     private String comment;
 
     @Column(name = "created_at", nullable = false)
@@ -28,7 +28,7 @@ public class Review {
     // ----- Relationships -----
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User guest;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
@@ -39,11 +39,11 @@ public class Review {
     public Review() {}
 
     public Review(int rating, String comment, LocalDateTime createdAt,
-                  User guest, Property property) {
+                  User user, Property property) {
         this.rating = rating;
         this.comment = comment;
         this.createdAt = createdAt;
-        this.guest = guest;
+        this.user = user;
         this.property = property;
     }
 
@@ -60,8 +60,8 @@ public class Review {
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public User getGuest() { return guest; }
-    public void setGuest(User guest) { this.guest = guest; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
     public Property getProperty() { return property; }
     public void setProperty(Property property) { this.property = property; }
@@ -75,7 +75,7 @@ public class Review {
                 ", rating=" + rating +
                 ", comment='" + comment + '\'' +
                 ", createdAt=" + createdAt +
-                ", userId=" + (guest != null ? guest.getUserId() : null) +
+                ", userId=" + (user != null ? user.getUserId() : null) +
                 ", propertyId=" + (property != null ? property.getPropertyId() : null) +
                 '}';
     }

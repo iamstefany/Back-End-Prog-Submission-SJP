@@ -25,14 +25,14 @@ public class Booking {
     @Column(name = "total_price", nullable = false)
     private BigDecimal totalPrice;
 
-    @Column(nullable = false)
+    @Column(name = "status", nullable = false)
     private String status;
 
 
     // ----- Relationships -----
-    @ManyToOne // N bookings -> 1 user (guest)
+    @ManyToOne // N bookings -> 1 User
     @JoinColumn(name = "user_id", nullable = false)
-    private User guest;
+    private User user;
 
     @ManyToOne // N bookings -> 1 property
     @JoinColumn(name = "property_id", nullable = false)
@@ -52,14 +52,14 @@ public class Booking {
             LocalDateTime checkOutDate,
             BigDecimal totalPrice,
             String status,
-            User guest,
+            User user,
             Property property
     ) {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.totalPrice = totalPrice;
         this.status = status;
-        this.guest = guest;
+        this.user = user;
         this.property = property;
     }
 
@@ -79,8 +79,8 @@ public class Booking {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
-    public User getGuest() { return guest; }
-    public void setGuest(User guest) { this.guest = guest; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
     public Property getProperty() { return property; }
     public void setProperty(Property property) { this.property = property; }

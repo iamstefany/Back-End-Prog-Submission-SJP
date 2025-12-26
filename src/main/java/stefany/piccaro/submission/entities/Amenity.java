@@ -15,7 +15,7 @@ public class Amenity {
     @Column(name = "amenity_id")
     private UUID amenityId;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
 
