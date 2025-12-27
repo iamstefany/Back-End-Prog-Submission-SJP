@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import stefany.piccaro.submission.dto.SignUpRequestDTO;
 import stefany.piccaro.submission.dto.SignUpResponseDTO;
 import stefany.piccaro.submission.entities.*;
+import stefany.piccaro.submission.exceptions.ForbiddenException;
 import stefany.piccaro.submission.exceptions.NotFoundException;
 import stefany.piccaro.submission.exceptions.ValidationException;
 import stefany.piccaro.submission.repositories.UserRepository;
@@ -36,28 +37,22 @@ public class UserService {
 
         Optional<User> found = userRepository.findByEmail(request.email());
 
-        User user;
-
-        // New user
-        if (found.isEmpty()) {
-            user = new User(request.email(), bcrypt.encode(request.password()),
-                    request.firstName(), request.lastName(),
-                    "https://ui-avatars.com/api/?name=" + request.firstName() + "+" + request.lastName(),
-                    LocalDateTime.now(), false, role.getBit());
-        }
-        // Existing user - we'll update fields and upgrade their roles
-        else {
-            user = found.get();
-            user.setEmail(request.email());
-            user.setPassword(bcrypt.encode(request.password()));
-            user.setFirstName(request.firstName());
-            user.setLastName(request.lastName());
-            user.setRoles(user.getRoles() | role.getBit());
+        // Prevent duplicate emails
+        if (found.isPresent()) {
+            throw new ForbiddenException("User with email " + request.email() + " already exists.");
         }
 
+        // Create new User entity
+        User user = new User(request.email(), bcrypt.encode(request.password()),
+                request.firstName(), request.lastName(),
+                "https://ui-avatars.com/api/?name=" + request.firstName() + "+" + request.lastName(),
+                LocalDateTime.now(), false, role.getBit());
+
+        // Create relevant Profile based on role
         switch (role) {
             case GUEST -> {
                 GuestProfile guestProfile = new GuestProfile();
+                guestProfile.setUserId(user.getUserId());
                 guestProfile.setUser(user);
                 guestProfile.setDateOfBirth(request.dateOfBirth());
                 guestProfile.setPhoneNumber(request.phoneNumber());
@@ -66,6 +61,7 @@ public class UserService {
             }
             case HOST -> {
                 HostProfile hostProfile = new HostProfile();
+                hostProfile.setUserId(user.getUserId());
                 hostProfile.setUser(user);
                 hostProfile.setHostSince(LocalDate.now());
                 hostProfile.setHostVerified(false); // Host not verified by default, admins can verify later

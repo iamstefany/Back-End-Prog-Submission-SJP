@@ -2,8 +2,7 @@
   "info": {
     "_postman_id": "2163f26c-93b9-41f6-9d8c-99ec230b894d",
     "name": "Piccaro - Back-End Programming Submission",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "46133175"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
@@ -14,7 +13,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer {{JWT_TOKEN}}",
+            "value": "Bearer {{BearerToken}}",
             "type": "text"
           }
         ],
@@ -35,26 +34,6 @@
     },
     {
       "name": "Login as Super Admin",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
-            "exec": [
-              "let jsonData = pm.response.json();\r",
-              "\r",
-              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
-              "} else {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
-              "}"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
       "id": "7b2e51a4-37f9-49c3-b83b-0fc46f7f3c98",
       "request": {
         "method": "POST",
@@ -85,26 +64,6 @@
     },
     {
       "name": "Login as Basic Admin",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
-            "exec": [
-              "let jsonData = pm.response.json();\r",
-              "\r",
-              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
-              "} else {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
-              "}"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
       "id": "ed2ac491-0a27-4f83-b934-b42da6dbbae5",
       "request": {
         "method": "POST",
@@ -135,26 +94,6 @@
     },
     {
       "name": "Login as Guest User",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
-            "exec": [
-              "let jsonData = pm.response.json();\r",
-              "\r",
-              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
-              "} else {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
-              "}"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
       "id": "57469faf-f91c-46e0-bb39-aac806cfa76d",
       "request": {
         "method": "POST",
@@ -185,26 +124,6 @@
     },
     {
       "name": "Login as Host User",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
-            "exec": [
-              "let jsonData = pm.response.json();\r",
-              "\r",
-              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
-              "} else {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
-              "}"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
       "id": "1ac7527b-cf95-4380-9d94-ef642c19148b",
       "request": {
         "method": "POST",
@@ -235,26 +154,6 @@
     },
     {
       "name": "Login as Guest & Host User",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
-            "exec": [
-              "let jsonData = pm.response.json();\r",
-              "\r",
-              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
-              "} else {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
-              "}"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
       "id": "f5455678-4f94-4451-8300-0a96efd376c5",
       "request": {
         "method": "POST",
@@ -285,26 +184,6 @@
     },
     {
       "name": "Login as Blocked User",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
-            "exec": [
-              "let jsonData = pm.response.json();\r",
-              "\r",
-              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
-              "} else {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
-              "}"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
       "id": "ea1a872b-94b1-4479-9c46-ee46d51719ab",
       "request": {
         "method": "POST",
@@ -335,26 +214,6 @@
     },
     {
       "name": "Login with Incorrect Credentials",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
-            "exec": [
-              "let jsonData = pm.response.json();\r",
-              "\r",
-              "if (pm.response.code === 200 && jsonData.accessToken) {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", jsonData.accessToken);\r",
-              "} else {\r",
-              "    pm.collectionVariables.set(\"JWT_TOKEN\", \"\");\r",
-              "}"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
       "id": "f9aa2128-68c5-431c-bcd5-f8003f76b7c5",
       "request": {
         "method": "POST",
@@ -384,6 +243,208 @@
       "response": []
     },
     {
+      "name": "Login with <Custom Credentials>",
+      "id": "d7258866-3665-4fbf-8c96-b21c8aabae0c",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"my.guest@example.com\",\r\n    \"password\": \"MyGuest123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register as Guest (missing details)",
+      "id": "f1247585-45c7-4436-ac05-e22910b639f5",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"my.guest@example.com\",\r\n    \"password\": \"MyGuest123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/register/guest",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "register",
+            "guest"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register as Guest (successful)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "892da5ed-1f6e-4963-8f2d-21a137f72295",
+            "exec": [
+              "// Age constraints\r",
+              "const MIN_AGE = 18;\r",
+              "const MAX_AGE = 60;\r",
+              "\r",
+              "const today = new Date();\r",
+              "\r",
+              "// Generate random age between 18 and 60\r",
+              "const age = Math.floor(Math.random() * (MAX_AGE - MIN_AGE + 1)) + MIN_AGE;\r",
+              "\r",
+              "// Generate a random extra offset within the year\r",
+              "const extraDays = Math.floor(Math.random() * 365);\r",
+              "\r",
+              "// Calculate date of birth\r",
+              "const dob = new Date(today);\r",
+              "dob.setFullYear(today.getFullYear() - age);\r",
+              "dob.setDate(dob.getDate() - extraDays);\r",
+              "\r",
+              "// Format as yyyy-MM-dd\r",
+              "const yyyy = dob.getFullYear();\r",
+              "const mm = String(dob.getMonth() + 1).padStart(2, '0');\r",
+              "const dd = String(dob.getDate()).padStart(2, '0');\r",
+              "\r",
+              "pm.collectionVariables.set(\"randomDOB\", `${yyyy}-${mm}-${dd}`);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "208a2b5c-5a0c-49d7-a56b-bcd60e9e772f",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"my.guest@example.com\",\r\n    \"password\": \"MyGuest123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n    \"dateOfBirth\": \"{{randomDOB}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/register/guest",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "register",
+            "guest"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register as Host (missing details)",
+      "id": "a369f582-c340-4b3a-9b1c-b65a0c3c49e0",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"my.host@example.com\",\r\n    \"password\": \"myHost123\",\r\n    \"firstName\": \"{{$randomFirstName}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/register/host",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "register",
+            "host"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register as Host (successful)",
+      "id": "1b519c80-c71b-4161-8135-19100552b0b3",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"my.host@example.com\",\r\n    \"password\": \"myHost123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/register/host",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "register",
+            "host"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Get Amenities",
       "id": "f9ebc96e-88fa-434e-ae36-88b9cfb86364",
       "request": {
@@ -391,7 +452,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer {{JWT_TOKEN}}",
+            "value": "Bearer {{BearerToken}}",
             "type": "text"
           }
         ],
@@ -415,7 +476,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "fc1bfd02-4d8a-4b7d-870d-58f4cf9d73bc",
+        "id": "9bcebc8f-bb70-49e9-8bda-b9d031fe33ed",
         "type": "text/javascript",
         "packages": {},
         "requests": {},
@@ -427,20 +488,33 @@
     {
       "listen": "test",
       "script": {
-        "id": "3b2c0981-7643-4c5f-b627-7a7c32797b9a",
+        "id": "a29df7d5-2473-4ccd-9ada-347a1a84f8e2",
         "type": "text/javascript",
         "packages": {},
         "requests": {},
         "exec": [
-          ""
+          "var requestPath = pm.request.url.getPath();\r",
+          "\r",
+          "// Update JWT token on all login requests\r",
+          "if (requestPath.toLowerCase() == \"/auth/login\") {\r",
+          "    let jsonData = pm.response.json(); \r",
+          "    \r",
+          "    // Set only if successfull response, set as empty otherwise\r",
+          "    if (pm.response.code === 200 && jsonData.accessToken) {\r",
+          "        pm.globals.set(\"BearerToken\", `${jsonData.accessToken}`);\r",
+          "    } \r",
+          "    else {\r",
+          "        pm.globals.set(\"BearerToken\", \"\");\r",
+          "    }\r",
+          "}"
         ]
       }
     }
   ],
   "variable": [
     {
-      "id": "10aed551-4a05-40ac-ba86-9813272adced",
-      "key": "JWT_TOKEN",
+      "id": "7174e497-3628-463c-a8d0-9c7a44527010",
+      "key": "randomDOB",
       "value": ""
     }
   ]
