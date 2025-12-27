@@ -34,16 +34,9 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
         try {
-            // Check for Authorization Header formatted as "Bearer <token>"
-            String authorizationHeader = request.getHeader("Authorization");
-            if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-                throw new UnauthorizedException("Missing or malformed token.");
-            }
-
             // Get token from Authorization Header and verify
-            String accessToken = authorizationHeader.replace("Bearer ", "");
+            String accessToken = jwtTools.getCurrentToken(request);
             jwtTools.verifyToken(accessToken);
 
             // Get user ID from token, find user, and set authentication in Security Context

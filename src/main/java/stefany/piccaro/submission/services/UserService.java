@@ -3,8 +3,10 @@ package stefany.piccaro.submission.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import stefany.piccaro.submission.dto.SignUpRequestDTO;
 import stefany.piccaro.submission.dto.SignUpResponseDTO;
+import stefany.piccaro.submission.dto.UserInfoDTO;
 import stefany.piccaro.submission.entities.*;
 import stefany.piccaro.submission.exceptions.ForbiddenException;
 import stefany.piccaro.submission.exceptions.NotFoundException;
@@ -21,6 +23,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ImageStorageService imageStorageService;
     @Autowired
     private PasswordEncoder bcrypt;
 
@@ -76,5 +80,21 @@ public class UserService {
         // Update host/guest profile info and return User ID
         User saved = userRepository.save(user);
         return new SignUpResponseDTO(user.getUserId());
+    }
+
+    public UserInfoDTO updateProfileImage(UUID userId, MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new ValidationException("File cannot be empty.");
+        }
+
+        User user = findById(userId);
+
+        // Upload image (local / cloud / third-party API)
+        String imageUrl = imageStorageService.upload(file);
+
+        user.setProfileImageUrl(imageUrl);
+        userRepository.save(user);
+
+        return UserInfoDTO.from(user);
     }
 }

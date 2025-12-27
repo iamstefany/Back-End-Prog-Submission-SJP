@@ -3,6 +3,7 @@ package stefany.piccaro.submission.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ public class User {
     private String email;
 
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "first_name", nullable = false)
@@ -124,6 +126,19 @@ public class User {
 
     public int getRoles() { return roles; }
     public void setRoles(int roles) { this.roles = roles; }
+
+    @Transient
+    public List<String> getRoleNames() {
+        List<String> roleNames = new ArrayList<>();
+
+        for (Role role : Role.values()) {
+            if ((this.roles & role.getBit()) != 0) {
+                roleNames.add(role.name());
+            }
+        }
+
+        return roleNames;
+    }
 
     public GuestProfile getGuestProfile() { return guestProfile; }
     public void setGuestProfile(GuestProfile guestProfile) { this.guestProfile = guestProfile; }

@@ -2,9 +2,11 @@ package stefany.piccaro.submission.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import stefany.piccaro.submission.entities.User;
+import stefany.piccaro.submission.exceptions.UnauthorizedException;
 
 import java.util.Date;
 import java.util.UUID;
@@ -50,5 +52,14 @@ public class JWTTools {
                 .parseSignedClaims(accessToken)
                 .getPayload()
                 .get("roles", Integer.class);
+    }
+
+    public String getCurrentToken(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            throw new UnauthorizedException("Missing or malformed Authorization header");
+        }
+
+        return authorizationHeader.replace("Bearer ", "");
     }
 }

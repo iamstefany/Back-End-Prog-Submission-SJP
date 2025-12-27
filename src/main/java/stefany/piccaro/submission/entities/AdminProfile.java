@@ -1,5 +1,6 @@
 package stefany.piccaro.submission.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ public class AdminProfile {
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id", nullable = false) // 1 AdminProfile -> 1 User
+    @JsonIgnore
     private User user;
 
 

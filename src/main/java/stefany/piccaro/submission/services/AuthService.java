@@ -27,12 +27,8 @@ public class AuthService {
     private PasswordEncoder bcrypt;
 
     public AuthInfoDTO getAuthInfo(HttpServletRequest request) {
-        String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            throw new UnauthorizedException("Missing or malformed Authorization header");
-        }
-
-        String token = authorizationHeader.replace("Bearer ", "");
+        // Get token from request
+        String token = jwtTools.getCurrentToken(request);
 
         // Validate token
         jwtTools.verifyToken(token);
@@ -43,21 +39,13 @@ public class AuthService {
         // Load user from DB
         User user = userService.findById(userId);
 
-        // Convert roles bitmask to list of names
-        List<String> roleNames = new ArrayList<>();
-        for (Role role : Role.values()) {
-            if ((user.getRoles() & role.getBit()) != 0) {
-                roleNames.add(role.name());
-            }
-        }
-
         return new AuthInfoDTO(
                 user.getUserId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
                 user.getIsBlocked(),
-                roleNames,
+                user.getRoleNames(),
                 token
         );
     }

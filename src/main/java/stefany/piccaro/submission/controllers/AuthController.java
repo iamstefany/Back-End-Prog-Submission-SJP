@@ -27,22 +27,23 @@ import java.util.UUID;
 public class AuthController {
 
     @Autowired
-    private JWTTools jwtTools;
-    @Autowired
     private AuthService authService;
     @Autowired
     private UserService userService;
 
+    // Get authentication info
     @GetMapping("/info")
     public AuthInfoDTO info(HttpServletRequest request) {
         return authService.getAuthInfo(request);
     }
 
+    // User login
     @PostMapping("/login")
     public LoginResponseDTO login(@RequestBody LoginRequestDTO body) {
         return new LoginResponseDTO(authService.attemptLogin(body));
     }
 
+    // User registration with role assignment
     @PostMapping("/register/{role}")
     @ResponseStatus(HttpStatus.CREATED)
     public SignUpResponseDTO createUser(

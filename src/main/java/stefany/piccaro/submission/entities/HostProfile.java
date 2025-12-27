@@ -28,6 +28,7 @@ public class HostProfile {
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id", nullable = false) // 1 HostProfile -> 1 User
+    @JsonIgnore
     private User user;
 
 
