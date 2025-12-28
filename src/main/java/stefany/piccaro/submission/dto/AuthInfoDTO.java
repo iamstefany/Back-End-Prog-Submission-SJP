@@ -1,6 +1,7 @@
 package stefany.piccaro.submission.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import stefany.piccaro.submission.entities.Role;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public record AuthInfoDTO(
 )
 {
     // Convert roles integer to list of role names internally
+    @JsonProperty("roleNames")
     public List<String> roleNames() {
         return Role.getRoleNames(roles);
     }

@@ -30,10 +30,10 @@ public class JWTTools {
                 // Set subject as user ID
                 .subject(String.valueOf(user.getUserId()))
                 // Include additional claims -> no need to query DB again for these data
-                .claim("firstName", user.getRoles())
-                .claim("lastName", user.getRoles())
-                .claim("email", user.getRoles())
-                .claim("isBlocked", user.getRoles())
+                .claim("firstName", user.getFirstName())
+                .claim("lastName", user.getLastName())
+                .claim("email", user.getEmail())
+                .claim("isBlocked", user.getIsBlocked())
                 .claim("roles", user.getRoles())
                 .claim("isSuperAdmin", user.getAdminProfile() != null && user.getAdminProfile().getIsSuperAdmin())
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
