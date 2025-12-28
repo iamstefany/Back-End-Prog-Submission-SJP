@@ -34,6 +34,7 @@ public class UserController {
     // ------- Get list of users -------
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/list")
+    @ResponseStatus(HttpStatus.OK)
     public List<User> getUsers() {
         return userService.getUsers();
     }
@@ -41,6 +42,7 @@ public class UserController {
 
     // ------- Get user by ID (with role-based access control) -------
     @GetMapping("/{userId}")
+    @ResponseStatus(HttpStatus.FOUND)
     public User getUserById(@PathVariable("userId") UUID userId, HttpServletRequest httpRequest) {
         // Get auth info from request
         AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
@@ -64,6 +66,7 @@ public class UserController {
             value = "/{userId}/upload-profile-picture",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
+    @ResponseStatus(HttpStatus.OK)
     public UploadProfilePictureDTO uploadProfilePicture(
             @PathVariable("userId") UUID userId,
             @RequestParam("file") MultipartFile file,
@@ -85,6 +88,7 @@ public class UserController {
 
     // ------- Edit user -------
     @PatchMapping("/{userId}")
+    @ResponseStatus(HttpStatus.OK)
     public User editUser(
             @PathVariable("userId") UUID userId,
             @RequestBody @Validated EditUserRequestDTO request,

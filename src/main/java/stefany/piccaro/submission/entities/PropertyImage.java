@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "property_image")
+@Table(name = "property_images")
 public class PropertyImage {
 
     // ----- Properties -----
@@ -22,7 +22,7 @@ public class PropertyImage {
 
 
     // ----- Relationship -----
-    @ManyToOne
+    @ManyToOne // N Images -> 1 Property
     @JoinColumn(name = "property_id", nullable = false)
     @JsonIgnore
     private Property property;
@@ -44,8 +44,8 @@ public class PropertyImage {
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
-    public boolean isMain() { return isMain; }
-    public void setMain(boolean main) { isMain = main; }
+    public boolean getIsMain() { return isMain; }
+    public void setIsMain(boolean main) { isMain = main; }
 
     public Property getProperty() { return property; }
     public void setProperty(Property property) { this.property = property; }

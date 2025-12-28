@@ -2,7 +2,10 @@ package stefany.piccaro.submission.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -19,12 +22,6 @@ public class Amenity {
     private String name;
 
 
-    // ----- Relationships -----
-    @OneToMany(mappedBy = "amenity") // 1 Amenity -> N PropertyAmenities
-    @JsonIgnore
-    private List<PropertyAmenity> propertyAmenities;
-
-
     // ----- Constructors -----
     public Amenity() {}
 
@@ -38,11 +35,6 @@ public class Amenity {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-
-    public List<PropertyAmenity> getPropertyAmenities() { return propertyAmenities; }
-    public void setPropertyAmenities(List<PropertyAmenity> propertyAmenities) {
-        this.propertyAmenities = propertyAmenities;
-    }
 
 
     // ----- String Conversion -----

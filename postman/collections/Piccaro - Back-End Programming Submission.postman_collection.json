@@ -68,117 +68,96 @@
           ]
         }
       },
-      "response": []
-    },
-    {
-      "name": "Register as Host (Ready to Use)",
-      "id": "1b519c80-c71b-4161-8135-19100552b0b3",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"my.host@example.com\",\r\n    \"password\": \"myHost123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/auth/register/host",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "register",
-            "host"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Register as Guest (Ready to Use)",
-      "event": [
+      "response": [
         {
-          "listen": "test",
-          "script": {
-            "id": "23d9037a-f7e9-4dd2-89b0-073b069bf26a",
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          "id": "8399e64d-886e-41a2-a32c-952582475778",
+          "name": "Register as Host",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"myhost.1@example.com\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/auth/register/:role",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "register",
+                ":role"
+              ],
+              "variable": [
+                {
+                  "key": "role",
+                  "value": "host",
+                  "description": "String - either \"guest\" or \"host\""
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T21:44:37.483Z",
+          "body": null
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "id": "892da5ed-1f6e-4963-8f2d-21a137f72295",
-            "exec": [
-              "// Age constraints\r",
-              "const MIN_AGE = 18;\r",
-              "const MAX_AGE = 60;\r",
-              "\r",
-              "const today = new Date();\r",
-              "\r",
-              "// Generate random age between 18 and 60\r",
-              "const age = Math.floor(Math.random() * (MAX_AGE - MIN_AGE + 1)) + MIN_AGE;\r",
-              "\r",
-              "// Generate a random extra offset within the year\r",
-              "const extraDays = Math.floor(Math.random() * 365);\r",
-              "\r",
-              "// Calculate date of birth\r",
-              "const dob = new Date(today);\r",
-              "dob.setFullYear(today.getFullYear() - age);\r",
-              "dob.setDate(dob.getDate() - extraDays);\r",
-              "\r",
-              "// Format as yyyy-MM-dd\r",
-              "const yyyy = dob.getFullYear();\r",
-              "const mm = String(dob.getMonth() + 1).padStart(2, '0');\r",
-              "const dd = String(dob.getDate()).padStart(2, '0');\r",
-              "\r",
-              "pm.collectionVariables.set(\"randomDOB\", `${yyyy}-${mm}-${dd}`);"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "id": "208a2b5c-5a0c-49d7-a56b-bcd60e9e772f",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"my.guest@example.com\",\r\n    \"password\": \"MyGuest123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n    \"dateOfBirth\": \"{{randomDOB}}\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "id": "168ea357-0969-4e48-b3c7-f5ec2c025d41",
+          "name": "Register as Guest",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"myguest.1@example.com\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n    \"dateOfBirth\": \"1970-12-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/auth/register/:role",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "register",
+                ":role"
+              ],
+              "variable": [
+                {
+                  "key": "role",
+                  "value": "guest",
+                  "description": "String - either \"guest\" or \"host\""
+                }
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/auth/register/guest",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "register",
-            "guest"
-          ]
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T21:56:44.833Z",
+          "body": null
         }
-      },
-      "response": []
+      ]
     },
     {
       "name": "Login (Customizable)",
@@ -208,187 +187,224 @@
           ]
         }
       },
-      "response": []
-    },
-    {
-      "name": "Login as Host (Ready to Use)",
-      "id": "1ac7527b-cf95-4380-9d94-ef642c19148b",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"host.user@example.com\",\r\n    \"password\": \"HostUser123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+      "response": [
+        {
+          "id": "6e91a993-eac5-41d9-b060-c779ff58eaf4",
+          "name": "Login as Pre-Populated Host (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"host.user@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "login"
+              ]
             }
-          }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T21:45:28.921Z",
+          "body": null
         },
-        "url": {
-          "raw": "http://localhost:3001/auth/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "login"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Login as Guest (Ready to Use)",
-      "id": "57469faf-f91c-46e0-bb39-aac806cfa76d",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"guest.user@example.com\",\r\n    \"password\": \"GuestUser123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "id": "379a8ca3-2d58-4f5b-85ae-6fad32bdb28c",
+          "name": "Login as Pre-Populated Guest (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"guest.user@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "login"
+              ]
             }
-          }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T21:48:27.067Z",
+          "body": null
         },
-        "url": {
-          "raw": "http://localhost:3001/auth/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "login"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Login as Guest & Host (Ready to Use)",
-      "id": "f5455678-4f94-4451-8300-0a96efd376c5",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"guest.host@example.com\",\r\n    \"password\": \"GuestHost123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "id": "4129f621-cae4-41a9-9d94-8a030bd53c49",
+          "name": "Login as Pre-Populated Guest & Host (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"guest.host@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "login"
+              ]
             }
-          }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T21:49:11.834Z",
+          "body": null
         },
-        "url": {
-          "raw": "http://localhost:3001/auth/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "login"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Login as Basic Admin (Ready to Use)",
-      "id": "ed2ac491-0a27-4f83-b934-b42da6dbbae5",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"basic.admin@example.com\",\r\n    \"password\": \"BasicAdmin123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "id": "80c32462-4c7b-498d-b79d-38d11663c249",
+          "name": "Login as Pre-Populated Basic Admin (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"basic.admin@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "login"
+              ]
             }
-          }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T21:50:18.321Z",
+          "body": null
         },
-        "url": {
-          "raw": "http://localhost:3001/auth/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "login"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Login as Super Admin (Ready to Use)",
-      "id": "7b2e51a4-37f9-49c3-b83b-0fc46f7f3c98",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"super.admin@example.com\",\r\n    \"password\": \"SuperAdmin123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "id": "c5fd2edb-14a5-4bb1-87c4-f3f6b0b3f820",
+          "name": "Login as Pre-Populated Super Admin (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"super.admin@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "login"
+              ]
             }
-          }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T21:50:50.809Z",
+          "body": null
         },
-        "url": {
-          "raw": "http://localhost:3001/auth/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "login"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Login as Blocked User (Ready to Use)",
-      "id": "ea1a872b-94b1-4479-9c46-ee46d51719ab",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"blocked.user@example.com\",\r\n    \"password\": \"BlockedUser123\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "id": "524d8275-298a-40fd-a2fe-fdab365bf3a5",
+          "name": "Login as Pre-Populated Blocked User (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"blocked.user@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "login"
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/auth/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "login"
-          ]
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T21:51:12.657Z",
+          "body": null
         }
-      },
-      "response": []
+      ]
     },
     {
       "name": "Get All Users (Ready to Use)",
@@ -468,7 +484,57 @@
           ]
         }
       },
-      "response": []
+      "response": [
+        {
+          "id": "5b136e28-19dc-475c-ab32-2690289a5b10",
+          "name": "Get Pre-Populated User (Ready to Use)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/user/:UUID",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "user",
+                ":UUID"
+              ],
+              "variable": [
+                {
+                  "key": "UUID",
+                  "value": "33333333-3333-3333-3333-333333333333"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T23:25:02.106Z",
+          "body": null
+        }
+      ]
     },
     {
       "name": "Upload Profile Picture (Customizable)",
@@ -520,8 +586,7 @@
           "variable": [
             {
               "key": "user_id",
-              "value": "",
-              "uuid": "f914f83a-52bd-429e-aef4-2c4e901bfc9e"
+              "value": ""
             }
           ]
         }
@@ -564,8 +629,7 @@
           "variable": [
             {
               "key": "user_id",
-              "value": "",
-              "uuid": "81363416-ea1e-4a8a-aac0-28318506199b"
+              "value": ""
             }
           ]
         }
@@ -608,13 +672,184 @@
           "variable": [
             {
               "key": "user_id",
-              "value": "",
-              "uuid": "81363416-ea1e-4a8a-aac0-28318506199b"
+              "value": ""
             }
           ]
         }
       },
       "response": []
+    },
+    {
+      "name": "Get Property by ID (Customizable)",
+      "id": "3eb36097-63e0-4a2d-aa8b-f7b4f63354f3",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/property/:UUID",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property",
+            ":UUID"
+          ],
+          "variable": [
+            {
+              "key": "UUID",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "6fd6b5f0-d543-41ec-9aa8-de426c530484",
+          "name": "Get Pre-Populated Property By ID (Ready to Use)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/property/:UUID",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                ":UUID"
+              ],
+              "variable": [
+                {
+                  "key": "UUID",
+                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T23:15:05.276Z",
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Create Property (Customizable)",
+      "id": "604b0a69-866c-4fb3-a97f-c9ccbec5a390",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"<title>\",\r\n    \"description\": \"<description>\",\r\n    \"address\": \"<address>\",\r\n    \"city\": \"<city>\",\r\n    \"country\": \"<country>\",\r\n    \"pricePerNight\": 0,\r\n    \"maxGuests\": 0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/property",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "957e17c4-6253-49a9-82e3-c619e3b583b0",
+          "name": "Create a Property (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Come stay at this amazing property!\",\r\n    \"description\": \"Perfect for couples looking for a romantic escape.\",\r\n    \"address\": \"Viale di Trastevere\",\r\n    \"city\": \"Roma\",\r\n    \"country\": \"IT\",\r\n    \"pricePerNight\": 120,\r\n    \"maxGuests\": 2,\r\n    \"automaticConfirmation\": true,\r\n    \"checkInTime\": \"14:00\", \r\n    \"checkOutTime\": \"11:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/property",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2025-12-28T23:17:41.867Z",
+          "body": null
+        }
+      ]
     },
     {
       "name": "Get Amenities",

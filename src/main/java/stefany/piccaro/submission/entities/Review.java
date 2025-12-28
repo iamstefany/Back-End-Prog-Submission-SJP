@@ -16,7 +16,7 @@ public class Review {
     private UUID reviewId;
 
     @Column(name = "rating", nullable = false)
-    private int rating;
+    private Integer rating;
 
     @Column(name = "comment", columnDefinition = "TEXT")
     private String comment;
@@ -51,8 +51,8 @@ public class Review {
     // ----- Getters/Setters -----
     public UUID getReviewId() { return reviewId; }
 
-    public int getRating() { return rating; }
-    public void setRating(int rating) { this.rating = rating; }
+    public Integer getRating() { return rating; }
+    public void setRating(Integer rating) { this.rating = rating; }
 
     public String getComment() { return comment; }
     public void setComment(String comment) { this.comment = comment; }

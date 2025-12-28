@@ -9,7 +9,7 @@
 
 # API Endpoints
 
-## [GET] auth/info
+## [GET] /auth/info
 
 Get info about the currently logged-in user. Needs valid Bearer Token.
 
@@ -35,7 +35,7 @@ Authorizarion: Bearer <BearerToken>
 }
 ```
 
-## [POST] auth/register/:role
+## [POST] /auth/register/:role
 
 Register a new user. Role can be `guest` or `host`.
 
@@ -58,7 +58,7 @@ Register a new user. Role can be `guest` or `host`.
 }
 ```
 
-## [POST] auth/login 
+## [POST] /auth/login 
 
 Login a user. Please note:
 - The Postman collection has ready-to-use endpoints to log in with each role for easier testing:
@@ -97,7 +97,7 @@ Login a user. Please note:
 ```
 
 
-## [GET] user/list/
+## [GET] /user/list
 
 Get all users. Please note: Only admins are allowed to access this endpoint.
 
@@ -139,11 +139,11 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [GET] user/:user_id/
+## [GET] /user/:user_id
 
 Get user details by id. Please note:
-- Only admins can get details of other users.
-- Regular users can only get their own details.
+- Only admins can get details of other admins.
+- Regular users can only get details of Host or Guest users.
 
 #### Headers:
 ```
@@ -179,7 +179,7 @@ Authorizarion: Bearer <BearerToken>
 }
 ```
 
-## [POST] user/:user_id/upload-profile-picture/
+## [POST] /user/:user_id/upload-profile-picture
 
 Upload profile picture for given user id. Please note:
 - Only admins can upload profile pictures for other users.
@@ -206,7 +206,7 @@ Content-Type: multipart/form-data
 ```
 
 
-## [PATCH] user/:user_id/
+## [PATCH] /user/:user_id
 
 Update user details by id. Please note:
 - Only admins can update details of other users.
@@ -260,7 +260,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [DELETE] user/:user_id/
+## [DELETE] /user/:user_id
 
 Delete user by id. Please note:
 - Only admins can delete other users.
@@ -274,4 +274,88 @@ Authorizarion: Bearer <BearerToken>
 #### Response:
 ```
 204 No Content
+```
+
+
+## [GET] /property/:property_id
+
+Get property details by id.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```json
+{
+  "title": "<String>",
+  "description": "<String>",
+  "address": "<String>",
+  "city": "<String>",
+  "country": "<String>",
+  "pricePerNight": "<Decimal>",
+  "maxGuests": "<Integer>",
+  "automaticConfirmation": "<Boolean>",
+  "checkInTime": "<HH:mm:ss>",
+  "checkOutTime": "<HH:mm:ss>",
+  "user": { },
+  "amenities": [ ],
+  "images": [ ],
+  "propertyId": "7cf3291b-4489-40eb-ab7b-18ae370cc3d8"
+}
+```
+
+
+## [POST] /property
+
+Creates a property. Please note:
+- Only hosts can access this endpoint.
+- To make the endpoint easier to use, whenever a property is created, it is assigned:
+  - A set of random amenities
+  - A set of random property images (from pexels.com API)
+- By design, properties are only allowed for:
+  - Country: IT
+  - City: 'Torino', 'Milano', 'Roma', or 'Napoli'
+  - This choice was made to ensure easier testing on properties search
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Body:
+```json
+{
+  "title": "<String>",
+  "description": "<String>",
+  "address": "<String>",
+  "city": "<String>",
+  "country": "<String>",
+  "pricePerNight": "<Decimal>",
+  "maxGuests": "<Integer>",
+  "automaticConfirmation": "<Boolean - optional>",
+  "checkInTime": "<HH:mm:ss - optional>",
+  "checkOutTime": "<HH:mm:ss - optional>"
+}
+```
+
+#### Response:
+```json
+{
+  "title": "<String>",
+  "description": "<String>",
+  "address": "<String>",
+  "city": "<String>",
+  "country": "<String>",
+  "pricePerNight": "<Decimal>",
+  "maxGuests": "<Integer>",
+  "automaticConfirmation": "<Boolean>",
+  "checkInTime": "<HH:mm:ss>",
+  "checkOutTime": "<HH:mm:ss>",
+  "user": { },
+  "amenities": [ ],
+  "images": [ ],
+  "propertyId": "7cf3291b-4489-40eb-ab7b-18ae370cc3d8"
+}
 ```

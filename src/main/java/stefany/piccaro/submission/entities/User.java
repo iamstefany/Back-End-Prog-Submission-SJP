@@ -45,12 +45,12 @@ public class User {
 
 
     // ----- Relationships -----
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private GuestProfile guestProfile;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private HostProfile hostProfile;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)

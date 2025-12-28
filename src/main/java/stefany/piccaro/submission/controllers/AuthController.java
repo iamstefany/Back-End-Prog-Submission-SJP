@@ -34,6 +34,7 @@ public class AuthController {
 
     // ------- Get authenticated user info -------
     @GetMapping("/info")
+    @ResponseStatus(HttpStatus.OK)
     public AuthInfoDTO info(HttpServletRequest httpRequest) {
         return authService.getAuthInfo(httpRequest);
     }
@@ -41,6 +42,7 @@ public class AuthController {
 
     // ------- Login user -------
     @PostMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
     public LoginResponseDTO login(@RequestBody LoginRequestDTO body) {
         return new LoginResponseDTO(authService.attemptLogin(body));
     }
