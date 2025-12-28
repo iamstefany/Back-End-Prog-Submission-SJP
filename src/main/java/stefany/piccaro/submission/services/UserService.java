@@ -15,6 +15,7 @@ import stefany.piccaro.submission.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,6 +28,11 @@ public class UserService {
     private ImageStorageService imageStorageService;
     @Autowired
     private PasswordEncoder bcrypt;
+
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
 
     public User findById(UUID userId) {
         return userRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));

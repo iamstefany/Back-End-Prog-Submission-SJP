@@ -31,19 +31,22 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    // Get authentication info
+
+    // ------- Get authenticated user info -------
     @GetMapping("/info")
     public AuthInfoDTO info(HttpServletRequest request) {
         return authService.getAuthInfo(request);
     }
 
-    // User login
+
+    // ------- Login user -------
     @PostMapping("/login")
     public LoginResponseDTO login(@RequestBody LoginRequestDTO body) {
         return new LoginResponseDTO(authService.attemptLogin(body));
     }
 
-    // User registration with role assignment
+
+    // ------- User registration with role assignment -------
     @PostMapping("/register/{role}")
     @ResponseStatus(HttpStatus.CREATED)
     public SignUpResponseDTO createUser(

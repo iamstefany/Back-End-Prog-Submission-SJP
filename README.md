@@ -96,6 +96,49 @@ Login a user. Please note:
 }
 ```
 
+
+## [GET] user/list/
+
+Get all users. Please note: Only admins are allowed to access this endpoint.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```json lines
+[
+  {
+    "userId": "<UUID>",
+    "email": "<String>",
+    "firstName": "<String>",
+    "lastName": "<String>",
+    "profileImageUrl": "<String>",
+    "registrationDate": "<YYYY-MM-DD>",
+    "isBlocked": "<Boolean>",
+    "roles": "<Integer>",
+    "roleNames": [ "GUEST", "HOST", "ADMIN" ],
+    "adminProfile": {
+      "userId": "<UUID>",
+      "isSuperAdmin": "<Boolean>"
+    },
+    "guestProfile": {
+      "userId": "<UUID>",
+      "dateOfBirth": "<YYYY-MM-DD>",
+      "phoneNumber": "<String>"
+    },
+    "hostProfile": {
+      "userId": "<UUID>",
+      "hostSince": "<YYYY-MM-DD>",
+      "hostVerified": "<Boolean>"
+    }
+  }
+  // , ... more users
+]
+```
+
+
 ## [GET] user/:user_id/
 
 Get user details by id. Please note:

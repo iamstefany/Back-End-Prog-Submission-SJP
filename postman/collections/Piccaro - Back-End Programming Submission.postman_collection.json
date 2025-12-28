@@ -211,127 +211,6 @@
       "response": []
     },
     {
-      "name": "Get User by ID (Customizable)",
-      "id": "9cd5669f-a833-4d8f-9198-d62336b63fd9",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/user/:UUID",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "user",
-            ":UUID"
-          ],
-          "variable": [
-            {
-              "key": "UUID",
-              "value": ""
-            }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Upload Profile Picture (Customizable)",
-      "id": "c4a3d8bf-2154-427f-be5c-e361a8f354ec",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "0779da9f-c32f-4762-b8ed-43a7ac844daf"
-          },
-          {
-            "key": "Content-Type",
-            "value": "multipart/form-data",
-            "type": "text",
-            "uuid": "9a386f8b-cd28-4e6c-8f74-3b963a4882bf"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "file",
-              "type": "file",
-              "uuid": "a83d5382-e82d-4842-8266-fa3ded67539f",
-              "src": []
-            }
-          ],
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/user/00000000-0000-0000-0000-000000000000/upload-profile-picture",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "user",
-            "00000000-0000-0000-0000-000000000000",
-            "upload-profile-picture"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Amenities",
-      "id": "f9ebc96e-88fa-434e-ae36-88b9cfb86364",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/amenity/list",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "amenity",
-            "list"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
       "name": "Login as Host (Ready to Use)",
       "id": "1ac7527b-cf95-4380-9d94-ef642c19148b",
       "request": {
@@ -506,6 +385,164 @@
           "path": [
             "auth",
             "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Users (Ready to Use)",
+      "id": "7c030b73-f771-43b1-9b97-c26d9be1e91e",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/user/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "user",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get User by ID (Customizable)",
+      "id": "9cd5669f-a833-4d8f-9198-d62336b63fd9",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/user/:UUID",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "user",
+            ":UUID"
+          ],
+          "variable": [
+            {
+              "key": "UUID",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Upload Profile Picture (Customizable)",
+      "id": "c4a3d8bf-2154-427f-be5c-e361a8f354ec",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "0779da9f-c32f-4762-b8ed-43a7ac844daf"
+          },
+          {
+            "key": "Content-Type",
+            "value": "multipart/form-data",
+            "type": "text",
+            "uuid": "9a386f8b-cd28-4e6c-8f74-3b963a4882bf"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "a83d5382-e82d-4842-8266-fa3ded67539f",
+              "src": []
+            }
+          ],
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/user/00000000-0000-0000-0000-000000000000/upload-profile-picture",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "user",
+            "00000000-0000-0000-0000-000000000000",
+            "upload-profile-picture"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Amenities",
+      "id": "f9ebc96e-88fa-434e-ae36-88b9cfb86364",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/amenity/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "amenity",
+            "list"
           ]
         }
       },

@@ -35,12 +35,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // @PreAuthorize("hasAnyAuthority('ADMIN', 'SUPERADMIN')")
-    // @GetMapping
-    // public List<User> getUsers() {
-    // return userService.getUsers();
-    // }
 
+    // ------- Get list of users -------
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/list")
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
+
+
+    // ------- Get user by ID (with role-based access control) -------
     @GetMapping("/{userId}")
     public User getUserById(@PathVariable("userId") UUID userId, HttpServletRequest request) {
         // Get auth info from request
@@ -59,6 +63,8 @@ public class UserController {
         return userService.findById(userId);
     }
 
+
+    // ------- Upload profile picture -------
     @PostMapping(
             value = "/{userId}/upload-profile-picture",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE

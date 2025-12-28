@@ -39,8 +39,8 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             AuthInfoDTO authInfo = jwtTools.getAuthInfoFromRequest(request);
             List<GrantedAuthority> authorities = new ArrayList<>();
 
+            // Issue authorities based on roles if user is not blocked
             if (!authInfo.isBlocked()) {
-                // Issue authorities based on roles if user is not blocked
                 authorities = Arrays.stream(Role.values())
                         .filter(r -> Role.hasRole(authInfo.roles(), r))
                         .map(r -> new SimpleGrantedAuthority("ROLE_" + r.name()))
