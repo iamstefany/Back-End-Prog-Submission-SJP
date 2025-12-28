@@ -1,6 +1,7 @@
 package stefany.piccaro.submission.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -44,12 +45,15 @@ public class User {
 
 
     // ----- Relationships -----
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private GuestProfile guestProfile;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private HostProfile hostProfile;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private AdminProfile adminProfile;
 

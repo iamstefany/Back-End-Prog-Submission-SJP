@@ -41,8 +41,8 @@ public class JWTTools {
     }
 
     // Returns AuthInfoDTO extracted from the JWT token present in the request's Authorization header
-    public AuthInfoDTO getAuthInfoFromRequest(HttpServletRequest request) {
-        String token = getCurrentToken(request);
+    public AuthInfoDTO getAuthInfoFromHTTPRequest(HttpServletRequest httpRequest) {
+        String token = getCurrentToken(httpRequest);
         Claims claims = getClaims(token); // Token is verified inside getClaims method
 
         UUID userId = UUID.fromString(claims.getSubject());
@@ -57,8 +57,8 @@ public class JWTTools {
     }
 
     // Gets current token from Authorization header in the request
-    private String getCurrentToken(HttpServletRequest request) {
-        String authorizationHeader = request.getHeader("Authorization");
+    private String getCurrentToken(HttpServletRequest httpRequest) {
+        String authorizationHeader = httpRequest.getHeader("Authorization");
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             throw new UnauthorizedException("Missing or malformed Authorization header");
         }

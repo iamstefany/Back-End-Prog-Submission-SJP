@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authorization.AuthorizationDeniedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -22,14 +23,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<ApiError> handleValidation(
             ValidationException ex,
-            HttpServletRequest request
+            HttpServletRequest httpRequest
     ) {
         ApiError error = new ApiError(
                 Instant.now(),
                 HttpStatus.BAD_REQUEST.value(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
                 ex.getMessage(),
-                request.getRequestURI(),
+                httpRequest.getRequestURI(),
                 null
         );
 
@@ -40,14 +41,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ApiError> handleUnauthorized(
             UnauthorizedException ex,
-            HttpServletRequest request
+            HttpServletRequest httpRequest
     ) {
         ApiError error = new ApiError(
                 Instant.now(),
                 HttpStatus.UNAUTHORIZED.value(),
                 HttpStatus.UNAUTHORIZED.getReasonPhrase(),
                 ex.getMessage(),
-                request.getRequestURI(),
+                httpRequest.getRequestURI(),
                 null
         );
 
@@ -58,14 +59,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ForbiddenException.class)
     public ResponseEntity<ApiError> handleForbidden(
             ForbiddenException ex,
-            HttpServletRequest request
+            HttpServletRequest httpRequest
     ) {
         ApiError error = new ApiError(
                 Instant.now(),
                 HttpStatus.FORBIDDEN.value(),
                 HttpStatus.FORBIDDEN.getReasonPhrase(),
                 ex.getMessage(),
-                request.getRequestURI(),
+                httpRequest.getRequestURI(),
                 null
         );
 
@@ -76,14 +77,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiError> handleAccessDenied(
             AccessDeniedException ex,
-            HttpServletRequest request
+            HttpServletRequest httpRequest
     ) {
         ApiError error = new ApiError(
                 Instant.now(),
                 HttpStatus.FORBIDDEN.value(),
                 HttpStatus.FORBIDDEN.getReasonPhrase(),
                 ex.getMessage(),
-                request.getRequestURI(),
+                httpRequest.getRequestURI(),
                 null
         );
 
@@ -94,14 +95,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AuthorizationDeniedException.class)
     public ResponseEntity<ApiError> handleForbidden(
             AuthorizationDeniedException ex,
-            HttpServletRequest request
+            HttpServletRequest httpRequest
     ) {
         ApiError error = new ApiError(
                 Instant.now(),
                 HttpStatus.FORBIDDEN.value(),
                 HttpStatus.FORBIDDEN.getReasonPhrase(),
                 ex.getMessage(),
-                request.getRequestURI(),
+                httpRequest.getRequestURI(),
                 null
         );
 
@@ -112,25 +113,43 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiError> handleNotFound(
             NotFoundException ex,
-            HttpServletRequest request
+            HttpServletRequest httpRequest
     ) {
         ApiError error = new ApiError(
                 Instant.now(),
                 HttpStatus.NOT_FOUND.value(),
                 HttpStatus.NOT_FOUND.getReasonPhrase(),
                 ex.getMessage(),
-                request.getRequestURI(),
+                httpRequest.getRequestURI(),
                 null
         );
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
+    // 405 Method Not Allowed
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ApiError> handleNotSupported(
+            HttpRequestMethodNotSupportedException ex,
+            HttpServletRequest httpRequest
+    ) {
+        ApiError error = new ApiError(
+                Instant.now(),
+                HttpStatus.METHOD_NOT_ALLOWED.value(),
+                HttpStatus.METHOD_NOT_ALLOWED.getReasonPhrase(),
+                ex.getMessage(),
+                httpRequest.getRequestURI(),
+                null
+        );
+
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(error);
+    }
+
     // 500 Internal Server Error - All other exceptions
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleGeneric(
             Exception ex,
-            HttpServletRequest request
+            HttpServletRequest httpRequest
     ) {
         String stackTraceMessage = Arrays.stream(ex.getStackTrace())
                 .map(StackTraceElement::toString)
@@ -141,7 +160,7 @@ public class GlobalExceptionHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
                 ex.getMessage(),
-                request.getRequestURI(),
+                httpRequest.getRequestURI(),
                 stackTraceMessage
         );
 

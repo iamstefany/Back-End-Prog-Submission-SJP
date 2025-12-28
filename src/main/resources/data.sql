@@ -17,12 +17,12 @@ VALUES
 (
     '11111111-1111-1111-1111-111111111111', 'super.admin@example.com',
     '$2a$12$U9NzpfEMdVLjdYSU0KDqhO18t3n/YErEBXrgl8P2kMd2WieKR4BkS', -- Password: SuperAdmin123
-    'Super', 'Admin', false, 'https://ui-avatars.com/api/?name=Super+Admin', '2026-01-01', 7
+    'Super', 'Admin', false, 'https://ui-avatars.com/api/?name=Super+Admin', '2026-01-01', 4
 ),
 (
     '22222222-2222-2222-2222-222222222222', 'basic.admin@example.com',
     '$2a$12$FanxPh.YGq.Qd98jUJ23tursamLGKpJmq24rcA7fSjYznOFUBilem', -- Password: BasicAdmin123
-    'Basic', 'Admin', false, 'https://ui-avatars.com/api/?name=Basic+Admin', '2026-01-01', 7
+    'Basic', 'Admin', false, 'https://ui-avatars.com/api/?name=Basic+Admin', '2026-01-01', 4
 ),
 (
     '33333333-3333-3333-3333-333333333333', 'guest.user@example.com',

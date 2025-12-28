@@ -529,6 +529,50 @@
       "response": []
     },
     {
+      "name": "Edit User (Customizable)",
+      "id": "0152bb5e-857b-4aba-a551-b4f0bba22a27",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "5aecc99b-d0a2-4586-a8d8-1e72c5c31d4c"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"dateOfBirth\": \"<YYYY-MM-DD>\",\r\n    \"phoneNumber\": \"<phoneNumber>\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/user/:user_id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "user",
+            ":user_id"
+          ],
+          "variable": [
+            {
+              "key": "user_id",
+              "value": "",
+              "uuid": "81363416-ea1e-4a8a-aac0-28318506199b"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Get Amenities",
       "id": "f9ebc96e-88fa-434e-ae36-88b9cfb86364",
       "request": {

@@ -9,7 +9,7 @@
 
 # API Endpoints
 
-## [GET] auth/info
+## <code style="color:#008000;">[GET]</code> auth/info
 
 Get info about the currently logged-in user. Needs valid Bearer Token.
 
@@ -35,7 +35,7 @@ Authorizarion: Bearer <BearerToken>
 }
 ```
 
-## [POST] auth/register/:role
+## <code style="color:#FFAE00;">[POST]</code> auth/register/:role
 
 Register a new user. Role can be `guest` or `host`.
 
@@ -58,10 +58,10 @@ Register a new user. Role can be `guest` or `host`.
 }
 ```
 
-## [POST] auth/login 
+## <code style="color:#FFAE00;">[POST]</code> auth/login 
 
 Login a user. Please note:
-- The Postman collection has ready-to-use endpoints to login with each role for easier testing:
+- The Postman collection has ready-to-use endpoints to log in with each role for easier testing:
   - Login as Guest
   - Login as Host
   - Login as Guest & Host User (both roles)
@@ -97,7 +97,7 @@ Login a user. Please note:
 ```
 
 
-## [GET] user/list/
+## <code style="color:#008000;">[GET]</code> user/list/
 
 Get all users. Please note: Only admins are allowed to access this endpoint.
 
@@ -139,7 +139,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [GET] user/:user_id/
+## <code style="color:#008000;">[GET]</code> user/:user_id/
 
 Get user details by id. Please note:
 - Only admins can get details of other users.
@@ -179,10 +179,11 @@ Authorizarion: Bearer <BearerToken>
 }
 ```
 
-## [POST] user/:user_id/upload-profile-picture/
+## <code style="color:#FFAE00;">[POST]</code> user/:user_id/upload-profile-picture/
 
 Upload profile picture for given user id. Please note:
 - Only admins can upload profile pictures for other users.
+- Regular users can only upload their own profile picture.
 
 #### Headers:
 ```
@@ -201,6 +202,60 @@ Content-Type: multipart/form-data
 ```json
 {
   "profile-pic": "<String>"
+}
+```
+
+
+## <code style="color:#9370DBFF;">[PATCH]</code> user/:user_id/
+
+Update user details by id. Please note:
+- Only admins can update details of other users.
+- Regular users can only update their own details.
+- Passwords cannot be updated via this endpoint.
+  - To change password, use dedicated password change endpoint.
+- Only guests are allowed to update their phone number and date of birth.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Body:
+```json
+{
+  "firstName": "<String>", 
+  "lastName": "<String>",
+  "dateOfBirth": "<YYYY-MM-DD>",
+  "phoneNumber": "<String>"
+}
+```
+
+#### Response:
+```json
+{
+  "userId": "<UUID>",
+  "email": "<String>",
+  "firstName": "<String>",
+  "lastName": "<String>",
+  "profileImageUrl": "<String>",
+  "registrationDate": "<YYYY-MM-DD>",
+  "isBlocked": "<Boolean>",
+  "roles": "<Integer>",
+  "roleNames": [ "GUEST", "HOST", "ADMIN" ],
+  "adminProfile": {
+    "userId": "<UUID>",
+    "isSuperAdmin": "<Boolean>"
+  },
+  "guestProfile": {
+    "userId": "<UUID>",
+    "dateOfBirth": "<YYYY-MM-DD>",
+    "phoneNumber": "<String>"
+  },
+  "hostProfile": {
+    "userId": "<UUID>",
+    "hostSince": "<YYYY-MM-DD>",
+    "hostVerified": "<Boolean>"
+  }
 }
 ```
 

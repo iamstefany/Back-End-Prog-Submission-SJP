@@ -26,9 +26,9 @@ public class AuthService {
     @Autowired
     private PasswordEncoder bcrypt;
 
-    public AuthInfoDTO getAuthInfo(HttpServletRequest request) {
+    public AuthInfoDTO getAuthInfo(HttpServletRequest httpRequest) {
         // Get token from request
-        return jwtTools.getAuthInfoFromRequest(request);
+        return jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
     }
 
     public String attemptLogin(LoginRequestDTO request) {

@@ -1,13 +1,10 @@
 package stefany.piccaro.submission.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +13,10 @@ import stefany.piccaro.submission.dto.*;
 import stefany.piccaro.submission.entities.Role;
 import stefany.piccaro.submission.entities.User;
 import stefany.piccaro.submission.exceptions.ForbiddenException;
-import stefany.piccaro.submission.exceptions.UnauthorizedException;
 import stefany.piccaro.submission.exceptions.ValidationException;
 import stefany.piccaro.submission.security.JWTTools;
-import stefany.piccaro.submission.services.AuthService;
 import stefany.piccaro.submission.services.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,9 +40,9 @@ public class UserController {
 
     // ------- Get user by ID (with role-based access control) -------
     @GetMapping("/{userId}")
-    public User getUserById(@PathVariable("userId") UUID userId, HttpServletRequest request) {
+    public User getUserById(@PathVariable("userId") UUID userId, HttpServletRequest httpRequest) {
         // Get auth info from request
-        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromRequest(request);
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
 
         // Get target user info
         User targetUser = userService.findById(userId);
@@ -72,11 +66,10 @@ public class UserController {
     public UploadProfilePictureDTO uploadProfilePicture(
             @PathVariable("userId") UUID userId,
             @RequestParam("file") MultipartFile file,
-            Authentication authentication,
-            HttpServletRequest request
+            HttpServletRequest httpRequest
     ) {
         // Get roles from token
-        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromRequest(request);
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
 
         // If you're not an admin, you're not allowed to upload profile pictures for other users
         if (!Role.hasRole(authInfo.roles(), Role.ADMIN)) {
@@ -86,5 +79,35 @@ public class UserController {
         }
 
         return new UploadProfilePictureDTO(userService.updateProfileImage(userId, file));
+    }
+
+
+    // ------- Edit user -------
+    @PatchMapping("/{userId}")
+    public User editUser(
+            @PathVariable("userId") UUID userId,
+            @RequestBody @Validated EditUserRequestDTO request,
+            BindingResult validationResult,
+            HttpServletRequest httpRequest
+    ) {
+        // Get roles from token
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
+
+        // If you're not an admin, you're not allowed to edit other users
+        if (!Role.hasRole(authInfo.roles(), Role.ADMIN)) {
+            if (!userId.equals(authInfo.userId())) {
+                throw new ForbiddenException("Access denied: insufficient permissions to edit this user.");
+            }
+        }
+
+        // DTO validation
+        if (validationResult.hasErrors()) {
+            throw new ValidationException(validationResult.getFieldErrors()
+                    .stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .toList());
+        }
+
+        return userService.editUser(userId, request);
     }
 }

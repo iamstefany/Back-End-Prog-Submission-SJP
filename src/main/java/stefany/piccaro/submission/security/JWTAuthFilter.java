@@ -34,9 +34,9 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     private UserService userService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpRequest, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
-            AuthInfoDTO authInfo = jwtTools.getAuthInfoFromRequest(request);
+            AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
             List<GrantedAuthority> authorities = new ArrayList<>();
 
             // Issue authorities based on roles if user is not blocked
@@ -54,7 +54,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             // Continue filter chain
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(httpRequest, response);
         }
         // Handle UnauthorizedException
         catch (UnauthorizedException ex) {
@@ -67,8 +67,8 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+    protected boolean shouldNotFilter(HttpServletRequest httpRequest) throws ServletException {
         // Do not filter requests at /auth/
-        return new AntPathMatcher().match("/auth/**", request.getServletPath());
+        return new AntPathMatcher().match("/auth/**", httpRequest.getServletPath());
     }
 }

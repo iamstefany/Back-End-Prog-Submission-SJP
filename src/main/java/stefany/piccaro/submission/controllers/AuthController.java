@@ -34,8 +34,8 @@ public class AuthController {
 
     // ------- Get authenticated user info -------
     @GetMapping("/info")
-    public AuthInfoDTO info(HttpServletRequest request) {
-        return authService.getAuthInfo(request);
+    public AuthInfoDTO info(HttpServletRequest httpRequest) {
+        return authService.getAuthInfo(httpRequest);
     }
 
 

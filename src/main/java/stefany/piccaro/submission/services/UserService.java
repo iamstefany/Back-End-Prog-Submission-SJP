@@ -3,7 +3,9 @@ package stefany.piccaro.submission.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import stefany.piccaro.submission.dto.EditUserRequestDTO;
 import stefany.piccaro.submission.dto.SignUpRequestDTO;
 import stefany.piccaro.submission.dto.SignUpResponseDTO;
 import stefany.piccaro.submission.entities.*;
@@ -34,7 +36,8 @@ public class UserService {
     }
 
     public User findById(UUID userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new NotFoundException(userId));
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(userId));
     }
 
     public User findByEmail(String email) {
@@ -101,5 +104,38 @@ public class UserService {
         userRepository.save(user);
 
         return imageUrl;
+    }
+
+    @Transactional
+    public User editUser(UUID userId, EditUserRequestDTO request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        if (request.firstName() != null) {
+            user.setFirstName(request.firstName());
+        }
+
+        if (request.lastName() != null) {
+            user.setLastName(request.lastName());
+        }
+
+        if (request.dateOfBirth() != null || request.phoneNumber() != null) {
+
+            GuestProfile guestProfile = user.getGuestProfile();
+
+            if (guestProfile == null) {
+                throw new ForbiddenException("Only guests can edit date of birth or phone number");
+            }
+
+            if (request.dateOfBirth() != null) {
+                guestProfile.setDateOfBirth(request.dateOfBirth());
+            }
+
+            if (request.phoneNumber() != null) {
+                guestProfile.setPhoneNumber(request.phoneNumber());
+            }
+        }
+
+        return userRepository.save(user);
     }
 }
