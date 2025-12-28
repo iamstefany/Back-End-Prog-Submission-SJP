@@ -128,17 +128,7 @@ public class User {
     public void setRoles(int roles) { this.roles = roles; }
 
     @Transient
-    public List<String> getRoleNames() {
-        List<String> roleNames = new ArrayList<>();
-
-        for (Role role : Role.values()) {
-            if ((this.roles & role.getBit()) != 0) {
-                roleNames.add(role.name());
-            }
-        }
-
-        return roleNames;
-    }
+    public List<String> getRoleNames() { return Role.getRoleNames(this.roles); }
 
     public GuestProfile getGuestProfile() { return guestProfile; }
     public void setGuestProfile(GuestProfile guestProfile) { this.guestProfile = guestProfile; }

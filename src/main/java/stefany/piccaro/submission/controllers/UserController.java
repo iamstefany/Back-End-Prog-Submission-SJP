@@ -43,16 +43,15 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public User getUserById(@PathVariable("userId") UUID userId, HttpServletRequest request) {
-        // Get roles from token
-        String token = jwtTools.getCurrentToken(request);
-        int roles = jwtTools.getRolesFromToken(token);
+        // Get auth info from request
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromRequest(request);
 
         // Get target user info
         User targetUser = userService.findById(userId);
 
         // If attempting to access an admin user details and the requester is not an admin, deny access
         if (Role.hasRole(targetUser.getRoles(), Role.ADMIN)) {
-            if (!Role.hasRole(roles, Role.ADMIN)) {
+            if (!Role.hasRole(authInfo.roles(), Role.ADMIN)) {
                 throw new ForbiddenException("Access denied: insufficient permissions to view admin user details.");
             }
         }
@@ -71,13 +70,11 @@ public class UserController {
             HttpServletRequest request
     ) {
         // Get roles from token
-        String token = jwtTools.getCurrentToken(request);
-        UUID authUserId = jwtTools.getUserIDFromToken(token);
-        int roles = jwtTools.getRolesFromToken(token);
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromRequest(request);
 
         // If you're not an admin, you're not allowed to upload profile pictures for other users
-        if (!Role.hasRole(roles, Role.ADMIN)) {
-            if (!userId.equals(authUserId)) {
+        if (!Role.hasRole(authInfo.roles(), Role.ADMIN)) {
+            if (!userId.equals(authInfo.userId())) {
                 throw new ForbiddenException("Access denied: insufficient permissions to upload profile picture for this user.");
             }
         }

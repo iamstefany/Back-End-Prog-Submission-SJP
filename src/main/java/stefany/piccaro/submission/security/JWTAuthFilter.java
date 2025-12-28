@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
+import stefany.piccaro.submission.dto.AuthInfoDTO;
 import stefany.piccaro.submission.entities.Role;
 import stefany.piccaro.submission.entities.User;
 import stefany.piccaro.submission.exceptions.UnauthorizedException;
@@ -35,36 +36,21 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
-            // Get token from Authorization Header and verify
-            String accessToken = jwtTools.getCurrentToken(request);
-            jwtTools.verifyToken(accessToken);
-
-            // Get user ID from token, find user, and set authentication in Security Context
-            UUID userId = jwtTools.getUserIDFromToken(accessToken);
-            User found = userService.findById(userId);
-
+            AuthInfoDTO authInfo = jwtTools.getAuthInfoFromRequest(request);
             List<GrantedAuthority> authorities = new ArrayList<>();
 
-            if (found != null) {
-                // Grant authorities only if user is not blocked
-                boolean isBlocked = found.getIsBlocked();
-
-                if (!isBlocked) {
-                    // Extract roles from token and set authorities
-                    int rolesBitmask = jwtTools.getRolesFromToken(accessToken);
-                    authorities = Arrays.stream(Role.values())
-                            .filter(r -> Role.hasRole(rolesBitmask, r)) // use your helper
-                            .map(r -> new SimpleGrantedAuthority("ROLE_" + r.name()))
-                            .collect(Collectors.toList());
-                }
-                else {
-                    throw new UnauthorizedException("Your account is blocked.");
-                }
-            } else {
-                throw new UnauthorizedException("User not found.");
+            if (!authInfo.isBlocked()) {
+                // Issue authorities based on roles if user is not blocked
+                authorities = Arrays.stream(Role.values())
+                        .filter(r -> Role.hasRole(authInfo.roles(), r))
+                        .map(r -> new SimpleGrantedAuthority("ROLE_" + r.name()))
+                        .collect(Collectors.toList());
+            }
+            else {
+                throw new UnauthorizedException("Your account is blocked.");
             }
 
-            Authentication authentication = new UsernamePasswordAuthenticationToken(userId, null, authorities);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(authInfo.userId(), null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             // Continue filter chain

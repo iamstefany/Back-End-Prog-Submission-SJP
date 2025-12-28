@@ -28,39 +28,20 @@ public class AuthService {
 
     public AuthInfoDTO getAuthInfo(HttpServletRequest request) {
         // Get token from request
-        String token = jwtTools.getCurrentToken(request);
-
-        // Validate token
-        jwtTools.verifyToken(token);
-
-        // Extract user ID from token
-        UUID userId = jwtTools.getUserIDFromToken(token);
-
-        // Load user from DB
-        User user = userService.findById(userId);
-
-        return new AuthInfoDTO(
-                user.getUserId(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getIsBlocked(),
-                user.getRoleNames(),
-                token
-        );
+        return jwtTools.getAuthInfoFromRequest(request);
     }
 
     public String attemptLogin(LoginRequestDTO request) {
         // Check if user exists
         User found = userService.findByEmail(request.email());
 
-        // If user found > check password
+        // If user found -> check password
         if (bcrypt.matches(request.password(), found.getPassword())) {
             // If password matches > return token
             return jwtTools.createToken(found);
         }
 
-        // If password is incorrect > throw exception
+        // If password is incorrect -> throw exception
         throw new UnauthorizedException("Incorrect credentials.");
     }
 }

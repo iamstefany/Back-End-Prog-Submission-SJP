@@ -6,7 +6,7 @@
   },
   "item": [
     {
-      "name": "Get Current Auth Info",
+      "name": "Get Current Auth Info (Ready to Use)",
       "id": "93b6ceee-fe49-48cf-ba1b-c2de8ddc20eb",
       "request": {
         "method": "GET",
@@ -63,7 +63,6 @@
             {
               "key": "role",
               "value": "",
-              "uuid": "86eb65e4-f6c2-45c5-b791-8cdc17b194da",
               "description": "String - either \"guest\" or \"host\""
             }
           ]
@@ -247,8 +246,7 @@
           "variable": [
             {
               "key": "UUID",
-              "value": "",
-              "uuid": "b1918d96-c07d-4ac0-9f3c-a83ae6689a6f"
+              "value": ""
             }
           ]
         }
@@ -256,7 +254,7 @@
       "response": []
     },
     {
-      "name": "Upload Profile Picture",
+      "name": "Upload Profile Picture (Customizable)",
       "id": "c4a3d8bf-2154-427f-be5c-e361a8f354ec",
       "request": {
         "method": "POST",
