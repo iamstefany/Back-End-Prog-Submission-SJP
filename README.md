@@ -9,7 +9,7 @@
 
 # API Endpoints
 
-## <code style="color:#008000;">[GET]</code> auth/info
+## [GET] auth/info
 
 Get info about the currently logged-in user. Needs valid Bearer Token.
 
@@ -35,7 +35,7 @@ Authorizarion: Bearer <BearerToken>
 }
 ```
 
-## <code style="color:#FFAE00;">[POST]</code> auth/register/:role
+## [POST] auth/register/:role
 
 Register a new user. Role can be `guest` or `host`.
 
@@ -58,7 +58,7 @@ Register a new user. Role can be `guest` or `host`.
 }
 ```
 
-## <code style="color:#FFAE00;">[POST]</code> auth/login 
+## [POST] auth/login 
 
 Login a user. Please note:
 - The Postman collection has ready-to-use endpoints to log in with each role for easier testing:
@@ -97,7 +97,7 @@ Login a user. Please note:
 ```
 
 
-## <code style="color:#008000;">[GET]</code> user/list/
+## [GET] user/list/
 
 Get all users. Please note: Only admins are allowed to access this endpoint.
 
@@ -139,7 +139,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## <code style="color:#008000;">[GET]</code> user/:user_id/
+## [GET] user/:user_id/
 
 Get user details by id. Please note:
 - Only admins can get details of other users.
@@ -179,7 +179,7 @@ Authorizarion: Bearer <BearerToken>
 }
 ```
 
-## <code style="color:#FFAE00;">[POST]</code> user/:user_id/upload-profile-picture/
+## [POST] user/:user_id/upload-profile-picture/
 
 Upload profile picture for given user id. Please note:
 - Only admins can upload profile pictures for other users.
@@ -206,7 +206,7 @@ Content-Type: multipart/form-data
 ```
 
 
-## <code style="color:#9370DBFF;">[PATCH]</code> user/:user_id/
+## [PATCH] user/:user_id/
 
 Update user details by id. Please note:
 - Only admins can update details of other users.
