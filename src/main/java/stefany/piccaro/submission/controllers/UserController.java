@@ -3,6 +3,7 @@ package stefany.piccaro.submission.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
@@ -109,5 +110,26 @@ public class UserController {
         }
 
         return userService.editUser(userId, request);
+    }
+
+
+    // ------- Delete user -------
+    @DeleteMapping("/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(
+            @PathVariable("userId") UUID userId,
+            HttpServletRequest httpRequest
+    ) {
+        // Get roles from token
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
+
+        // If you're not an admin, you're not allowed to delete other users
+        if (!Role.hasRole(authInfo.roles(), Role.ADMIN)) {
+            if (!userId.equals(authInfo.userId())) {
+                throw new ForbiddenException("Access denied: insufficient permissions to delete this user.");
+            }
+        }
+
+        userService.deleteUser(userId);
     }
 }

@@ -40,7 +40,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"email\": \"<email>\",\r\n    \"password\": \"<password>\",\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"phoneNumber\": \"<phoneNumber - only required for role='guest'>\",\r\n    \"dateOfBirth\": \"<YYYY-MM-DD - only required for role='guest'>\"\r\n}",
+          "raw": "{\r\n    \"email\": \"<email>\",\r\n    \"password\": \"<password>\",\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"phoneNumber\": \"<phoneNumber>\",\r\n    \"dateOfBirth\": \"<YYYY-MM-DD>\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -544,6 +544,50 @@
         "body": {
           "mode": "raw",
           "raw": "{\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"dateOfBirth\": \"<YYYY-MM-DD>\",\r\n    \"phoneNumber\": \"<phoneNumber>\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/user/:user_id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "user",
+            ":user_id"
+          ],
+          "variable": [
+            {
+              "key": "user_id",
+              "value": "",
+              "uuid": "81363416-ea1e-4a8a-aac0-28318506199b"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete User (Customizable)",
+      "id": "4351d691-7e40-4f97-a044-3ba4d44fe7a5",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "5aecc99b-d0a2-4586-a8d8-1e72c5c31d4c"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
           "options": {
             "raw": {
               "language": "json"

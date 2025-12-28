@@ -259,3 +259,19 @@ Authorizarion: Bearer <BearerToken>
 }
 ```
 
+
+## [DELETE] user/:user_id/
+
+Delete user by id. Please note:
+- Only admins can delete other users.
+- Regular users can only delete their own account.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```
+204 No Content
+```

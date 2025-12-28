@@ -138,4 +138,12 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    @Transactional
+    public void deleteUser(UUID userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        userRepository.delete(user);
+    }
 }
