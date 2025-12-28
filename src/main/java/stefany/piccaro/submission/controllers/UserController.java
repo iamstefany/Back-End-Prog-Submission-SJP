@@ -69,7 +69,7 @@ public class UserController {
             value = "/{userId}/upload-profile-picture",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
-    public UserInfoDTO uploadProfilePicture(
+    public UploadProfilePictureDTO uploadProfilePicture(
             @PathVariable("userId") UUID userId,
             @RequestParam("file") MultipartFile file,
             Authentication authentication,
@@ -85,6 +85,6 @@ public class UserController {
             }
         }
 
-        return userService.updateProfileImage(userId, file);
+        return new UploadProfilePictureDTO(userService.updateProfileImage(userId, file));
     }
 }

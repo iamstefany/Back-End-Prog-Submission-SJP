@@ -506,7 +506,7 @@
           }
         },
         "url": {
-          "raw": "http://localhost:3001/user/00000000-0000-0000-0000-000000000000/upload-profile-picture",
+          "raw": "http://localhost:3001/user/:user_id/upload-profile-picture",
           "protocol": "http",
           "host": [
             "localhost"
@@ -514,8 +514,15 @@
           "port": "3001",
           "path": [
             "user",
-            "00000000-0000-0000-0000-000000000000",
+            ":user_id",
             "upload-profile-picture"
+          ],
+          "variable": [
+            {
+              "key": "user_id",
+              "value": "",
+              "uuid": "f914f83a-52bd-429e-aef4-2c4e901bfc9e"
+            }
           ]
         }
       },

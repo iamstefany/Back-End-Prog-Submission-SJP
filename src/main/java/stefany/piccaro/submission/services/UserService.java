@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import stefany.piccaro.submission.dto.SignUpRequestDTO;
 import stefany.piccaro.submission.dto.SignUpResponseDTO;
-import stefany.piccaro.submission.dto.UserInfoDTO;
 import stefany.piccaro.submission.entities.*;
 import stefany.piccaro.submission.exceptions.ForbiddenException;
 import stefany.piccaro.submission.exceptions.NotFoundException;
@@ -88,7 +87,7 @@ public class UserService {
         return new SignUpResponseDTO(user.getUserId());
     }
 
-    public UserInfoDTO updateProfileImage(UUID userId, MultipartFile file) {
+    public String updateProfileImage(UUID userId, MultipartFile file) {
         if (file.isEmpty()) {
             throw new ValidationException("File cannot be empty.");
         }
@@ -101,6 +100,6 @@ public class UserService {
         user.setProfileImageUrl(imageUrl);
         userRepository.save(user);
 
-        return UserInfoDTO.from(user);
+        return imageUrl;
     }
 }

@@ -181,7 +181,8 @@ Authorizarion: Bearer <BearerToken>
 
 ## [POST] user/:user_id/upload-profile-picture/
 
-Upload profile picture for given user id.
+Upload profile picture for given user id. Please note:
+- Only admins can upload profile pictures for other users.
 
 #### Headers:
 ```
@@ -203,7 +204,3 @@ Content-Type: multipart/form-data
 }
 ```
 
-TODO 
-- Change the upload pic endpoint to return the URL of the uploaded picture instead 
-of the user details.
-- Add the uploads path to the Postman collection
