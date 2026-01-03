@@ -800,6 +800,119 @@
       "response": []
     },
     {
+      "name": "Search Properties (Ready to Use)",
+      "id": "8c2b8344-aa61-49f0-958b-f11ea02092c3",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/property/search?city=Torino&country=IT&amenities=WiFi,Parking&hostVerified=true&minPrice=50&maxPrice=200&minGuests=2&page=0&size=10&sortBy=pricePerNight&direction=asc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "city",
+              "value": "Torino",
+              "uuid": "ae9f5ed5-f577-4dc4-bd3c-b68905a02a67"
+            },
+            {
+              "key": "country",
+              "value": "IT",
+              "uuid": "e068aa18-2b0e-4446-9d6f-632fba230965"
+            },
+            {
+              "key": "amenities",
+              "value": "WiFi,Parking",
+              "uuid": "1dfcdcbd-07bd-4bad-863f-c2cc40655f8e"
+            },
+            {
+              "key": "hostVerified",
+              "value": "true",
+              "uuid": "3afd55fd-274c-4ab6-9470-92a1f91805cd"
+            },
+            {
+              "key": "minPrice",
+              "value": "50",
+              "uuid": "fa25ac15-66bf-4cd0-b70f-7a893074b598"
+            },
+            {
+              "key": "maxPrice",
+              "value": "200",
+              "uuid": "a171e5d4-f11e-45d0-b537-b9a32c507e85"
+            },
+            {
+              "key": "minGuests",
+              "value": "2",
+              "uuid": "effe5068-827b-491c-bbbd-b44660ca1c77"
+            },
+            {
+              "key": "page",
+              "value": "0",
+              "uuid": "9e6a5ab1-dc81-4f26-8eda-0376b035c724"
+            },
+            {
+              "key": "size",
+              "value": "10",
+              "uuid": "4a4e6cd0-58c9-43c8-9541-205da95af535"
+            },
+            {
+              "key": "sortBy",
+              "value": "pricePerNight",
+              "uuid": "b5addee0-b29f-497f-aa26-e727958023af"
+            },
+            {
+              "key": "direction",
+              "value": "asc",
+              "uuid": "eced2eb2-a181-47be-894c-49411a7aff84"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Properties Statistics by City (Ready to Use)",
+      "id": "178a2e22-691d-4799-babc-59ff36f71952",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/property/stats",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property",
+            "stats"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Create Property (Customizable)",
       "id": "604b0a69-866c-4fb3-a97f-c9ccbec5a390",
       "request": {

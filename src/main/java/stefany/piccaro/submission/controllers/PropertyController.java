@@ -3,6 +3,7 @@ package stefany.piccaro.submission.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import stefany.piccaro.submission.exceptions.ValidationException;
 import stefany.piccaro.submission.security.JWTTools;
 import stefany.piccaro.submission.services.PropertyService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,6 +46,46 @@ public class PropertyController {
     public List<Property> getMyProperties(HttpServletRequest httpRequest) {
         AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
         return propertyService.findByUserId(authInfo.userId());
+    }
+
+
+    // ------- Search properties -------
+    @GetMapping("/search")
+    public Page<Property> searchProperties(
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String country,
+            @RequestParam(required = false) String amenities, // comma-separated
+            @RequestParam(required = false) Boolean hostVerified,
+            @RequestParam(required = false) BigDecimal minPrice,
+            @RequestParam(required = false) BigDecimal maxPrice,
+            @RequestParam(required = false) Integer minGuests,
+
+            @RequestParam(defaultValue = "pricePerNight") String sortBy,
+            @RequestParam(defaultValue = "asc") String direction,
+
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return propertyService.search(
+                city,
+                country,
+                amenities,
+                hostVerified,
+                minPrice,
+                maxPrice,
+                minGuests,
+                sortBy,
+                direction,
+                page,
+                size
+        );
+    }
+
+
+    // ------- Get stats by city -------
+    @GetMapping("/stats")
+    public List<PropertyCityStatsDTO> getStatsByCity() {
+        return propertyService.getStatsByCity();
     }
 
 

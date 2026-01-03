@@ -343,6 +343,119 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
+## [GET] /property/search
+
+Search properties by a series of query parameters. Please note:
+- Amenities may be passed for filtering as a comma-separated list (i.e. 'WiFi,Parking')
+- Paging starts from page 0 (therefore, to get results from the first page, use page=0)
+- Sorting is only allowed by pricePerNight, maxGuests or title
+  - The fallback sorting is by pricePerNight 
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Query parameters:
+```
+/property/search
+?city=<String>
+&country=<String>
+&amenities=<Comma-separated list>
+&hostVerified=<Boolean>
+&minPrice=<Decimal>
+&maxPrice=<Decimal>
+&minGuests=<Integer>
+&page=<Integer>
+&size=<Integer>
+&sortBy=<String>
+&direction=<ASC/DESC>
+```
+
+#### Response:
+```json lines
+[
+  {
+    "content": [
+      {
+        "title": "<String>",
+        "description": "<String>",
+        "address": "<String>",
+        "city": "<String>",
+        "country": "<String>",
+        "pricePerNight": "<Decimal>",
+        "maxGuests": "<Integer>",
+        "automaticConfirmation": "<Boolean>",
+        "checkInTime": "<HH:mm:ss>",
+        "checkOutTime": "<HH:mm:ss>",
+        "user": { },
+        "amenities": [ ],
+        "images": [ ],
+        "propertyId": "<UUID>"
+      },
+      // ... other properties
+    ],
+    "empty": "<Boolean>",
+    "first": "<Boolean>",
+    "last": "<Boolean>",
+    "number": "<Integer>",
+    "numberOfElements": "<Integer>",
+    "pageable": {
+      "offset": "<Integer>",
+      "pageNumber": "<Integer>",
+      "pageSize": "<Integer>",
+      "paged": "<Boolean>",
+      "sort": {
+        "empty": "<Boolean>",
+        "sorted": "<Boolean>",
+        "unsorted": "<Boolean>"
+      },
+      "unpaged": "<Boolean>"
+    },
+    "size": "<Integer>",
+    "sort": {
+      "empty": "<Boolean>",
+      "sorted": "<Boolean>",
+      "unsorted": "<Boolean>"
+    },
+    "totalElements": "<Integer>",
+    "totalPages": "<Integer>"
+  }
+]
+```
+
+
+## [GET] /property/stats
+
+Get property statistics by city.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```json lines
+[
+  {
+    "city": "Milano",
+    "count": "<Integer>",
+    "avgPrice": "<Decimal>",
+    "minPrice": "<Decimal>",
+    "maxPrice": "<Decimal>"
+  },
+  {
+    "city": "Roma",
+    "count": "<Integer>",
+    "avgPrice": "<Decimal>",
+    "minPrice": "<Decimal>",
+    "maxPrice": "<Decimal>"
+  },
+  // ... Other cities
+]
+```
+
+
 ## [POST] /property
 
 Creates a property. Please note:

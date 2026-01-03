@@ -4,6 +4,10 @@ import kong.unirest.core.json.JSONArray;
 import kong.unirest.core.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,11 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import stefany.piccaro.submission.dto.CreatePropertyRequestDTO;
 import stefany.piccaro.submission.dto.EditPropertyRequestDTO;
+import stefany.piccaro.submission.dto.PropertyCityStatsDTO;
 import stefany.piccaro.submission.entities.*;
 import stefany.piccaro.submission.exceptions.NotFoundException;
 import stefany.piccaro.submission.repositories.PropertyImageRepository;
 import stefany.piccaro.submission.repositories.PropertyRepository;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -46,6 +52,13 @@ public class PropertyService {
             "cabin"
     };
 
+    // Whitelisted fields for sorting in search endpoint
+    private static final Set<String> ALLOWED_SORT_FIELDS = Set.of(
+            "pricePerNight",
+            "maxGuests",
+            "title"
+    );
+
     public Property findById(UUID propertyId) {
         return propertyRepository.findById(propertyId)
                 .orElseThrow(() -> new NotFoundException(propertyId));
@@ -53,6 +66,60 @@ public class PropertyService {
 
     public List<Property> findByUserId(UUID userId) {
         return propertyRepository.findByUser_UserId(userId);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Property> search(
+            String city,
+            String country,
+            String amenities,
+            Boolean hostVerified,
+            BigDecimal minPrice,
+            BigDecimal maxPrice,
+            Integer minGuests,
+            String sortBy,
+            String direction,
+            int page,
+            int size
+    ) {
+
+        // Parse amenities (comma-separated -> List<String>)
+        List<String> amenityNames = null;
+        if (amenities != null && !amenities.isBlank()) {
+            amenityNames = Arrays.stream(amenities.split(","))
+                    .map(String::trim)
+                    .toList();
+        }
+
+        // Sorting (restrict to whitelisted sorting fields to prevent SQL injection)
+        String safeSortBy = ALLOWED_SORT_FIELDS.contains(sortBy)
+                ? sortBy
+                : "pricePerNight"; // Fallback to pricePerNight
+
+        Sort sort = Sort.by(
+                "desc".equalsIgnoreCase(direction)
+                        ? Sort.Direction.DESC
+                        : Sort.Direction.ASC,
+                safeSortBy
+        );
+
+        // Setup pagination
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return propertyRepository.search(
+                city,
+                country,
+                amenityNames,
+                hostVerified,
+                minPrice,
+                maxPrice,
+                minGuests,
+                pageable
+        );
+    }
+
+    public List<PropertyCityStatsDTO> getStatsByCity() {
+        return propertyRepository.getStatsByCity();
     }
 
     @Transactional
