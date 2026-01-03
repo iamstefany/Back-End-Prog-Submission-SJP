@@ -1265,6 +1265,154 @@
       ]
     },
     {
+      "name": "Book a Property (Customizable)",
+      "id": "fca0d3cb-0e45-436d-a07d-9308fff30047",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"checkInDate\": \"<YYYY-MM-DD>\",\r\n    \"checkOutDate\": \"<YYYY-MM-DD>\",\r\n    \"paymentType\": \"<String - 'PayPal' or 'Card'>\",\r\n\r\n    \"cardNumber\": \"<cardNumber - required only for paymentType=card>\",\r\n    \"cardHolder\": \"<cardHolder - required only for paymentType=card>\",\r\n    \"cardExpiry\": \"<cardExpiry - required only for paymentType=card>\",\r\n\r\n    \"paypalEmail\": \"<paypalEmail - required only for paymentType=paypal>\",\r\n    \"paypalTransactionId\": \"<paypalTransactionId - required only for paymentType=paypal>\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/property/:property_id/book",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property",
+            ":property_id",
+            "book"
+          ],
+          "variable": [
+            {
+              "key": "property_id",
+              "value": "",
+              "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "9af504d7-d602-430c-b52b-46b3ffcbb7ee",
+          "name": "Book a Property - Card Payment (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"checkInDate\": \"2026-05-01\",\r\n    \"checkOutDate\": \"2026-05-12\",\r\n    \"paymentType\": \"Card\",\r\n\r\n    \"cardNumber\": \"{{$randomCreditCardMask}}-1234-5678-9012\",\r\n    \"cardHolder\": \"{{$randomFullName}}\",\r\n    \"cardExpiry\": \"{{$randomMonth}}/2035\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/property/:property_id/book",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                ":property_id",
+                "book"
+              ],
+              "variable": [
+                {
+                  "key": "property_id",
+                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb",
+                  "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-03T20:12:47.616Z",
+          "body": null
+        },
+        {
+          "id": "44794bc4-1a6a-4268-92ee-70d8fd1dbac5",
+          "name": "Book a Property - PayPal Payment (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"checkInDate\": \"2026-07-03\",\r\n    \"checkOutDate\": \"2026-07-09\",\r\n    \"paymentType\": \"PayPal\",\r\n\r\n    \"paypalEmail\": \"{{$randomExampleEmail}}\",\r\n    \"paypalTransactionId\": \"PP-{{$randomUUID}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/property/:property_id/book",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                ":property_id",
+                "book"
+              ],
+              "variable": [
+                {
+                  "key": "property_id",
+                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb",
+                  "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-03T20:12:47.616Z",
+          "body": null
+        }
+      ]
+    },
+    {
       "name": "Get Amenities",
       "id": "f9ebc96e-88fa-434e-ae36-88b9cfb86364",
       "request": {

@@ -10,12 +10,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import stefany.piccaro.submission.dto.*;
+import stefany.piccaro.submission.entities.Booking;
 import stefany.piccaro.submission.entities.Property;
 import stefany.piccaro.submission.entities.Review;
 import stefany.piccaro.submission.entities.Role;
 import stefany.piccaro.submission.exceptions.ForbiddenException;
 import stefany.piccaro.submission.exceptions.ValidationException;
 import stefany.piccaro.submission.security.JWTTools;
+import stefany.piccaro.submission.services.BookingService;
 import stefany.piccaro.submission.services.PropertyService;
 import stefany.piccaro.submission.services.ReviewService;
 
@@ -33,6 +35,8 @@ public class PropertyController {
     private PropertyService propertyService;
     @Autowired
     private ReviewService reviewService;
+    @Autowired
+    private BookingService bookingService;
 
 
     // ------- Get property by ID -------
@@ -90,36 +94,6 @@ public class PropertyController {
     @GetMapping("/stats")
     public List<PropertyCityStatsDTO> getStatsByCity() {
         return propertyService.getStatsByCity();
-    }
-
-
-    // ------- Get property reviews -------
-    @PreAuthorize("hasAnyRole('GUEST')")
-    @PostMapping("/{propertyId}/review")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Review savePropertyReview(
-            @PathVariable("propertyId") UUID propertyId,
-            @RequestBody @Validated CreateReviewRequestDTO request,
-            BindingResult validationResult,
-            HttpServletRequest httpRequest) {
-        // Get logged-in user info
-        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
-
-        // Check that user hasn't already reviewed this property
-        List<Review> reviews = reviewService.findByUserId(authInfo.userId());
-        if (!reviews.isEmpty()) {
-            throw new ForbiddenException("You already reviewed this property.");
-        }
-
-        // Basic DTO validation
-        if (validationResult.hasErrors()) {
-            throw new ValidationException(validationResult.getFieldErrors()
-                    .stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .toList());
-        }
-
-        return reviewService.save(propertyId, authInfo.userId(), request);
     }
 
 
@@ -202,5 +176,59 @@ public class PropertyController {
         }
 
         propertyService.deleteProperty(propertyId);
+    }
+
+
+    // ------- Save property review -------
+    @PreAuthorize("hasAnyRole('GUEST')")
+    @PostMapping("/{propertyId}/review")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Review savePropertyReview(
+            @PathVariable("propertyId") UUID propertyId,
+            @RequestBody @Validated CreateReviewRequestDTO request,
+            BindingResult validationResult,
+            HttpServletRequest httpRequest) {
+        // Get logged-in user info
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
+
+        // Check that user hasn't already reviewed this property
+        List<Review> reviews = reviewService.findByUserId(authInfo.userId());
+        if (!reviews.isEmpty()) {
+            throw new ForbiddenException("You already reviewed this property.");
+        }
+
+        // Basic DTO validation
+        if (validationResult.hasErrors()) {
+            throw new ValidationException(validationResult.getFieldErrors()
+                    .stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .toList());
+        }
+
+        return reviewService.save(propertyId, authInfo.userId(), request);
+    }
+
+
+    // ------- Book a property -------
+    @PreAuthorize("hasAnyRole('GUEST')")
+    @PostMapping("/{propertyId}/book")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Booking bookProperty(
+            @PathVariable("propertyId") UUID propertyId,
+            @RequestBody @Validated CreateBookingRequestDTO request,
+            BindingResult validationResult,
+            HttpServletRequest httpRequest) {
+        // Get logged-in user info
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
+
+        // Basic DTO validation
+        if (validationResult.hasErrors()) {
+            throw new ValidationException(validationResult.getFieldErrors()
+                    .stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .toList());
+        }
+
+        return bookingService.save(propertyId, authInfo.userId(), request);
     }
 }

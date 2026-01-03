@@ -3,7 +3,8 @@ package stefany.piccaro.submission.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,10 +18,10 @@ public class Booking {
     private UUID bookingId;
 
     @Column(name = "check_in_date", nullable = false)
-    private LocalDateTime checkInDate;
+    private LocalDate checkInDate;
 
     @Column(name = "check_out_date", nullable = false)
-    private LocalDateTime checkOutDate;
+    private LocalDate checkOutDate;
 
     @Column(name = "total_price", nullable = false)
     private BigDecimal totalPrice;
@@ -38,9 +39,9 @@ public class Booking {
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
 
-    @OneToMany(mappedBy = "booking")
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Payment> payments;
+    private List<Payment> payments = new ArrayList<>();
 
 
     // ----- Constructors -----
@@ -48,8 +49,8 @@ public class Booking {
     }
 
     public Booking(
-            LocalDateTime checkInDate,
-            LocalDateTime checkOutDate,
+            LocalDate checkInDate,
+            LocalDate checkOutDate,
             BigDecimal totalPrice,
             String status,
             User user,
@@ -67,11 +68,11 @@ public class Booking {
     // ----- Getters/Setters -----
     public UUID getId() { return bookingId; }
 
-    public LocalDateTime getCheckInDate() { return checkInDate; }
-    public void setCheckInDate(LocalDateTime checkInDate) { this.checkInDate = checkInDate; }
+    public LocalDate getCheckInDate() { return checkInDate; }
+    public void setCheckInDate(LocalDate checkInDate) { this.checkInDate = checkInDate; }
 
-    public LocalDateTime getCheckOutDate() { return checkOutDate; }
-    public void setCheckOutDate(LocalDateTime checkOutDate) { this.checkOutDate = checkOutDate; }
+    public LocalDate getCheckOutDate() { return checkOutDate; }
+    public void setCheckOutDate(LocalDate checkOutDate) { this.checkOutDate = checkOutDate; }
 
     public BigDecimal getTotalPrice() { return totalPrice; }
     public void setTotalPrice(BigDecimal totalPrice) { this.totalPrice = totalPrice; }

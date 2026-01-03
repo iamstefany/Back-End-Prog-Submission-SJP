@@ -7,6 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "payments")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Payment {
 
     // ----- Properties -----
@@ -18,14 +19,11 @@ public class Payment {
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "payment_method", nullable = false)
-    private String paymentMethod;
+    @Column(nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column(name = "payment_status", nullable = false)
-    private String paymentStatus;
-
-    @Column(name = "payment_date", nullable = false)
-    private LocalDateTime paymentDate;
+    @Column(name = "status", nullable = false)
+    private String status;
 
 
     // ----- Relationship -----
@@ -37,12 +35,8 @@ public class Payment {
     // ----- Constructors -----
     public Payment() {}
 
-    public Payment(BigDecimal amount, String paymentMethod, String paymentStatus,
-                   LocalDateTime paymentDate, Booking booking) {
+    public Payment(BigDecimal amount, Booking booking) {
         this.amount = amount;
-        this.paymentMethod = paymentMethod;
-        this.paymentStatus = paymentStatus;
-        this.paymentDate = paymentDate;
         this.booking = booking;
     }
 
@@ -53,14 +47,11 @@ public class Payment {
     public BigDecimal getAmount() { return amount; }
     public void setAmount(BigDecimal amount) { this.amount = amount; }
 
-    public String getPaymentMethod() { return paymentMethod; }
-    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public String getPaymentStatus() { return paymentStatus; }
-    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
-
-    public LocalDateTime getPaymentDate() { return paymentDate; }
-    public void setPaymentDate(LocalDateTime paymentDate) { this.paymentDate = paymentDate; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
     public Booking getBooking() { return booking; }
     public void setBooking(Booking booking) { this.booking = booking; }

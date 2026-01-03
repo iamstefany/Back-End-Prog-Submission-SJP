@@ -623,3 +623,49 @@ Authorizarion: Bearer <BearerToken>
   "reviewId": "<UUID>"
 }
 ```
+
+
+## [POST] /property/:property_id/book
+
+Create a booking against a property. Please note:
+- Only guests can access this endpoint.
+- Two different payment types are accepted: Card and PayPal.
+  - The relevant fields should be provided for the chosen payment method.
+- If the chosen property has automatic confirmation,
+the booking and payment will be automatically confirmed.
+Otherwise, they will remain PENDING/ON HOLD until the host of 
+the specified property confirms (or cancels) the booking.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Body:
+```json
+{
+  "checkInDate": "<YYYY-MM-DD>",
+  "checkOutDate": "<YYYY-MM-DD>",
+  "paymentType": "<String - 'PayPal' or 'Card'>",
+
+  "cardNumber": "<cardNumber - required only for paymentType=card>",
+  "cardHolder": "<cardHolder - required only for paymentType=card>",
+  "cardExpiry": "<cardExpiry - required only for paymentType=card>",
+
+  "paypalEmail": "<paypalEmail - required only for paymentType=paypal>",
+  "paypalTransactionId": "<paypalTransactionId - required only for paymentType=paypal>"
+}
+```
+
+#### Response:
+```json
+{
+  "checkInDate": "<YYYY-MM-DD>",
+  "checkOutDate": "<YYYY-MM-DD>",
+  "totalPrice": "<Decimal>",
+  "status": "<String>",
+  "user": { },
+  "property": { },
+  "id": "<UUID>"
+}
+```
