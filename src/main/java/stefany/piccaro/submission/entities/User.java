@@ -131,9 +131,6 @@ public class User {
     public int getRoles() { return roles; }
     public void setRoles(int roles) { this.roles = roles; }
 
-    @Transient
-    public List<String> getRoleNames() { return Role.getRoleNames(this.roles); }
-
     public GuestProfile getGuestProfile() { return guestProfile; }
     public void setGuestProfile(GuestProfile guestProfile) { this.guestProfile = guestProfile; }
 
@@ -151,6 +148,11 @@ public class User {
 
     public List<Property> getProperties() { return properties; }
     public void setProperties(List<Property> properties) { this.properties = properties; }
+
+
+    // ----- Derived fields -----
+    @Transient
+    public List<String> getRoleNames() { return Role.getRoleNames(this.roles); }
 
 
     // ----- String Conversion -----

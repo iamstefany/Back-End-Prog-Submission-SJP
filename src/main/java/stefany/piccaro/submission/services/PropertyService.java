@@ -85,10 +85,18 @@ public class PropertyService {
 
         // Parse amenities (comma-separated -> List<String>)
         List<String> amenityNames = null;
+        Integer numAmenities = 0;
+
         if (amenities != null && !amenities.isBlank()) {
             amenityNames = Arrays.stream(amenities.split(","))
                     .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .map(String::toLowerCase)
                     .toList();
+
+            if (!amenityNames.isEmpty()) {
+                numAmenities = amenityNames.size();
+            }
         }
 
         // Sorting (restrict to whitelisted sorting fields to prevent SQL injection)
@@ -107,10 +115,10 @@ public class PropertyService {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         return propertyRepository.search(
-                city,
-                country,
-                amenityNames != null && !amenityNames.isEmpty() ? amenityNames : null,
-                amenityNames != null ? amenityNames.size() : 0,
+                city != null ? city.toLowerCase() : null,
+                country != null ? country.toLowerCase() : null,
+                amenityNames,
+                numAmenities,
                 hostVerified,
                 minPrice,
                 maxPrice,

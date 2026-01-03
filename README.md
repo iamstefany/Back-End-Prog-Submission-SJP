@@ -301,10 +301,13 @@ Authorizarion: Bearer <BearerToken>
   "automaticConfirmation": "<Boolean>",
   "checkInTime": "<HH:mm:ss>",
   "checkOutTime": "<HH:mm:ss>",
-  "user": { },
-  "amenities": [ ],
-  "images": [ ],
-  "propertyId": "7cf3291b-4489-40eb-ab7b-18ae370cc3d8"
+  "amenityNames": [ ],
+  "averageRating": "<Decimal>",
+  "imageUrls": [ ],
+  "listedBy": "<String>",
+  "propertyId": "<UUID>",
+  "reviews": [ ],
+  "totalReviews": "<Integer>"
 }
 ```
 
@@ -333,12 +336,15 @@ Authorizarion: Bearer <BearerToken>
     "automaticConfirmation": "<Boolean>",
     "checkInTime": "<HH:mm:ss>",
     "checkOutTime": "<HH:mm:ss>",
-    "user": { },
-    "amenities": [ ],
-    "images": [ ],
-    "propertyId": "7cf3291b-4489-40eb-ab7b-18ae370cc3d8"
-  },
-  // ... other properties
+    "amenityNames": [ ],
+    "averageRating": "<Decimal>",
+    "imageUrls": [ ],
+    "listedBy": "<String>",
+    "propertyId": "<UUID>",
+    "reviews": [ ],
+    "totalReviews": "<Integer>"
+  }
+  // , ... other properties
 ]
 ```
 
@@ -389,10 +395,13 @@ Authorizarion: Bearer <BearerToken>
         "automaticConfirmation": "<Boolean>",
         "checkInTime": "<HH:mm:ss>",
         "checkOutTime": "<HH:mm:ss>",
-        "user": { },
-        "amenities": [ ],
-        "images": [ ],
-        "propertyId": "<UUID>"
+        "amenityNames": [ ],
+        "averageRating": "<Decimal>",
+        "imageUrls": [ ],
+        "listedBy": "<String>",
+        "propertyId": "<UUID>",
+        "reviews": [ ],
+        "totalReviews": "<Integer>"
       },
       // ... other properties
     ],
@@ -503,10 +512,13 @@ Authorizarion: Bearer <BearerToken>
   "automaticConfirmation": "<Boolean>",
   "checkInTime": "<HH:mm:ss>",
   "checkOutTime": "<HH:mm:ss>",
-  "user": { },
-  "amenities": [ ],
-  "images": [ ],
-  "propertyId": "7cf3291b-4489-40eb-ab7b-18ae370cc3d8"
+  "amenityNames": [ ],
+  "averageRating": "<Decimal>",
+  "imageUrls": [ ],
+  "listedBy": "<String>",
+  "propertyId": "<UUID>",
+  "reviews": [ ],
+  "totalReviews": "<Integer>"
 }
 ```
 
@@ -579,4 +591,35 @@ Authorizarion: Bearer <BearerToken>
 #### Response:
 ```
 204 No Content
+```
+
+
+## [POST] property/:property_id/review/ 
+
+Create a review for a property. Please note:
+- Only guests can access this endpoint.
+- A guest may not leave multiple reviews for the same property.
+  - Attempting to add more than one review for the same property will result in a Forbidden API error.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Body:
+```json
+{
+  "rating": "<Integer>",
+  "comment": "<String>"
+}
+```
+
+#### Response:
+```json
+{
+  "rating": "<Integer>",
+  "comment": "<String>",
+  "createdAt": "<LocalDate>",
+  "reviewId": "<UUID>"
+}
 ```

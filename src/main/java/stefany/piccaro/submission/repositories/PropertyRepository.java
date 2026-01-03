@@ -20,19 +20,23 @@ public interface PropertyRepository extends JpaRepository<Property, UUID> {
     List<Property> findByUser_UserId(UUID userId);
 
     @Query("""
-        SELECT DISTINCT p
+        SELECT p
         FROM Property p
         JOIN p.user u
         LEFT JOIN p.amenities a
-        WHERE (:city IS NULL OR p.city = :city)
-        AND (:country IS NULL OR p.country = :country)
+        WHERE (:city IS NULL OR LOWER(p.city) = :city)
+        AND (:country IS NULL OR LOWER(p.country) = :country)
         AND (:hostVerified IS NULL OR u.hostProfile.hostVerified = :hostVerified)
         AND (:minPrice IS NULL OR p.pricePerNight >= :minPrice)
         AND (:maxPrice IS NULL OR p.pricePerNight <= :maxPrice)
         AND (:minGuests IS NULL OR p.maxGuests >= :minGuests)
-        AND (:amenities IS NULL OR a.name IN :amenities)
         GROUP BY p
-        HAVING (:amenities IS NULL OR COUNT(DISTINCT a.id) = :numAmenities)
+        HAVING (
+            :amenities IS NULL OR
+            COUNT(DISTINCT CASE
+                WHEN LOWER(a.name) IN :amenities THEN a.id
+            END) = :numAmenities
+        )
     """)
     Page<Property> search(
             @Param("city") String city,

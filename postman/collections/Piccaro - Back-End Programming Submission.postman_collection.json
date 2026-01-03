@@ -757,7 +757,7 @@
               "variable": [
                 {
                   "key": "UUID",
-                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be"
+                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
                 }
               ]
             }
@@ -813,7 +813,7 @@
           }
         ],
         "url": {
-          "raw": "http://localhost:3001/property/search?city=Torino&country=IT&amenities=WiFi,Parking&hostVerified=true&minPrice=50&maxPrice=200&minGuests=2&page=0&size=10&sortBy=pricePerNight&direction=asc",
+          "raw": "http://localhost:3001/property/search?city=Torino&country=IT&amenities=Wi-Fi,Parking&hostVerified=true&minPrice=50&maxPrice=200&minGuests=2&page=0&size=10&sortBy=pricePerNight&direction=asc",
           "protocol": "http",
           "host": [
             "localhost"
@@ -836,7 +836,7 @@
             },
             {
               "key": "amenities",
-              "value": "WiFi,Parking",
+              "value": "Wi-Fi,Parking",
               "uuid": "1dfcdcbd-07bd-4bad-863f-c2cc40655f8e"
             },
             {
@@ -1157,6 +1157,109 @@
           "header": [],
           "cookie": [],
           "responseTime": "2026-01-03T12:33:03.873Z",
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Create Property Review (Customizable)",
+      "id": "c9da8323-6214-4581-b190-359eac7efca2",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"rating\": \"<rating>\",\r\n    \"comment\": \"<comment>\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/property/:property_id/review",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property",
+            ":property_id",
+            "review"
+          ],
+          "variable": [
+            {
+              "key": "property_id",
+              "value": "",
+              "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "5a48bc0d-fce6-4e40-b9a4-3232b0d27b2e",
+          "name": "Create Property Review (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"rating\": 5,\r\n    \"comment\": \"I loved my stay at this amazing property!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/property/:property_id/review",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                ":property_id",
+                "review"
+              ],
+              "variable": [
+                {
+                  "key": "property_id",
+                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb",
+                  "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-03T18:48:42.679Z",
           "body": null
         }
       ]

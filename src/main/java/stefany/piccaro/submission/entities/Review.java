@@ -28,10 +28,12 @@ public class Review {
     // ----- Relationships -----
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
+    @JsonIgnore
     private Property property;
 
 

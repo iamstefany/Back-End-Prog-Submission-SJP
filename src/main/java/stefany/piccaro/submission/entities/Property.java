@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalTime;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "properties")
@@ -58,6 +56,7 @@ public class Property {
     // ----- Relationships -----
     @ManyToOne // N Properties -> 1 User
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "property") // 1 Property -> N Bookings
@@ -65,10 +64,10 @@ public class Property {
     private Set<Booking> bookings;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true) // 1 Property -> N Reviews
-    @JsonIgnore
     private Set<Review> reviews;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true) // 1 Property -> N Images
+    @JsonIgnore
     private Set<PropertyImage> images = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // N Properties -> N Amenities
@@ -77,6 +76,7 @@ public class Property {
             joinColumns = @JoinColumn(name = "property_id"),
             inverseJoinColumns = @JoinColumn(name = "amenity_id")
     )
+    @JsonIgnore
     private Set<Amenity> amenities = new HashSet<>();
 
 
@@ -155,6 +155,59 @@ public class Property {
     public void addAmenity(Amenity amenity) { this.amenities.add(amenity); }
     public void removeAmenity(Amenity amenity) { this.amenities.remove(amenity); }
     public void clearAmenities() { this.amenities.clear(); }
+
+
+    // ----- Derived fields -----
+    @Transient
+    public String getListedBy() {
+        if (user == null) {
+            return "--";
+        }
+
+        return user.getFirstName() + " " + user.getLastName();
+    }
+
+    @Transient
+    public List<String> getAmenityNames() {
+        if (amenities == null || amenities.isEmpty()) {
+            return List.of();
+        }
+
+        return amenities.stream()
+                .map(Amenity::getName)
+                .sorted() // optional but nice
+                .toList();
+    }
+
+    @Transient
+    public List<String> getImageUrls() {
+        if (images == null || images.isEmpty()) {
+            return List.of();
+        }
+
+        return images.stream()
+                // main image first
+                .sorted(Comparator.comparing(PropertyImage::getIsMain).reversed())
+                .map(PropertyImage::getImageUrl)
+                .toList();
+    }
+
+    @Transient
+    public int getTotalReviews() {
+        return reviews == null ? 0 : reviews.size();
+    }
+
+    @Transient
+    public double getAverageRating() {
+        if (reviews == null || reviews.isEmpty()) {
+            return 0.0;
+        }
+
+        return reviews.stream()
+                .mapToInt(Review::getRating) // rating is int
+                .average()
+                .orElse(0.0);
+    }
 
 
     // ----- String Conversion -----
