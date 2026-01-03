@@ -109,7 +109,8 @@ public class PropertyService {
         return propertyRepository.search(
                 city,
                 country,
-                amenityNames,
+                amenityNames != null && !amenityNames.isEmpty() ? amenityNames : null,
+                amenityNames != null ? amenityNames.size() : 0,
                 hostVerified,
                 minPrice,
                 maxPrice,

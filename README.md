@@ -347,6 +347,7 @@ Authorizarion: Bearer <BearerToken>
 
 Search properties by a series of query parameters. Please note:
 - Amenities may be passed for filtering as a comma-separated list (i.e. 'WiFi,Parking')
+  - Only properties having all specified amenities will be returned
 - Paging starts from page 0 (therefore, to get results from the first page, use page=0)
 - Sorting is only allowed by pricePerNight, maxGuests or title
   - The fallback sorting is by pricePerNight 

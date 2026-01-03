@@ -30,15 +30,15 @@ public interface PropertyRepository extends JpaRepository<Property, UUID> {
         AND (:minPrice IS NULL OR p.pricePerNight >= :minPrice)
         AND (:maxPrice IS NULL OR p.pricePerNight <= :maxPrice)
         AND (:minGuests IS NULL OR p.maxGuests >= :minGuests)
-        AND (
-            :amenities IS NULL
-            OR a.name IN :amenities
-        )
+        AND (:amenities IS NULL OR a.name IN :amenities)
+        GROUP BY p
+        HAVING (:amenities IS NULL OR COUNT(DISTINCT a.id) = :numAmenities)
     """)
     Page<Property> search(
             @Param("city") String city,
             @Param("country") String country,
             @Param("amenities") List<String> amenities,
+            @Param("numAmenities") long numAmenities,
             @Param("hostVerified") Boolean hostVerified,
             @Param("minPrice") BigDecimal minPrice,
             @Param("maxPrice") BigDecimal maxPrice,
