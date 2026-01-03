@@ -757,7 +757,7 @@
               "variable": [
                 {
                   "key": "UUID",
-                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
+                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be"
                 }
               ]
             }
@@ -771,6 +771,33 @@
           "body": null
         }
       ]
+    },
+    {
+      "name": "Get My Properties (Ready to Use)",
+      "id": "8382e9d4-8b01-43c2-8c10-ba3e38ee5384",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/property/my",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property",
+            "my"
+          ]
+        }
+      },
+      "response": []
     },
     {
       "name": "Create Property (Customizable)",
@@ -847,6 +874,176 @@
           "header": [],
           "cookie": [],
           "responseTime": "2025-12-28T23:17:41.867Z",
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Edit Property (Customizable)",
+      "id": "01a64140-b9d6-45ab-a001-5198057686e9",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"<title>\",\r\n    \"description\": \"<description>\",\r\n    \"address\": \"<address>\",\r\n    \"pricePerNight\": \"<pricePerNight>\",\r\n    \"maxGuests\": \"<maxGuests>\",\r\n    \"automaticConfirmation\": \"<true/false>\",\r\n    \"checkInTime\": \"<HH:mm>\",\r\n    \"checkOutTime\": \"<HH:mm>\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/property/:property_id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property",
+            ":property_id"
+          ],
+          "variable": [
+            {
+              "key": "property_id",
+              "value": "",
+              "uuid": "31513d29-3f8d-427c-8283-b2f46be241e8"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "0dd139d2-975f-4c9b-a34d-3d8d6c11c8fb",
+          "name": "Edit Property (Ready to Use)",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"New title\",\r\n    \"description\": \"New description. Lorem ipsum dolor sit amet.\",\r\n    \"address\": \"New address.\",\r\n    \"pricePerNight\": 110,\r\n    \"maxGuests\": 2,\r\n    \"automaticConfirmation\": true,\r\n    \"checkInTime\": \"13:00\",\r\n    \"checkOutTime\": \"11:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/property/:property_id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                ":property_id"
+              ],
+              "variable": [
+                {
+                  "key": "property_id",
+                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be",
+                  "uuid": "31513d29-3f8d-427c-8283-b2f46be241e8"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-03T11:35:22.403Z",
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Delete Property (Customizable)",
+      "id": "da7e22a8-45f3-4d1e-980a-3a517bf400b1",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/property/:property_id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property",
+            ":property_id"
+          ],
+          "variable": [
+            {
+              "key": "property_id",
+              "value": "",
+              "uuid": "fc7e5a3d-a239-4964-87f5-f163f09f0b49"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "7f652eda-ca9c-4c70-a0dd-1b075a304a22",
+          "name": "Delete Property (Ready to Use)",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/property/:property_id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                ":property_id"
+              ],
+              "variable": [
+                {
+                  "key": "property_id",
+                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be",
+                  "uuid": "fc7e5a3d-a239-4964-87f5-f163f09f0b49"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-03T12:33:03.873Z",
           "body": null
         }
       ]

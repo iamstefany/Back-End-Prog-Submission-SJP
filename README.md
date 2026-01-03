@@ -214,6 +214,8 @@ Update user details by id. Please note:
 - Passwords cannot be updated via this endpoint.
   - To change password, use dedicated password change endpoint.
 - Only guests are allowed to update their phone number and date of birth.
+- Only the fields that were provided in the request will be overwritten in the database 
+  - (i.e. if no firstName is provided in the request, then the original firstName will persist)
 
 #### Headers:
 ```
@@ -223,10 +225,10 @@ Authorizarion: Bearer <BearerToken>
 #### Body:
 ```json
 {
-  "firstName": "<String>", 
-  "lastName": "<String>",
-  "dateOfBirth": "<YYYY-MM-DD>",
-  "phoneNumber": "<String>"
+  "firstName": "<String - optional>", 
+  "lastName": "<String - optional>",
+  "dateOfBirth": "<YYYY-MM-DD - optional>",
+  "phoneNumber": "<String - optional>"
 }
 ```
 
@@ -307,6 +309,40 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
+## [GET] /property/my
+
+Get all properties owned by the authenticated user. Please note:
+- Only hosts can access this endpoint.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```json lines
+[
+  {
+    "title": "<String>",
+    "description": "<String>",
+    "address": "<String>",
+    "city": "<String>",
+    "country": "<String>",
+    "pricePerNight": "<Decimal>",
+    "maxGuests": "<Integer>",
+    "automaticConfirmation": "<Boolean>",
+    "checkInTime": "<HH:mm:ss>",
+    "checkOutTime": "<HH:mm:ss>",
+    "user": { },
+    "amenities": [ ],
+    "images": [ ],
+    "propertyId": "7cf3291b-4489-40eb-ab7b-18ae370cc3d8"
+  },
+  // ... other properties
+]
+```
+
+
 ## [POST] /property
 
 Creates a property. Please note:
@@ -358,4 +394,75 @@ Authorizarion: Bearer <BearerToken>
   "images": [ ],
   "propertyId": "7cf3291b-4489-40eb-ab7b-18ae370cc3d8"
 }
+```
+
+
+## [PATCH] /property/:property_id
+
+Update property details by id. Please note:
+- Only hosts and admins can access this endpoint.
+- Only admins can edit other users' properties.
+- A host may only edit their own properties. 
+If a host attempts to edit a property that is owned by a 
+different user, the API request will be denied.
+- By design, it is not possible to edit a property's country or city.
+  - If a property was relocated in a different city, delete it and create a new one. 
+- Only the fields that were provided in the request will be overwritten in the database
+    - (i.e. if no address is provided in the request, then the original address will persist)
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Body:
+```json
+{
+  "title": "<String - optional>",
+  "description": "<String - optional>",
+  "address": "<String - optional>",
+  "pricePerNight": "<Decimal - optional>",
+  "maxGuests": "<Integer - optional>",
+  "automaticConfirmation": "<Boolean - optional>",
+  "checkInTime": "<HH:mm:ss - optional>",
+  "checkOutTime": "<HH:mm:ss - optional>"
+}
+```
+
+#### Response:
+```json
+{
+  "title": "<String>",
+  "description": "<String>",
+  "address": "<String>",
+  "city": "<String>",
+  "country": "<String>",
+  "pricePerNight": "<Decimal>",
+  "maxGuests": "<Integer>",
+  "automaticConfirmation": "<Boolean>",
+  "checkInTime": "<HH:mm:ss>",
+  "checkOutTime": "<HH:mm:ss>",
+  "user": { },
+  "amenities": [ ],
+  "images": [ ],
+  "propertyId": "7cf3291b-4489-40eb-ab7b-18ae370cc3d8"
+}
+```
+
+
+## [DELETE] /property/:property_id
+
+Delete property by id. Please note:
+- Only hosts and admins can access this endpoint.
+- Only admins can delete other users' properties.
+- Hosts can only delete their own properties.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```
+204 No Content
 ```

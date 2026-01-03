@@ -4,7 +4,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authorization.AuthorizationDeniedException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -13,6 +15,7 @@ import stefany.piccaro.submission.exceptions.dto.ApiError;
 import java.nio.file.AccessDeniedException;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 // This class handles exceptions globally and returns structured API error responses
@@ -35,6 +38,30 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    // 400 Bad Request (for Validation Errors)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiError> handleValidationErrors(
+            MethodArgumentNotValidException ex,
+            HttpServletRequest httpRequest
+    ) {
+        List<String> errors = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(FieldError::getDefaultMessage)
+                .toList();
+
+        ApiError error = new ApiError(
+                Instant.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                String.join("; ", errors),
+                httpRequest.getRequestURI(),
+                null
+        );
+
+        return ResponseEntity.badRequest().body(error);
     }
 
     // 401 Unauthorized

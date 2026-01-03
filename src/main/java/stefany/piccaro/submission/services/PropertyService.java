@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import stefany.piccaro.submission.dto.CreatePropertyRequestDTO;
+import stefany.piccaro.submission.dto.EditPropertyRequestDTO;
 import stefany.piccaro.submission.entities.*;
 import stefany.piccaro.submission.exceptions.NotFoundException;
 import stefany.piccaro.submission.repositories.PropertyImageRepository;
@@ -31,10 +32,10 @@ public class PropertyService {
     private PropertyRepository propertyRepository;
     @Autowired
     private RestTemplate restTemplate;
-    @Value("${pexels.api.key}")
-    private String pexelsApiKey;
     @Autowired
     private PropertyImageRepository propertyImageRepository;
+    @Value("${pexels.api.key}")
+    private String pexelsApiKey;
 
     // Static search terms for image search API call
     private static final String[] SEARCH_TERMS = {
@@ -48,6 +49,10 @@ public class PropertyService {
     public Property findById(UUID propertyId) {
         return propertyRepository.findById(propertyId)
                 .orElseThrow(() -> new NotFoundException(propertyId));
+    }
+
+    public List<Property> findByUserId(UUID userId) {
+        return propertyRepository.findByUser_UserId(userId);
     }
 
     @Transactional
@@ -68,6 +73,63 @@ public class PropertyService {
                 user
         );
 
+        // Assign random amenities from database
+        assignRandomAmenities(property);
+
+        // Assign random images from 3rd Party API
+        assignRandomImages(property);
+
+        return propertyRepository.save(property);
+    }
+
+    @Transactional
+    public Property editProperty(UUID propertyId, EditPropertyRequestDTO request) {
+        Property property = findById(propertyId);
+
+        if (request.title() != null) {
+            property.setTitle(request.title());
+        }
+
+        if (request.description() != null) {
+            property.setDescription(request.description());
+        }
+
+        if (request.address() != null) {
+            property.setAddress(request.address());
+        }
+
+        if (request.pricePerNight() != null) {
+            property.setPricePerNight(request.pricePerNight());
+        }
+
+        if (request.maxGuests() != null) {
+            property.setMaxGuests(request.maxGuests());
+        }
+
+        if (request.automaticConfirmation() != null) {
+            property.setAutomaticConfirmation(request.automaticConfirmation());
+        }
+
+        if (request.checkInTime() != null) {
+            property.setCheckInTime(request.checkInTime());
+        }
+
+        if (request.checkOutTime() != null) {
+            property.setCheckOutTime(request.checkOutTime());
+        }
+
+        return propertyRepository.save(property);
+    }
+
+    @Transactional
+    public void deleteProperty(UUID propertyId) {
+        Property property = propertyRepository.findById(propertyId)
+                .orElseThrow(() -> new NotFoundException("Property not found"));
+
+        propertyRepository.delete(property);
+    }
+
+    private void assignRandomAmenities(Property property) {
         // Fetch amenities, save in local copy and shuffle
         List<Amenity> amenities = new ArrayList<>(amenityService.findAll());
         Collections.shuffle(amenities);
@@ -79,15 +141,9 @@ public class PropertyService {
         for (int i = 0; i < randomCount; i++) {
             property.addAmenity(amenities.get(i));
         }
-
-        // Assign random images from 3rd Party API
-        assignRandomImages(property);
-
-        Property saved = propertyRepository.save(property);
-        return saved;
     }
 
-    public void assignRandomImages(Property property) {
+    private void assignRandomImages(Property property) {
         // Choose random search terms for variety
         List<String> searchTerms = List.of(SEARCH_TERMS);
         String term = searchTerms.get(ThreadLocalRandom.current().nextInt(searchTerms.size()));
