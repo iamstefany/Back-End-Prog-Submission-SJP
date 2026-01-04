@@ -55,7 +55,7 @@ A few notes:
 section where I have included explanation, business rules clarifications, payload 
 and response details for all API endpoints. 
 
-# About The project
+# About the Project
 
 ## ERD
 ![Entity Relationship Diagram](docs/erd.png)
