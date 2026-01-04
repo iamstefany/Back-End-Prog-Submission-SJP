@@ -46,18 +46,30 @@ public class UserService {
     @Transactional
     public SignUpResponseDTO save(SignUpRequestDTO request, Role role) {
 
+        User user;
         Optional<User> found = userRepository.findByEmail(request.email());
 
-        // Prevent duplicate emails
+        // Prevent duplicate emails if same user with same role already exists
         if (found.isPresent()) {
-            throw new ForbiddenException("User with email " + request.email() + " already exists.");
+            if (Role.hasRole(found.get().getRoles(), role)) {
+                throw new ForbiddenException("User with email " + request.email() + " already exists.");
+            }
+            else {
+                // Overwrite user info
+                user = found.get();
+                user.setPassword(bcrypt.encode(request.password()));
+                user.setFirstName(request.firstName());
+                user.setLastName(request.lastName());
+                user.setRoles(user.getRoles() + role.getBit());
+            }
         }
-
-        // Create new User entity
-        User user = new User(request.email(), bcrypt.encode(request.password()),
-                request.firstName(), request.lastName(),
-                "https://ui-avatars.com/api/?name=" + request.firstName() + "+" + request.lastName(),
-                LocalDateTime.now(), false, role.getBit());
+        else {
+            // Create new User entity
+            user = new User(request.email(), bcrypt.encode(request.password()),
+                    request.firstName(), request.lastName(),
+                    "https://ui-avatars.com/api/?name=" + request.firstName() + "+" + request.lastName(),
+                    LocalDateTime.now(), false, role.getBit());
+        }
 
         // Create relevant Profile based on role
         switch (role) {

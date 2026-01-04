@@ -37,7 +37,12 @@ Authorizarion: Bearer <BearerToken>
 
 ## [POST] /auth/register/:role
 
-Register a new user. Role can be `guest` or `host`.
+Register a new user. Role can be `guest` or `host`. Please note:
+- During registration, the provided email address is checked against existing users in the database.
+- If a user with the same email already exists **but does not yet have the requested role**, the registration is allowed.
+  - The existing user record will be updated and the requested role will be added to the user’s roles.
+- If a user with the same email **and the same role** already exists, the request will be rejected due to a duplicate email.
+- This design allows a single user account to be associated with multiple roles (i.e. both Host and Guest).
 
 #### Body (JSON)
 ```json
