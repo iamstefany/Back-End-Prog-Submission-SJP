@@ -106,7 +106,7 @@ The platform supports three main user roles.
 
 The application uses JWT tokens for stateless authentication and authorization.
 
-When a user successfully logs in or registers, the backend issues a signed JWT containing essential claims, such as:
+When a user successfully logs in, the backend issues a signed JWT containing essential claims, such as:
 - User ID
 - Email
 - Roles
