@@ -705,3 +705,24 @@ Authorizarion: Bearer <BearerToken>
   "id": "<UUID>"
 }
 ```
+
+
+## [POST] booking/:booking_id/reject
+
+Reject a booking. Please note:
+- Only hosts can access this endpoint.
+- A host is authorized to reject their own properties' bookings only.
+    - Attempting to reject a booking that is not owned by the authenticated user
+      will result in Access Denied API error.
+- By design, a booking that is already confirmed cannot be rejected.
+- A rejected booking will be deleted, and the relevant payment(s) will be deleted too.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```
+204 No Content
+```

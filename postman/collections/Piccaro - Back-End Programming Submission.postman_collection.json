@@ -1526,6 +1526,103 @@
           "body": null
         }
       ]
+    },
+    {
+      "name": "Reject Booking (Customizable)",
+      "id": "4b4306fd-3121-4cfa-a199-3ed4145b2778",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/booking/:booking_id/reject",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "booking",
+            ":booking_id",
+            "reject"
+          ],
+          "variable": [
+            {
+              "key": "booking_id",
+              "value": "",
+              "uuid": "cbe72a71-3098-439c-8c82-d8b0750fa319"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "1046a2aa-943e-44b9-b51f-e02b5e4e3040",
+          "name": "Reject Booking (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/booking/:booking_id/reject",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "booking",
+                ":booking_id",
+                "reject"
+              ],
+              "variable": [
+                {
+                  "key": "booking_id",
+                  "value": "8a79d9fb-3205-488e-bcea-8ef5ec2b88e5",
+                  "uuid": "cbe72a71-3098-439c-8c82-d8b0750fa319"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-04T12:16:23.281Z",
+          "body": null
+        }
+      ]
     }
   ],
   "event": [

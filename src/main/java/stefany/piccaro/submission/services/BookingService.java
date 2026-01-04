@@ -39,19 +39,6 @@ public class BookingService {
     }
 
     @Transactional
-    public Booking approveBooking(UUID bookingId, UUID userId) {
-        // Check if property belongs to user
-        Booking booking = findById(bookingId);
-        if (!booking.getProperty().getUser().getUserId().equals(userId)) {
-            throw new ForbiddenException("Access Denied. You are not the property's owner for this booking.");
-        }
-
-        // Save and return booking
-        booking.setStatus(BookingStatus.CONFIRMED.name());
-        return bookingRepository.save(booking);
-    }
-
-    @Transactional
     public Booking save(UUID propertyId, UUID userId, CreateBookingRequestDTO request) {
         Property property = propertyService.findById(propertyId);
         User user = userService.findById(userId);
@@ -143,5 +130,42 @@ public class BookingService {
 
         // Save booking and relevant payment
         return bookingRepository.save(booking);
+    }
+
+    @Transactional
+    public Booking approveBooking(UUID bookingId, UUID userId) {
+        // Check if property belongs to user
+        Booking booking = findById(bookingId);
+        if (!booking.getProperty().getUser().getUserId().equals(userId)) {
+            throw new ForbiddenException("Access Denied. You are not the property's owner for this booking.");
+        }
+
+        // Save and return booking
+        booking.setStatus(BookingStatus.CONFIRMED.name());
+
+        // Mark all payments for this booking as confirmed
+        if (booking.getPayments() != null) {
+            booking.getPayments().forEach(payment -> payment.setStatus(PaymentStatus.CONFIRMED.name()));
+        }
+
+        // Save booking and relevant payments
+        return bookingRepository.save(booking);
+    }
+
+    @Transactional
+    public void rejectBooking(UUID bookingId, UUID userId) {
+        // Check if property belongs to user
+        Booking booking = findById(bookingId);
+        if (!booking.getProperty().getUser().getUserId().equals(userId)) {
+            throw new ForbiddenException("Access Denied. You are not the property's owner for this booking.");
+        }
+
+        // Prevent user from rejecting a booking that is already confirmed
+        if (booking.getStatus().equalsIgnoreCase(BookingStatus.CONFIRMED.name())) {
+            throw new ForbiddenException("You are not allowed to reject a booking that is already confirmed.");
+        }
+
+        // Delete booking and relevant payments
+        bookingRepository.delete(booking);
     }
 }
