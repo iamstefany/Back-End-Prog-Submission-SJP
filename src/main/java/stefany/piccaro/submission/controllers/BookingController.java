@@ -93,4 +93,25 @@ public class BookingController {
 
         bookingService.rejectBooking(bookingId, authInfo.userId());
     }
+
+
+    // ------- Delete booking -------
+    @PreAuthorize("hasAnyRole('GUEST')")
+    @DeleteMapping("/{bookingId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBooking(
+            @PathVariable("bookingId") UUID bookingId,
+            HttpServletRequest httpRequest
+    ) {
+        // Get authInfo and booking info
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
+
+        // A guest is not allowed to delete other people's bookings
+        Booking booking = bookingService.findById(bookingId);
+        if (!booking.getUser().getUserId().equals(authInfo.userId())) {
+            throw new ForbiddenException("Access denied: insufficient permissions to delete this booking, as it is not yours.");
+        }
+
+        bookingService.deleteBooking(bookingId);
+    }
 }

@@ -172,4 +172,11 @@ public class BookingService {
         // Delete booking and relevant payments
         bookingRepository.delete(booking);
     }
+
+    @Transactional
+    public void deleteBooking(UUID bookingId) {
+        Booking booking = findById(bookingId);
+
+        bookingRepository.delete(booking);
+    }
 }

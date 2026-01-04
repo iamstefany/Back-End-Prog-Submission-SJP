@@ -1700,6 +1700,81 @@
       "response": []
     },
     {
+      "name": "Delete Booking (Customizable)",
+      "id": "4a13bcdf-2971-46f3-8b6d-4ff39c086fac",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/booking/:booking_id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "booking",
+            ":booking_id"
+          ],
+          "variable": [
+            {
+              "key": "booking_id",
+              "value": "",
+              "uuid": "fd493e0a-8b29-4df8-83eb-a25754842706"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "90d27b19-1ab7-4206-9b6b-bd149b82df7d",
+          "name": "Delete Booking (Ready to Use)",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/booking/:booking_id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "booking",
+                ":booking_id"
+              ],
+              "variable": [
+                {
+                  "key": "booking_id",
+                  "value": "8a79d9fb-3205-488e-bcea-8ef5ec2b88e5",
+                  "uuid": "fd493e0a-8b29-4df8-83eb-a25754842706"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-04T12:54:34.914Z",
+          "body": null
+        }
+      ]
+    },
+    {
       "name": "Get Amenities",
       "id": "f9ebc96e-88fa-434e-ae36-88b9cfb86364",
       "request": {

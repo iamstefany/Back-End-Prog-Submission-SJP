@@ -779,3 +779,20 @@ Authorizarion: Bearer <BearerToken>
   //, ... other bookings
 ]
 ```
+
+
+## [DELETE] booking/:booking_id
+
+Delete a booking by ID. Please note:
+- Only guests can access this endpoint.
+- Guests are only allowed to delete their own bookings.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```
+204 No Content
+```
