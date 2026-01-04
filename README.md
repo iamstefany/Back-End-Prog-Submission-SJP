@@ -594,7 +594,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [POST] property/:property_id/review
+## [POST] /property/:property_id/review
 
 Create a review for a property. Please note:
 - Only guests can access this endpoint.
@@ -680,7 +680,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [POST] booking/:booking_id/approve
+## [POST] /booking/:booking_id/approve
 
 Approve a booking. Please note:
 - Only hosts can access this endpoint.
@@ -707,7 +707,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [POST] booking/:booking_id/reject
+## [POST] /booking/:booking_id/reject
 
 Reject a booking. Please note:
 - Only hosts can access this endpoint.
@@ -728,7 +728,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [GET] booking/:booking_id
+## [GET] /booking/:booking_id
 
 Get a booking by ID. Please note:
 - Only Admins are allowed to view all bookings.
@@ -754,7 +754,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [GET] booking/my
+## [GET] /booking/my
 
 Get all bookings for the currently authenticated user. Please note:
 - Only guests can access this endpoint.
@@ -781,7 +781,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [DELETE] booking/:booking_id
+## [DELETE] /booking/:booking_id
 
 Delete a booking by ID. Please note:
 - Only guests can access this endpoint.
@@ -798,7 +798,46 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [POST] admin/:user_id/block
+## [POST] /admin
+
+Create an admin user. Please note:
+- Only admins can access this endpoint.
+- By design, Basic Admins are not allowed to create Super Admins.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Request:
+```json
+{
+  "email": "<String>",
+  "password": "<String>",
+  "firstName": "<String>",
+  "lastName": "<String>",
+  "isSuperAdmin": "<Boolean>"
+}
+```
+
+#### Response:
+```json
+{
+  "userId": "<UUID>",
+  "email": "<String>",
+  "firstName": "<String>",
+  "lastName": "<String>",
+  "isBlocked": "<Boolean>",
+  "profileImageUrl": "<String>",
+  "registrationDate": "<LocalDate>",
+  "roles": 4,
+  "roleNames": [ ],
+  "adminProfile": { }
+}
+```
+
+
+## [POST] /admin/:user_id/block
 
 Block a user by ID. Please note:
 - Only admins can access this endpoint.
@@ -840,7 +879,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [POST] admin/:user_id/unblock
+## [POST] /admin/:user_id/unblock
 
 Unblock a user by ID. Please note:
 - Only admins can access this endpoint.

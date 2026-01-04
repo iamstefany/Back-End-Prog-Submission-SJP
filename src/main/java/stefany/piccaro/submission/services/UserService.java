@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import stefany.piccaro.submission.dto.CreateAdminRequestDTO;
 import stefany.piccaro.submission.dto.EditUserRequestDTO;
 import stefany.piccaro.submission.dto.SignUpRequestDTO;
 import stefany.piccaro.submission.dto.SignUpResponseDTO;
@@ -45,6 +46,7 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("User with email " + email + " was not found."));
     }
 
+    @Transactional
     public SignUpResponseDTO save(SignUpRequestDTO request, Role role) {
 
         Optional<User> found = userRepository.findByEmail(request.email());
@@ -156,6 +158,33 @@ public class UserService {
     @Transactional
     public User unblockUser(User user) {
         user.setBlocked(false);
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public User createAdmin(CreateAdminRequestDTO request) {
+
+        Optional<User> found = userRepository.findByEmail(request.email());
+
+        // Prevent duplicate emails
+        if (found.isPresent()) {
+            throw new ForbiddenException("User with email " + request.email() + " already exists.");
+        }
+
+        // Create new User entity
+        User user = new User(request.email(), bcrypt.encode(request.password()),
+                request.firstName(), request.lastName(),
+                "https://ui-avatars.com/api/?name=" + request.firstName() + "+" + request.lastName(),
+                LocalDateTime.now(), false, Role.ADMIN.getBit());
+
+        // Create admin profile
+        AdminProfile adminProfile = new AdminProfile();
+        adminProfile.setUserId(user.getUserId());
+        adminProfile.setUser(user);
+        adminProfile.setIsSuperAdmin(request.isSuperAdmin());
+        user.setAdminProfile(adminProfile);
+
+        // Add user
         return userRepository.save(user);
     }
 }
