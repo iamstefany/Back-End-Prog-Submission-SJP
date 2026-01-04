@@ -16,8 +16,14 @@ public class Payment {
     @Column(name = "payment_id")
     private UUID paymentId;
 
-    @Column(name = "amount", nullable = false)
-    private BigDecimal amount;
+    @Column(name = "currency", nullable = false)
+    private String currency;
+
+    @Column(name = "amount_charged", nullable = false)
+    private BigDecimal amountCharged;
+
+    @Column(name = "amount_eur", nullable = false)
+    private BigDecimal amountEUR;
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -35,8 +41,12 @@ public class Payment {
     // ----- Constructors -----
     public Payment() {}
 
-    public Payment(BigDecimal amount, Booking booking) {
-        this.amount = amount;
+    public Payment(String currency,
+                   BigDecimal amountCharged,
+                   BigDecimal amountEUR, Booking booking) {
+        this.currency = currency;
+        this.amountCharged = amountCharged;
+        this.amountEUR = amountEUR;
         this.booking = booking;
     }
 
@@ -44,8 +54,14 @@ public class Payment {
     // ----- Getters/Setters -----
     public UUID getPaymentId() { return paymentId; }
 
-    public BigDecimal getAmount() { return amount; }
-    public void setAmount(BigDecimal amount) { this.amount = amount; }
+    public String getCurrency() { return currency; }
+    public void setCurrency(String currency) { this.currency = currency; }
+
+    public BigDecimal getAmountCharged() { return amountCharged; }
+    public void setAmountCharged(BigDecimal amountCharged) { this.amountCharged = amountCharged; }
+
+    public BigDecimal getAmountEUR() { return amountEUR; }
+    public void setAmountEUR(BigDecimal amountEUR) { this.amountEUR = amountEUR; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }

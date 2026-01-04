@@ -20,8 +20,13 @@ public class PaypalPayment extends Payment {
 
     // ----- Constructors -----
     public PaypalPayment() {}
-    public PaypalPayment(BigDecimal amount, Booking booking, String paypalEmail, String transactionId) {
-        super(amount, booking);
+    public PaypalPayment(String currency,
+                         BigDecimal amountCharged,
+                         BigDecimal amountEUR,
+                         Booking booking,
+                         String paypalEmail,
+                         String transactionId) {
+        super(currency, amountCharged, amountEUR, booking);
         this.paypalEmail = paypalEmail;
         this.transactionId = transactionId;
     }

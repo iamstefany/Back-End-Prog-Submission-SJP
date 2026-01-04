@@ -1027,8 +1027,7 @@
           "variable": [
             {
               "key": "property_id",
-              "value": "",
-              "uuid": "31513d29-3f8d-427c-8283-b2f46be241e8"
+              "value": ""
             }
           ]
         }
@@ -1070,8 +1069,7 @@
               "variable": [
                 {
                   "key": "property_id",
-                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be",
-                  "uuid": "31513d29-3f8d-427c-8283-b2f46be241e8"
+                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be"
                 }
               ]
             }
@@ -1112,8 +1110,7 @@
           "variable": [
             {
               "key": "property_id",
-              "value": "",
-              "uuid": "fc7e5a3d-a239-4964-87f5-f163f09f0b49"
+              "value": ""
             }
           ]
         }
@@ -1145,8 +1142,7 @@
               "variable": [
                 {
                   "key": "property_id",
-                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be",
-                  "uuid": "fc7e5a3d-a239-4964-87f5-f163f09f0b49"
+                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be"
                 }
               ]
             }
@@ -1198,8 +1194,7 @@
           "variable": [
             {
               "key": "property_id",
-              "value": "",
-              "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+              "value": ""
             }
           ]
         }
@@ -1248,8 +1243,7 @@
               "variable": [
                 {
                   "key": "property_id",
-                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb",
-                  "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
                 }
               ]
             }
@@ -1279,7 +1273,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"checkInDate\": \"<YYYY-MM-DD>\",\r\n    \"checkOutDate\": \"<YYYY-MM-DD>\",\r\n    \"paymentType\": \"<String - 'PayPal' or 'Card'>\",\r\n\r\n    \"cardNumber\": \"<cardNumber - required only for paymentType=card>\",\r\n    \"cardHolder\": \"<cardHolder - required only for paymentType=card>\",\r\n    \"cardExpiry\": \"<cardExpiry - required only for paymentType=card>\",\r\n\r\n    \"paypalEmail\": \"<paypalEmail - required only for paymentType=paypal>\",\r\n    \"paypalTransactionId\": \"<paypalTransactionId - required only for paymentType=paypal>\"\r\n}",
+          "raw": "{\r\n    \"checkInDate\": \"<YYYY-MM-DD>\",\r\n    \"checkOutDate\": \"<YYYY-MM-DD>\",\r\n    \"paymentType\": \"<String - 'PayPal' or 'Card'>\",\r\n    \"currency\": \"<3-character currency>\",\r\n\r\n    \"cardNumber\": \"<cardNumber - required only for paymentType=card>\",\r\n    \"cardHolder\": \"<cardHolder - required only for paymentType=card>\",\r\n    \"cardExpiry\": \"<cardExpiry - required only for paymentType=card>\",\r\n\r\n    \"paypalEmail\": \"<paypalEmail - required only for paymentType=paypal>\",\r\n    \"paypalTransactionId\": \"<paypalTransactionId - required only for paymentType=paypal>\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -1301,8 +1295,7 @@
           "variable": [
             {
               "key": "property_id",
-              "value": "",
-              "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+              "value": ""
             }
           ]
         }
@@ -1323,7 +1316,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"checkInDate\": \"2026-05-01\",\r\n    \"checkOutDate\": \"2026-05-12\",\r\n    \"paymentType\": \"Card\",\r\n\r\n    \"cardNumber\": \"{{$randomCreditCardMask}}-1234-5678-9012\",\r\n    \"cardHolder\": \"{{$randomFullName}}\",\r\n    \"cardExpiry\": \"{{$randomMonth}}/2035\"\r\n}",
+              "raw": "{\r\n    \"checkInDate\": \"2026-05-01\",\r\n    \"checkOutDate\": \"2026-05-12\",\r\n    \"paymentType\": \"Card\",\r\n    \"currency\": \"THB\",\r\n\r\n    \"cardNumber\": \"{{$randomCreditCardMask}}-1234-5678-9012\",\r\n    \"cardHolder\": \"{{$randomFullName}}\",\r\n    \"cardExpiry\": \"{{$randomMonth}} 2035\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1345,8 +1338,7 @@
               "variable": [
                 {
                   "key": "property_id",
-                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb",
-                  "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
                 }
               ]
             }
@@ -1374,7 +1366,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"checkInDate\": \"2026-07-03\",\r\n    \"checkOutDate\": \"2026-07-09\",\r\n    \"paymentType\": \"PayPal\",\r\n\r\n    \"paypalEmail\": \"{{$randomExampleEmail}}\",\r\n    \"paypalTransactionId\": \"PP-{{$randomUUID}}\"\r\n}",
+              "raw": "{\r\n    \"checkInDate\": \"2026-07-03\",\r\n    \"checkOutDate\": \"2026-07-09\",\r\n    \"paymentType\": \"PayPal\",\r\n    \"currency\": \"CAD\",\r\n\r\n    \"paypalEmail\": \"{{$randomExampleEmail}}\",\r\n    \"paypalTransactionId\": \"PP-{{$randomUUID}}\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1396,8 +1388,7 @@
               "variable": [
                 {
                   "key": "property_id",
-                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb",
-                  "uuid": "ae0e981c-ef75-4a09-85fb-a1eab95bda37"
+                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
                 }
               ]
             }

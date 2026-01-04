@@ -10,6 +10,7 @@ import stefany.piccaro.submission.exceptions.ValidationException;
 import stefany.piccaro.submission.repositories.BookingRepository;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -24,6 +25,8 @@ public class BookingService {
     private PropertyService propertyService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ExchangeRateService exchangeRateService;
 
 
     public boolean existsCompletedBooking(UUID userId, UUID propertyId) {
@@ -46,18 +49,26 @@ public class BookingService {
             throw new ForbiddenException("Property is not available for the selected dates.");
         }
 
-        // Calculate total nights and price
+        // Calculate total nights
         long nights = ChronoUnit.DAYS.between(request.checkInDate(), request.checkOutDate());
         if (nights <= 0) {
             throw new ValidationException("Check-out date must be after check-in date.");
         }
-        BigDecimal totalPrice = property.getPricePerNight().multiply(BigDecimal.valueOf(nights));
+
+        // Price EUR
+        BigDecimal totalPriceEUR = property.getPricePerNight().multiply(BigDecimal.valueOf(nights));
+
+        // Get exchange rate
+        BigDecimal rate = exchangeRateService.getRateFromEur(request.currency());
+
+        // Convert to user's currency
+        BigDecimal amountCharged = totalPriceEUR.multiply(rate).setScale(2, RoundingMode.HALF_UP);
 
         // Create booking
         Booking booking = new Booking();
         booking.setCheckInDate(request.checkInDate());
         booking.setCheckOutDate(request.checkOutDate());
-        booking.setTotalPrice(totalPrice);
+        booking.setTotalPrice(totalPriceEUR);
         booking.setProperty(property);
         booking.setUser(user);
 
@@ -68,13 +79,28 @@ public class BookingService {
                 if (request.cardNumber() == null || request.cardHolder() == null || request.cardExpiry() == null) {
                     throw new ValidationException("Card information is incomplete (required: cardNumber, cardHolder, cardExpiry).");
                 }
-                payment = new CardPayment(totalPrice, booking, request.cardNumber(), request.cardHolder(), request.cardExpiry());
+                payment = new CardPayment(
+                        request.currency(),
+                        amountCharged,
+                        totalPriceEUR,
+                        booking,
+                        request.cardNumber(),
+                        request.cardHolder(),
+                        request.cardExpiry()
+                );
             }
             case "paypal" -> {
                 if (request.paypalEmail() == null || request.paypalTransactionId() == null) {
                     throw new ValidationException("Paypal information is incomplete (required: paypalEmail, paypalTransactionId).");
                 }
-                payment = new PaypalPayment(totalPrice, booking, request.paypalEmail(), request.paypalTransactionId());
+                payment = new PaypalPayment(
+                        request.currency(),
+                        amountCharged,
+                        totalPriceEUR,
+                        booking,
+                        request.paypalEmail(),
+                        request.paypalTransactionId()
+                );
             }
             default -> throw new ValidationException("Unsupported payment type.");
         }

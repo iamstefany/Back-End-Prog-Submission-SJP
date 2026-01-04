@@ -24,8 +24,14 @@ public class CardPayment extends Payment {
     // ----- Constructors -----
     public CardPayment() { }
 
-    public CardPayment(BigDecimal amount, Booking booking, String cardNumber, String cardHolder, String expiry) {
-        super(amount, booking);
+    public CardPayment(String currency,
+                       BigDecimal amountCharged,
+                       BigDecimal amountEUR,
+                       Booking booking,
+                       String cardNumber,
+                       String cardHolder,
+                       String expiry) {
+        super(currency, amountCharged, amountEUR, booking);
         this.cardNumber = cardNumber;
         this.cardHolder = cardHolder;
         this.expiry = expiry;

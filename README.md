@@ -637,6 +637,12 @@ Create a booking against a property. Please note:
 the booking and payment will be automatically confirmed.
 Otherwise, they will remain PENDING/ON HOLD until the host of 
 the specified property confirms (or cancels) the booking.
+- By design, the base currency of the application is EUR. 
+Although, payments in other currencies are accepted. The payments table will therefore show:
+  - currency: The currency the payment was made in
+  - amount_charged: The amount in the specified currency
+  - amount_eur: The amount in EUR
+  - This design choice was made to showcase the use of a 3rd-party exchange rate API.
 
 #### Headers:
 ```
@@ -649,6 +655,7 @@ Authorizarion: Bearer <BearerToken>
   "checkInDate": "<YYYY-MM-DD>",
   "checkOutDate": "<YYYY-MM-DD>",
   "paymentType": "<String - 'PayPal' or 'Card'>",
+  "currency": "<3-letter currency code>",
 
   "cardNumber": "<cardNumber - required only for paymentType=card>",
   "cardHolder": "<cardHolder - required only for paymentType=card>",
