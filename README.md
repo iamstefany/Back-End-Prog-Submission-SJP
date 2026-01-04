@@ -1,10 +1,161 @@
-# ERD
-![alt text](docs/erd.png)
+# Project Overview
+
+This project is a RESTful backend API for a property booking platform, 
+similar in concept to short-term rental marketplaces (i.e. Airbnb or Booking.com).
+
+It allows users to register, list properties, search and book accommodations, 
+leave reviews, and handle payments, while enforcing role-based access control 
+and business rules.
+
+The application is built with Java and Spring, follows a layered architecture 
+(controllers, services, repositories), and uses JWT-based authentication 
+to secure endpoints. It integrates multiple third-party APIs and demonstrates 
+advanced querying, validation, and domain modeling.
 
 
-# How to generate JWT Secret
-- On Linux / macOS: `openssl rand -base64 64`
-- On Windows (PowerShell): `[Convert]::ToBase64String((1..64 | ForEach-Object {Get-Random -Maximum 256}))`
+# How To Run The Project
+
+## Environment file configuration
+Please edit the `env.properties` file located at the root of the project 
+(same level as `src` folder) and set up the PostgreSQL connection details 
+(according to your machine's setup)
+in:
+- PG_USERNAME
+- PG_PASSWORD
+
+Make sure to create a piccaro_submission database before running the application.
+
+> **Please note**: I have also included a `data.sql` file that will pre-populate 
+> some tables in the database to make testing easier. This includes ready-to-use 
+> user accounts, properties, etc. There is no need to run this `data.sql` file manually,
+> as it will be executed on each application startup, and records that already exist
+> will be skipped.
+
+## Postman Collection
+
+Please download Postman and import the collection located in:
+
+`postman/collections/Piccaro - Back-End Programming Submission.postman_collection.json`
+
+### About the Postman Collection
+
+I have tried to make the Postman Collection as easy and usable as possible. 
+A few notes:
+- All requests already include a `Authorization Bearer {{BearerToken}}` header. 
+  - The collection includes a Post-Response script that 
+  checks whether a request was made to the /auth/login endpoint, 
+  and automatically refreshes/deletes the BearerToken in the Global Variables 
+  according to the login outcome.
+- I have tried to include as many examples as possible to make testing easier.
+  - I have marked some endpoints as Customizable to encourage testing with custom values
+  - For all Customizable endpoint (wherever possible) there are also Ready to Use examples
+  with populated request bodies to showcase the API functionality
+- If the functionality of an endpoint isn't clear, please check the **API Endpoints**
+section where I have included explanation, business rules clarifications, payload 
+and response details for all API endpoints. 
+
+# About The project
+
+## ERD
+![Entity Relationship Diagram](docs/erd.png)
+
+> Please note: as per submission requirement, a hierarchy structure can be found
+> in the Payment entities, where Payment is the base entity, and CardPayment and 
+> PaypalPayment extend the base Payment entity.
+
+## User Roles
+
+The platform supports three main user roles.
+
+### Guest
+  - Can search for properties using filters (city, price, amenities, guests, etc.)
+  - Can book available properties
+  - Can leave reviews for properties they have booked
+  - Can manage their own profile
+### Host
+  - Can create and manage properties
+  - Can define property details such as pricing, amenities, images, and availability
+  - Can view bookings for their properties
+### Admin
+  - Has elevated permissions for platform management
+  - Can access restricted administrative endpoints
+  - May not necessarily act as a Host or Guest
+
+> **Important**: A single user account can hold multiple roles 
+> (i.e. a user can be both a Host and a Guest).
+> This is implemented using a roles bitmask, where each role is mapped to 
+> a specific bit (Guest = 1, Host = 2, Admin = 4).
+> By combining these values, multiple roles can be assigned to the same user 
+> (i.e. 1 + 2 = 3 → Guest and Host), 
+> similar to how permission flags work in Linux.
+
+## Key Features
+
+- User authentication and authorization with JWT
+- Role-based access control
+- Property creation, editing, and advanced search with filtering, sorting, and pagination
+- Booking system with date availability checks
+- Review system
+- Payment hierarchy (i.e. Card and PayPal) with currency conversion
+- Aggregated statistics (i.e. property stats by city)
+- Integration with third-party APIs for images and exchange rates
+- Robust validation and error handling
+
+## Authentication and Security
+
+The application uses JWT tokens for stateless authentication and authorization.
+
+When a user successfully logs in or registers, the backend issues a signed JWT containing essential claims, such as:
+- User ID
+- Email
+- Roles
+- Blocked status
+- Admin flags (i.e. super admin)
+
+By embedding this information directly in the token, the application 
+can extract authentication and authorization data without 
+querying the database on every request, improving performance and scalability.
+
+Also, the API endpoints are protected by @PreAuthorize annotations 
+to enforce role-based access to certain actions. 
+
+### JWT Filter
+
+A custom JWT authentication filter intercepts incoming requests and:
+- Extracts the JWT from the Authorization header
+- Verifies the token’s signature and expiration
+- Reads claims from the token
+- Builds the Spring Security authentication context accordingly
+- If the token is invalid, expired, or the user is blocked, 
+the request is rejected before reaching the controller layer.
+
+This approach ensures:
+- Stateless authentication
+- Separation of authentication and business logic
+- Consistent security enforcement across the entire API
+
+## Exception Handling
+The application uses a `GlobalExceptionHandler` to centrally 
+manage all runtime and validation exceptions.
+
+This ensures that errors are returned in a consistent and 
+structured JSON format, rather than default stack traces.
+
+Custom exceptions are mapped to appropriate HTTP status codes 
+(e.g. 400, 401, 403, 404). 
+Stack traces are not shown, unless there's a 
+500 Internal Server Error exception 
+(this choice was made to allow for easier testing).
+
+## 3rd-Party APIs
+
+The 3rd-party APIs I have integrated are:
+- pexels.com/api/: used to associate random photos to each new property
+  - I have tried to randomize the image associations as much as possible, by passing 
+  different random keywords (i.e. 'hotel', 'cabin', 'house' etc.) on each request, 
+  and choosing a random page number to pick the images from the JSON result set
+- exchangerate-api.com: used to convert incoming payments from the chosen currency in EUR 
+(where EUR is the standard currency of my application). 
 
 
 # API Endpoints

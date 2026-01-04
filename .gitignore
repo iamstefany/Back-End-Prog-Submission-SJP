@@ -33,6 +33,5 @@ build/
 .vscode/
 
 ### Environment Properties ###
-env.properties
 TODO.md
 uploads/*

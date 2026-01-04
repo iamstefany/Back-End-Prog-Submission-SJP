@@ -2179,7 +2179,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "9bcebc8f-bb70-49e9-8bda-b9d031fe33ed",
+        "id": "19c00bcd-d198-448d-a04a-8531b10a76a6",
         "type": "text/javascript",
         "packages": {},
         "requests": {},
@@ -2191,7 +2191,7 @@
     {
       "listen": "test",
       "script": {
-        "id": "a29df7d5-2473-4ccd-9ada-347a1a84f8e2",
+        "id": "32948a8a-13fd-4caf-9aaa-434c9bb13904",
         "type": "text/javascript",
         "packages": {},
         "requests": {},
@@ -2212,13 +2212,6 @@
           "}"
         ]
       }
-    }
-  ],
-  "variable": [
-    {
-      "id": "dba57d4c-2482-4366-a8c2-d114f4b5d391",
-      "key": "randomDOB",
-      "value": ""
     }
   ]
 }
