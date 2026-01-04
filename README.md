@@ -20,6 +20,7 @@ Please edit the `env.properties` file located at the root of the project
 (same level as `src` folder) and set up the PostgreSQL connection details 
 (according to your machine's setup)
 in:
+- PG_PORT
 - PG_USERNAME
 - PG_PASSWORD
 
