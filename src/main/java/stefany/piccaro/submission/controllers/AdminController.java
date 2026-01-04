@@ -47,4 +47,16 @@ public class AdminController {
 
         return userService.blockUser(targetUser);
     }
+
+
+    // ------- Unlock a user -------
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PostMapping("/{userId}/unblock")
+    @ResponseStatus(HttpStatus.OK)
+    public User unblockUser(
+            @PathVariable("userId") UUID userId,
+            HttpServletRequest httpRequest) {
+        User targetUser = userService.findById(userId);
+        return userService.unblockUser(targetUser);
+    }
 }

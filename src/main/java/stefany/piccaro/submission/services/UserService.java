@@ -152,4 +152,10 @@ public class UserService {
         user.setBlocked(true);
         return userRepository.save(user);
     }
+
+    @Transactional
+    public User unblockUser(User user) {
+        user.setBlocked(false);
+        return userRepository.save(user);
+    }
 }

@@ -1835,7 +1835,7 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "583303a9-818d-4119-be36-088a8bea3d23",
+                  "value": "66666666-6666-6666-6666-666666666666",
                   "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
                 }
               ]
@@ -1847,6 +1847,83 @@
           "header": [],
           "cookie": [],
           "responseTime": "2026-01-04T13:23:22.083Z",
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Unblock User (Customizable)",
+      "id": "2d2c5b16-bd5d-4641-b700-90e110b68d8c",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/admin/:user_id/unblock",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "admin",
+            ":user_id",
+            "unblock"
+          ],
+          "variable": [
+            {
+              "key": "user_id",
+              "value": "",
+              "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "0ac2f883-6877-4a7f-8a98-80391473a5ab",
+          "name": "Unblock User (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/admin/:user_id/unblock",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "admin",
+                ":user_id",
+                "unblock"
+              ],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "66666666-6666-6666-6666-666666666666",
+                  "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-04T13:32:31.251Z",
           "body": null
         }
       ]

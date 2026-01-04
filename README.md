@@ -838,3 +838,43 @@ Authorizarion: Bearer <BearerToken>
   }
 }
 ```
+
+
+## [POST] admin/:user_id/unblock
+
+Unblock a user by ID. Please note:
+- Only admins can access this endpoint.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```json
+{
+  "userId": "<UUID>",
+  "email": "<String>",
+  "firstName": "<String>",
+  "lastName": "<String>",
+  "profileImageUrl": "<String>",
+  "registrationDate": "<YYYY-MM-DD>",
+  "isBlocked": "<Boolean>",
+  "roles": "<Integer>",
+  "roleNames": [ "GUEST", "HOST", "ADMIN" ],
+  "adminProfile": {
+    "userId": "<UUID>",
+    "isSuperAdmin": "<Boolean>"
+  },
+  "guestProfile": {
+    "userId": "<UUID>",
+    "dateOfBirth": "<YYYY-MM-DD>",
+    "phoneNumber": "<String>"
+  },
+  "hostProfile": {
+    "userId": "<UUID>",
+    "hostSince": "<YYYY-MM-DD>",
+    "hostVerified": "<Boolean>"
+  }
+}
+```
