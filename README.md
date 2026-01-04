@@ -594,7 +594,7 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
-## [POST] property/:property_id/review/ 
+## [POST] property/:property_id/review
 
 Create a review for a property. Please note:
 - Only guests can access this endpoint.
@@ -664,6 +664,33 @@ Authorizarion: Bearer <BearerToken>
   "paypalEmail": "<paypalEmail - required only for paymentType=paypal>",
   "paypalTransactionId": "<paypalTransactionId - required only for paymentType=paypal>"
 }
+```
+
+#### Response:
+```json
+{
+  "checkInDate": "<YYYY-MM-DD>",
+  "checkOutDate": "<YYYY-MM-DD>",
+  "totalPrice": "<Decimal>",
+  "status": "<String>",
+  "user": { },
+  "property": { },
+  "id": "<UUID>"
+}
+```
+
+
+## [POST] booking/:booking_id/approve
+
+Approve a booking. Please note:
+- Only hosts can access this endpoint.
+- A host is authorized to approve their own properties' bookings only.
+  - Attempting to approve a booking that is not owned by the authenticated user
+will result in Access Denied API error.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
 ```
 
 #### Response:

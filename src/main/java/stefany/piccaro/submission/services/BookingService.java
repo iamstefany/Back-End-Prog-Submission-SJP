@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import stefany.piccaro.submission.dto.CreateBookingRequestDTO;
 import stefany.piccaro.submission.entities.*;
 import stefany.piccaro.submission.exceptions.ForbiddenException;
+import stefany.piccaro.submission.exceptions.NotFoundException;
 import stefany.piccaro.submission.exceptions.ValidationException;
 import stefany.piccaro.submission.repositories.BookingRepository;
 
@@ -28,9 +29,26 @@ public class BookingService {
     @Autowired
     private ExchangeRateService exchangeRateService;
 
+    public Booking findById(UUID bookingId) {
+        return bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new NotFoundException(bookingId));
+    }
 
     public boolean existsCompletedBooking(UUID userId, UUID propertyId) {
         return bookingRepository.existsCompletedBooking(userId, propertyId);
+    }
+
+    @Transactional
+    public Booking approveBooking(UUID bookingId, UUID userId) {
+        // Check if property belongs to user
+        Booking booking = findById(bookingId);
+        if (!booking.getProperty().getUser().getUserId().equals(userId)) {
+            throw new ForbiddenException("Access Denied. You are not the property's owner for this booking.");
+        }
+
+        // Save and return booking
+        booking.setStatus(BookingStatus.CONFIRMED.name());
+        return bookingRepository.save(booking);
     }
 
     @Transactional

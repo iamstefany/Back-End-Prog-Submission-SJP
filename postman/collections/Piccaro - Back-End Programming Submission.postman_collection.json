@@ -1429,6 +1429,103 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Approve Booking (Customizable)",
+      "id": "0613e5bd-8c97-4b7e-be09-1aa83f37e35c",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/booking/:booking_id/approve",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "booking",
+            ":booking_id",
+            "approve"
+          ],
+          "variable": [
+            {
+              "key": "booking_id",
+              "value": "",
+              "uuid": "cbe72a71-3098-439c-8c82-d8b0750fa319"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "c51099fd-9793-438c-abf1-51e19e621958",
+          "name": "Approve Booking (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/booking/:booking_id/approve",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "booking",
+                ":booking_id",
+                "approve"
+              ],
+              "variable": [
+                {
+                  "key": "booking_id",
+                  "value": "8a79d9fb-3205-488e-bcea-8ef5ec2b88e5",
+                  "uuid": "cbe72a71-3098-439c-8c82-d8b0750fa319"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-04T12:00:09.957Z",
+          "body": null
+        }
+      ]
     }
   ],
   "event": [

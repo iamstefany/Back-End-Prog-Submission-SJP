@@ -4,30 +4,40 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import stefany.piccaro.submission.dto.*;
-import stefany.piccaro.submission.entities.Role;
-import stefany.piccaro.submission.entities.User;
+import stefany.piccaro.submission.dto.AuthInfoDTO;
+import stefany.piccaro.submission.dto.CreateBookingRequestDTO;
+import stefany.piccaro.submission.entities.Booking;
 import stefany.piccaro.submission.exceptions.ForbiddenException;
 import stefany.piccaro.submission.exceptions.ValidationException;
 import stefany.piccaro.submission.security.JWTTools;
-import stefany.piccaro.submission.services.UserService;
+import stefany.piccaro.submission.services.BookingService;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/booking")
 public class BookingController {
 
-    // @Autowired
-    // private BookingService bookingService;
+    @Autowired
+    private JWTTools jwtTools;
+    @Autowired
+    private BookingService bookingService;
 
 
+    // ------- Approve a booking -------
+    @PreAuthorize("hasAnyRole('HOST')")
+    @PostMapping("/{bookingId}/approve")
+    @ResponseStatus(HttpStatus.OK)
+    public Booking approveBooking(
+            @PathVariable("bookingId") UUID bookingId,
+            HttpServletRequest httpRequest) {
+        // Get logged-in user info
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
 
+        return bookingService.approveBooking(bookingId, authInfo.userId());
+    }
 }
