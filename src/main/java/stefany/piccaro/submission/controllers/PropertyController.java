@@ -183,19 +183,13 @@ public class PropertyController {
     @PreAuthorize("hasAnyRole('GUEST')")
     @PostMapping("/{propertyId}/review")
     @ResponseStatus(HttpStatus.CREATED)
-    public Review savePropertyReview(
+    public Review reviewProperty(
             @PathVariable("propertyId") UUID propertyId,
             @RequestBody @Validated CreateReviewRequestDTO request,
             BindingResult validationResult,
             HttpServletRequest httpRequest) {
         // Get logged-in user info
         AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
-
-        // Check that user hasn't already reviewed this property
-        List<Review> reviews = reviewService.findByUserId(authInfo.userId());
-        if (!reviews.isEmpty()) {
-            throw new ForbiddenException("You already reviewed this property.");
-        }
 
         // Basic DTO validation
         if (validationResult.hasErrors()) {

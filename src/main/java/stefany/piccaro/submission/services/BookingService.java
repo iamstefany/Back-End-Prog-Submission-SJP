@@ -25,6 +25,11 @@ public class BookingService {
     @Autowired
     private UserService userService;
 
+
+    public boolean existsCompletedBooking(UUID userId, UUID propertyId) {
+        return bookingRepository.existsCompletedBooking(userId, propertyId);
+    }
+
     @Transactional
     public Booking save(UUID propertyId, UUID userId, CreateBookingRequestDTO request) {
         Property property = propertyService.findById(propertyId);

@@ -23,4 +23,16 @@ public interface BookingRepository extends JpaRepository<Booking, UUID> {
             @Param("requestedCheckIn") LocalDate requestedCheckIn,
             @Param("requestedCheckOut") LocalDate requestedCheckOut
     );
+
+    @Query("""
+    SELECT COUNT(b) > 0
+    FROM Booking b
+    WHERE b.user.userId = :userId
+      AND b.property.propertyId = :propertyId
+      AND b.checkOutDate <= CURRENT_DATE
+    """)
+    boolean existsCompletedBooking(
+            @Param("userId") UUID userId,
+            @Param("propertyId") UUID propertyId
+    );
 }

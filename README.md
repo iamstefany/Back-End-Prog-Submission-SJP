@@ -600,6 +600,8 @@ Create a review for a property. Please note:
 - Only guests can access this endpoint.
 - A guest may not leave multiple reviews for the same property.
   - Attempting to add more than one review for the same property will result in a Forbidden API error.
+- A guest may not leave a review for a property they never booked
+  - The booking(s) must be already completed (checkOutDate <= today)
 
 #### Headers:
 ```
