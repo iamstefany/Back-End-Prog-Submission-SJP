@@ -726,3 +726,30 @@ Authorizarion: Bearer <BearerToken>
 ```
 204 No Content
 ```
+
+
+## [GET] booking/my
+
+Get all bookings for the currently authenticated user. Please note:
+- Only guests can access this endpoint.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```json lines
+[
+  {
+    "checkInDate": "<YYYY-MM-DD>",
+    "checkOutDate": "<YYYY-MM-DD>",
+    "totalPrice": "<Decimal>",
+    "status": "<String>",
+    "user": { },
+    "property": { },
+    "id": "<UUID>"
+  }
+  //, ... other bookings
+]
+```

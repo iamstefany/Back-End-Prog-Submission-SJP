@@ -34,6 +34,10 @@ public class BookingService {
                 .orElseThrow(() -> new NotFoundException(bookingId));
     }
 
+    public List<Booking> findByUserId(UUID userId) {
+        return bookingRepository.findByUser_UserId(userId);
+    }
+
     public boolean existsCompletedBooking(UUID userId, UUID propertyId) {
         return bookingRepository.existsCompletedBooking(userId, propertyId);
     }
