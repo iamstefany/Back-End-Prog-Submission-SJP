@@ -127,7 +127,7 @@ A custom JWT authentication filter intercepts incoming requests and:
 - Verifies the token’s signature and expiration
 - Reads claims from the token
 - Builds the Spring Security authentication context accordingly
-- If the token is invalid, expired, or the user is blocked, 
+- If the token is invalid or expired, 
 the request is rejected before reaching the controller layer.
 
 This approach ensures:
