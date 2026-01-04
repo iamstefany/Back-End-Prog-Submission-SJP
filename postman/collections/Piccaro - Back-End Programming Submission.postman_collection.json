@@ -1775,6 +1775,83 @@
       ]
     },
     {
+      "name": "Block User (Customizable)",
+      "id": "f9393583-1d81-4d14-952e-19374df01730",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/admin/:user_id/block",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "admin",
+            ":user_id",
+            "block"
+          ],
+          "variable": [
+            {
+              "key": "user_id",
+              "value": "",
+              "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "3f3771a3-af0f-4c3b-868b-735948a980ee",
+          "name": "Block User (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/admin/:user_id/block",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "admin",
+                ":user_id",
+                "block"
+              ],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "583303a9-818d-4119-be36-088a8bea3d23",
+                  "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-04T13:23:22.083Z",
+          "body": null
+        }
+      ]
+    },
+    {
       "name": "Get Amenities",
       "id": "f9ebc96e-88fa-434e-ae36-88b9cfb86364",
       "request": {

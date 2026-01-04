@@ -146,4 +146,10 @@ public class UserService {
 
         userRepository.delete(user);
     }
+
+    @Transactional
+    public User blockUser(User user) {
+        user.setBlocked(true);
+        return userRepository.save(user);
+    }
 }

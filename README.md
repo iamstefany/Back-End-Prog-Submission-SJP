@@ -796,3 +796,45 @@ Authorizarion: Bearer <BearerToken>
 ```
 204 No Content
 ```
+
+
+## [POST] admin/:user_id/block
+
+Block a user by ID. Please note:
+- Only admins can access this endpoint.
+- A super admin is allowed to block any user
+- A basic admin is allowed to block any user except Super Admins.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```json
+{
+  "userId": "<UUID>",
+  "email": "<String>",
+  "firstName": "<String>",
+  "lastName": "<String>",
+  "profileImageUrl": "<String>",
+  "registrationDate": "<YYYY-MM-DD>",
+  "isBlocked": "<Boolean>",
+  "roles": "<Integer>",
+  "roleNames": [ "GUEST", "HOST", "ADMIN" ],
+  "adminProfile": {
+    "userId": "<UUID>",
+    "isSuperAdmin": "<Boolean>"
+  },
+  "guestProfile": {
+    "userId": "<UUID>",
+    "dateOfBirth": "<YYYY-MM-DD>",
+    "phoneNumber": "<String>"
+  },
+  "hostProfile": {
+    "userId": "<UUID>",
+    "hostSince": "<YYYY-MM-DD>",
+    "hostVerified": "<Boolean>"
+  }
+}
+```
