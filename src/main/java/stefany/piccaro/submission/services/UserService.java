@@ -5,10 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import stefany.piccaro.submission.dto.CreateAdminRequestDTO;
-import stefany.piccaro.submission.dto.EditUserRequestDTO;
-import stefany.piccaro.submission.dto.SignUpRequestDTO;
-import stefany.piccaro.submission.dto.SignUpResponseDTO;
+import stefany.piccaro.submission.dto.*;
 import stefany.piccaro.submission.entities.*;
 import stefany.piccaro.submission.exceptions.ForbiddenException;
 import stefany.piccaro.submission.exceptions.NotFoundException;
@@ -186,5 +183,12 @@ public class UserService {
 
         // Add user
         return userRepository.save(user);
+    }
+
+    @Transactional
+    public void resetPassword(UUID userId, EditPasswordRequestDTO request) {
+        User user = findById(userId);
+        user.setPassword(bcrypt.encode(request.newPassword()));
+        userRepository.save(user);
     }
 }

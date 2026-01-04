@@ -262,6 +262,33 @@ Authorizarion: Bearer <BearerToken>
 ```
 
 
+## [PATCH] /user/:user_id/password-reset
+
+Reset password for the specified user. Please note:
+- Only admins can reset the password of other users.
+  - Admins can reset another user's password without knowing their old password.
+- Regular users can only reset their own password.
+    - Regular users must provide their old password to set a new one
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Body:
+```json
+{
+  "newPassword": "<String>", 
+  "oldPassword": "<String - only required if logged in as regular user>"
+}
+```
+
+#### Response:
+```
+200 OK
+```
+
+
 ## [DELETE] /user/:user_id
 
 Delete user by id. Please note:

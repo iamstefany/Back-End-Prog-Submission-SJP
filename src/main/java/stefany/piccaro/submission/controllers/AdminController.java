@@ -10,8 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import stefany.piccaro.submission.dto.AuthInfoDTO;
 import stefany.piccaro.submission.dto.CreateAdminRequestDTO;
-import stefany.piccaro.submission.dto.SignUpRequestDTO;
-import stefany.piccaro.submission.dto.SignUpResponseDTO;
 import stefany.piccaro.submission.entities.Role;
 import stefany.piccaro.submission.entities.User;
 import stefany.piccaro.submission.exceptions.ForbiddenException;
@@ -47,6 +45,14 @@ public class AdminController {
         // Prevent basic admin from creating super admins
         if (!authUser.getAdminProfile().getIsSuperAdmin() && request.isSuperAdmin()) {
             throw new ForbiddenException("As a Basic Admin, you are not allowed to create Super Admins.");
+        }
+
+        // DTO validation
+        if (validationResult.hasErrors()) {
+            throw new ValidationException(validationResult.getFieldErrors()
+                    .stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .toList());
         }
 
         // Save user with assigned role

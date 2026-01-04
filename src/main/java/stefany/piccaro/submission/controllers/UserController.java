@@ -6,6 +6,7 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,8 @@ public class UserController {
 
     @Autowired
     private JWTTools jwtTools;
+    @Autowired
+    private PasswordEncoder bcrypt;
     @Autowired
     private UserService userService;
 
@@ -114,6 +117,43 @@ public class UserController {
         }
 
         return userService.editUser(userId, request);
+    }
+
+
+    // ------- Password reset -------
+    @PatchMapping("/{userId}/password-reset")
+    @ResponseStatus(HttpStatus.OK)
+    public void passwordReset(
+            @PathVariable("userId") UUID userId,
+            @RequestBody @Validated EditPasswordRequestDTO request,
+            BindingResult validationResult,
+            HttpServletRequest httpRequest
+    ) {
+        // Get roles from token
+        AuthInfoDTO authInfo = jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
+        User targetUser = userService.findById(userId);
+
+        // If you're not an admin, you're not allowed to edit other users' passwords
+        if (!Role.hasRole(authInfo.roles(), Role.ADMIN)) {
+            if (!userId.equals(authInfo.userId())) {
+                throw new ForbiddenException("Access denied: insufficient permissions to reset password for this user.");
+            }
+
+            // Also, if you're not an admin, you must know your old password in order to reset it
+            if (!bcrypt.matches(request.oldPassword(), targetUser.getPassword())) {
+                throw new ForbiddenException("Access denied: your old password does not match.");
+            }
+        }
+
+        // DTO validation
+        if (validationResult.hasErrors()) {
+            throw new ValidationException(validationResult.getFieldErrors()
+                    .stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .toList());
+        }
+
+        userService.resetPassword(userId, request);
     }
 
 

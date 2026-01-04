@@ -637,6 +637,107 @@
       "response": []
     },
     {
+      "name": "Reset Password (Customizable)",
+      "id": "e8327236-b5dc-42cd-b0bd-e81b6973ff5e",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"newPassword\": \"<newPassword>\", \r\n    \"oldPassword\": \"<oldPassword - only required if logged in as non-admin>\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/user/:user_id/password-reset",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "user",
+            ":user_id",
+            "password-reset"
+          ],
+          "variable": [
+            {
+              "key": "user_id",
+              "value": "",
+              "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "a368ff07-5cf4-44cf-88b4-c4620c3a2755",
+          "name": "Reset Password (Ready to Use)",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"newPassword\": \"NewPassword123\", \r\n    \"oldPassword\": \"AAAA\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/user/:user_id/password-reset",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "user",
+                ":user_id",
+                "password-reset"
+              ],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "22222222-2222-2222-2222-222222222222",
+                  "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-04T15:16:04.010Z",
+          "body": null
+        }
+      ]
+    },
+    {
       "name": "Delete User (Customizable)",
       "id": "4351d691-7e40-4f97-a044-3ba4d44fe7a5",
       "request": {
