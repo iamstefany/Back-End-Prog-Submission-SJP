@@ -1598,6 +1598,81 @@
       ]
     },
     {
+      "name": "Get Booking by Id (Customizable)",
+      "id": "14e252f6-47ba-4112-9d2b-1a19e5c9cc1e",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/booking/:booking_id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "booking",
+            ":booking_id"
+          ],
+          "variable": [
+            {
+              "key": "booking_id",
+              "value": "",
+              "uuid": "fd493e0a-8b29-4df8-83eb-a25754842706"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "616c5a27-ae28-409d-a180-e198e9f26010",
+          "name": "Get Booking by Id (Ready to Use)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/booking/:booking_id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "booking",
+                ":booking_id"
+              ],
+              "variable": [
+                {
+                  "key": "booking_id",
+                  "value": "8a79d9fb-3205-488e-bcea-8ef5ec2b88e5",
+                  "uuid": "fd493e0a-8b29-4df8-83eb-a25754842706"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-04T12:42:22.755Z",
+          "body": null
+        }
+      ]
+    },
+    {
       "name": "Get My Bookings (Ready to Use)",
       "id": "8d2325a9-239f-453b-8a39-e9de096651ba",
       "request": {

@@ -352,7 +352,7 @@ Authorizarion: Bearer <BearerToken>
 ## [GET] /property/search
 
 Search properties by a series of query parameters. Please note:
-- Amenities may be passed for filtering as a comma-separated list (i.e. 'WiFi,Parking')
+- Amenities may be passed for filtering as a comma-separated list (i.e. 'Wi-Fi,Parking')
   - Only properties having all specified amenities will be returned
 - Paging starts from page 0 (therefore, to get results from the first page, use page=0)
 - Sorting is only allowed by pricePerNight, maxGuests or title
@@ -725,6 +725,32 @@ Authorizarion: Bearer <BearerToken>
 #### Response:
 ```
 204 No Content
+```
+
+
+## [GET] booking/:booking_id
+
+Get a booking by ID. Please note:
+- Only Admins are allowed to view all bookings.
+- Guests are only allowed to access their own bookings.
+- Hosts are only allowed to access bookings against their own properties.
+
+#### Headers:
+```
+Authorizarion: Bearer <BearerToken>
+```
+
+#### Response:
+```json lines
+{
+  "checkInDate": "<YYYY-MM-DD>",
+  "checkOutDate": "<YYYY-MM-DD>",
+  "totalPrice": "<Decimal>",
+  "status": "<String>",
+  "user": { },
+  "property": { },
+  "id": "<UUID>"
+}
 ```
 
 
