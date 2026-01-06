@@ -254,7 +254,8 @@ Login a user. Please note:
 #### Response:
 ```json
 {
-    "accessToken": "<String>"
+    "accessToken": "<String>",
+    "userID": "<UUID>"
 }
 ```
 
