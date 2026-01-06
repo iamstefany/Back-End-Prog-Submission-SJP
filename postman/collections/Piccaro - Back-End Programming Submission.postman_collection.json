@@ -591,7 +591,73 @@
           ]
         }
       },
-      "response": []
+      "response": [
+        {
+          "id": "44717a8e-a205-4696-82ec-5d94911a519d",
+          "name": "Upload Profile Picture (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "0779da9f-c32f-4762-b8ed-43a7ac844daf"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data",
+                "type": "text",
+                "uuid": "9a386f8b-cd28-4e6c-8f74-3b963a4882bf"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "uuid": "a83d5382-e82d-4842-8266-fa3ded67539f",
+                  "src": [
+                    "postman-cloud:///1f0eb334-f9f6-4130-9cac-e185f9aba853"
+                  ]
+                }
+              ],
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/user/:user_id/upload-profile-picture",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "user",
+                ":user_id",
+                "upload-profile-picture"
+              ],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "33333333-3333-3333-3333-333333333333"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-06T19:01:25.679Z",
+          "body": null
+        }
+      ]
     },
     {
       "name": "Edit User (Customizable)",
@@ -634,7 +700,57 @@
           ]
         }
       },
-      "response": []
+      "response": [
+        {
+          "id": "1be14378-a924-4448-becc-9f15a193b807",
+          "name": "Edit Pre-Populated User (Ready to Use)",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "5aecc99b-d0a2-4586-a8d8-1e72c5c31d4c"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"dateOfBirth\": \"1970-05-01\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/user/:user_id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "user",
+                ":user_id"
+              ],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "33333333-3333-3333-3333-333333333333"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-06T18:59:49.008Z",
+          "body": null
+        }
+      ]
     },
     {
       "name": "Reset Password (Customizable)",
@@ -672,8 +788,7 @@
           "variable": [
             {
               "key": "user_id",
-              "value": "",
-              "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+              "value": ""
             }
           ]
         }
@@ -721,8 +836,7 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "22222222-2222-2222-2222-222222222222",
-                  "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+                  "value": "33333333-3333-3333-3333-333333333333"
                 }
               ]
             }
@@ -778,7 +892,57 @@
           ]
         }
       },
-      "response": []
+      "response": [
+        {
+          "id": "1c733b3c-fc38-4438-8fb4-3099a962a447",
+          "name": "Delete Pre-Populated User (Ready to Use)",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "5aecc99b-d0a2-4586-a8d8-1e72c5c31d4c"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/user/:user_id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "user",
+                ":user_id"
+              ],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "77777777-7777-7777-7777-777777777777"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-06T19:11:42.167Z",
+          "body": null
+        }
+      ]
     },
     {
       "name": "Get Property by ID (Customizable)",
@@ -1149,7 +1313,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"title\": \"New title\",\r\n    \"description\": \"New description. Lorem ipsum dolor sit amet.\",\r\n    \"address\": \"New address.\",\r\n    \"pricePerNight\": 110,\r\n    \"maxGuests\": 2,\r\n    \"automaticConfirmation\": true,\r\n    \"checkInTime\": \"13:00\",\r\n    \"checkOutTime\": \"11:00\"\r\n}",
+              "raw": "{\r\n    \"title\": \"Your dream property in Naples!\",\r\n    \"description\": \"Perfect location, quite area! And the property is situated near an underground station.\",\r\n    \"address\": \"Piazza Municipio 10\",\r\n    \"pricePerNight\": 85,\r\n    \"maxGuests\": 3,\r\n    \"automaticConfirmation\": true,\r\n    \"checkInTime\": \"14:00\",\r\n    \"checkOutTime\": \"11:00\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1243,7 +1407,7 @@
               "variable": [
                 {
                   "key": "property_id",
-                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be"
+                  "value": "4dce23f8-f569-4fc3-a9e4-afbdf64efc7c"
                 }
               ]
             }
@@ -1259,42 +1423,58 @@
       ]
     },
     {
-      "name": "Create Property Review (Customizable)",
-      "id": "c9da8323-6214-4581-b190-359eac7efca2",
+      "name": "Get My Bookings (Ready to Use)",
+      "id": "8d2325a9-239f-453b-8a39-e9de096651ba",
       "request": {
-        "method": "POST",
+        "method": "GET",
         "header": [
           {
             "key": "Authorization",
             "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+            "type": "text"
           }
         ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"rating\": \"<rating>\",\r\n    \"comment\": \"<comment>\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
         "url": {
-          "raw": "http://localhost:3001/property/:property_id/review",
+          "raw": "http://localhost:3001/booking/my",
           "protocol": "http",
           "host": [
             "localhost"
           ],
           "port": "3001",
           "path": [
-            "property",
-            ":property_id",
-            "review"
+            "booking",
+            "my"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Booking by Id (Customizable)",
+      "id": "14e252f6-47ba-4112-9d2b-1a19e5c9cc1e",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3001/booking/:booking_id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "booking",
+            ":booking_id"
           ],
           "variable": [
             {
-              "key": "property_id",
+              "key": "booking_id",
               "value": ""
             }
           ]
@@ -1302,49 +1482,32 @@
       },
       "response": [
         {
-          "id": "5a48bc0d-fce6-4e40-b9a4-3232b0d27b2e",
-          "name": "Create Property Review (Ready to Use)",
+          "id": "616c5a27-ae28-409d-a180-e198e9f26010",
+          "name": "Get Booking by Id (Ready to Use)",
           "originalRequest": {
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
                 "key": "Authorization",
                 "value": "Bearer {{BearerToken}}",
-                "type": "text",
-                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
-              },
-              {
-                "key": "Content-Type",
-                "name": "Content-Type",
-                "value": "application/json",
                 "type": "text"
               }
             ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"rating\": 5,\r\n    \"comment\": \"I loved my stay at this amazing property!\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
             "url": {
-              "raw": "http://localhost:3001/property/:property_id/review",
+              "raw": "http://localhost:3001/booking/:booking_id",
               "protocol": "http",
               "host": [
                 "localhost"
               ],
               "port": "3001",
               "path": [
-                "property",
-                ":property_id",
-                "review"
+                "booking",
+                ":booking_id"
               ],
               "variable": [
                 {
-                  "key": "property_id",
-                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
+                  "key": "booking_id",
+                  "value": "7d83e72a-d0ec-4476-9e0e-4d895593bf25"
                 }
               ]
             }
@@ -1354,7 +1517,7 @@
           "_postman_previewlanguage": "json",
           "header": [],
           "cookie": [],
-          "responseTime": "2026-01-03T18:48:42.679Z",
+          "responseTime": "2026-01-04T12:42:22.755Z",
           "body": null
         }
       ]
@@ -1505,6 +1668,107 @@
       ]
     },
     {
+      "name": "Create Property Review (Customizable)",
+      "id": "c9da8323-6214-4581-b190-359eac7efca2",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{BearerToken}}",
+            "type": "text",
+            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"rating\": \"<rating>\",\r\n    \"comment\": \"<comment>\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/property/:property_id/review",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "property",
+            ":property_id",
+            "review"
+          ],
+          "variable": [
+            {
+              "key": "property_id",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "5a48bc0d-fce6-4e40-b9a4-3232b0d27b2e",
+          "name": "Create Property Review (Ready to Use)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"rating\": 5,\r\n    \"comment\": \"I loved my stay at this amazing property!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/property/:property_id/review",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                ":property_id",
+                "review"
+              ],
+              "variable": [
+                {
+                  "key": "property_id",
+                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [],
+          "cookie": [],
+          "responseTime": "2026-01-03T18:48:42.679Z",
+          "body": null
+        }
+      ]
+    },
+    {
       "name": "Approve Booking (Customizable)",
       "id": "0613e5bd-8c97-4b7e-be09-1aa83f37e35c",
       "request": {
@@ -1541,8 +1805,7 @@
           "variable": [
             {
               "key": "booking_id",
-              "value": "",
-              "uuid": "cbe72a71-3098-439c-8c82-d8b0750fa319"
+              "value": ""
             }
           ]
         }
@@ -1585,8 +1848,7 @@
               "variable": [
                 {
                   "key": "booking_id",
-                  "value": "8a79d9fb-3205-488e-bcea-8ef5ec2b88e5",
-                  "uuid": "cbe72a71-3098-439c-8c82-d8b0750fa319"
+                  "value": "7d83e72a-d0ec-4476-9e0e-4d895593bf25"
                 }
               ]
             }
@@ -1638,8 +1900,7 @@
           "variable": [
             {
               "key": "booking_id",
-              "value": "",
-              "uuid": "cbe72a71-3098-439c-8c82-d8b0750fa319"
+              "value": ""
             }
           ]
         }
@@ -1682,8 +1943,7 @@
               "variable": [
                 {
                   "key": "booking_id",
-                  "value": "8a79d9fb-3205-488e-bcea-8ef5ec2b88e5",
-                  "uuid": "cbe72a71-3098-439c-8c82-d8b0750fa319"
+                  "value": "e8595a6e-d8d6-4aa6-a146-cc77afaa9439"
                 }
               ]
             }
@@ -1697,108 +1957,6 @@
           "body": null
         }
       ]
-    },
-    {
-      "name": "Get Booking by Id (Customizable)",
-      "id": "14e252f6-47ba-4112-9d2b-1a19e5c9cc1e",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/booking/:booking_id",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "booking",
-            ":booking_id"
-          ],
-          "variable": [
-            {
-              "key": "booking_id",
-              "value": "",
-              "uuid": "fd493e0a-8b29-4df8-83eb-a25754842706"
-            }
-          ]
-        }
-      },
-      "response": [
-        {
-          "id": "616c5a27-ae28-409d-a180-e198e9f26010",
-          "name": "Get Booking by Id (Ready to Use)",
-          "originalRequest": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{BearerToken}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3001/booking/:booking_id",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "booking",
-                ":booking_id"
-              ],
-              "variable": [
-                {
-                  "key": "booking_id",
-                  "value": "8a79d9fb-3205-488e-bcea-8ef5ec2b88e5",
-                  "uuid": "fd493e0a-8b29-4df8-83eb-a25754842706"
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T12:42:22.755Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Get My Bookings (Ready to Use)",
-      "id": "8d2325a9-239f-453b-8a39-e9de096651ba",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/booking/my",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "booking",
-            "my"
-          ]
-        }
-      },
-      "response": []
     },
     {
       "name": "Delete Booking (Customizable)",
@@ -1826,8 +1984,7 @@
           "variable": [
             {
               "key": "booking_id",
-              "value": "",
-              "uuid": "fd493e0a-8b29-4df8-83eb-a25754842706"
+              "value": ""
             }
           ]
         }
@@ -1859,8 +2016,7 @@
               "variable": [
                 {
                   "key": "booking_id",
-                  "value": "8a79d9fb-3205-488e-bcea-8ef5ec2b88e5",
-                  "uuid": "fd493e0a-8b29-4df8-83eb-a25754842706"
+                  "value": "f2a263d3-2ba2-40e2-9643-cedffca6a7ec"
                 }
               ]
             }
@@ -2020,8 +2176,7 @@
           "variable": [
             {
               "key": "user_id",
-              "value": "",
-              "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+              "value": ""
             }
           ]
         }
@@ -2054,8 +2209,7 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "66666666-6666-6666-6666-666666666666",
-                  "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+                  "value": "66666666-6666-6666-6666-666666666666"
                 }
               ]
             }
@@ -2097,8 +2251,7 @@
           "variable": [
             {
               "key": "user_id",
-              "value": "",
-              "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+              "value": ""
             }
           ]
         }
@@ -2131,8 +2284,7 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "66666666-6666-6666-6666-666666666666",
-                  "uuid": "7456879d-1c25-4cb8-b79f-786382c147f7"
+                  "value": "66666666-6666-6666-6666-666666666666"
                 }
               ]
             }

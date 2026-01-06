@@ -2,10 +2,11 @@
 
 -- Pre-populating the database with initial data for easier testing.
 -- Data:
---   - 6 Users (Super Admin, Basic Admin, Guest User, Host User, Guest & Host User, Blocked User)
+--   - 7 Users (Super Admin, Basic Admin, Guest User, Host User, Guest & Host User, Blocked User)
 --   - Corresponding Profiles for each user
 --   - 20 Amenities
---   - 7 Properties (and relevant images and amenities associations)
+--   - 8 Properties (and relevant images and amenities associations)
+--   - 3 Bookings (and relevant card/paypal payments)
 -- This script is run on each application startup, but uses ON CONFLICT DO NOTHING
 -- to avoid duplicate entries if the data already exists.
 
@@ -44,7 +45,12 @@ VALUES
     '66666666-6666-6666-6666-666666666666', 'blocked.user@example.com',
     '$2a$12$1NbZcLDEG.bKRpTMRG4nRu3HqKN/CHWK8RTQFPnd8uEmNFzuEMFkG',
     'Blocked', 'User', true, 'https://ui-avatars.com/api/?name=Blocked+User', '2026-01-01', 3
-)
+),
+(
+     '77777777-7777-7777-7777-777777777777', 'dummy.user@example.com',
+     '$2a$12$1NbZcLDEG.bKRpTMRG4nRu3HqKN/CHWK8RTQFPnd8uEmNFzuEMFkG',
+     'Dummy', 'User', true, 'https://ui-avatars.com/api/?name=Dummy+User', '2026-01-01', 1
+ )
 ON CONFLICT (user_id) DO NOTHING;
 
 
@@ -63,7 +69,8 @@ VALUES
 ('22222222-2222-2222-2222-222222222222', '1992-02-02', '+2222222222'),
 ('33333333-3333-3333-3333-333333333333', '1990-05-15', '+1234567890'),
 ('55555555-5555-5555-5555-555555555555', '1985-10-20', '+0987654321'),
-('66666666-6666-6666-6666-666666666666', '1995-12-25', '+1122334455')
+('66666666-6666-6666-6666-666666666666', '1995-12-25', '+1122334455'),
+('77777777-7777-7777-7777-777777777777', '1987-03-12', '+0011122233')
 ON CONFLICT (user_id) DO NOTHING;
 
 INSERT INTO
@@ -104,17 +111,18 @@ VALUES
 ON CONFLICT (amenity_id) DO NOTHING;
 -----------------------------------------------------------------
 
---------------------- Properties (7) ---------------------
+--------------------- Properties (8) ---------------------
 INSERT INTO properties
 (property_id, address, automatic_confirmation, check_in_time, check_out_time, city, country, description, max_guests, price_per_night, title, user_id)
 VALUES
 ('8164dd55-a730-4a84-a376-4c6f697aeadb', 'Via Bologna 1', true, '15:00:00', '10:00:00', 'Torino', 'IT', 'This beautiful property will make you feel right at home.', 2, 60.00, 'Beautiful property in city center', '44444444-4444-4444-4444-444444444444'),
-('fb53eed4-b6c3-467f-b89a-e0babaaa92e0', 'Via Montebello', true, '15:00:00', '10:00:00', 'Torino', 'IT', 'Prestigious location, we look forward to welcoming you!', 3, 90.00, 'Amazing property near Mole Antoneliana', '44444444-4444-4444-4444-444444444444'),
+('fb53eed4-b6c3-467f-b89a-e0babaaa92e0', 'Via Montebello', false, '15:00:00', '10:00:00', 'Torino', 'IT', 'Prestigious location, we look forward to welcoming you!', 3, 90.00, 'Amazing property near Mole Antoneliana', '44444444-4444-4444-4444-444444444444'),
 ('191b86ed-c9f9-4713-90e3-167aba489668', 'Piazza del Duomo', true, '15:00:00', '10:00:00', 'Milano', 'IT', 'This property is a 5-minutes walk away from Duomo!', 2, 150.00, 'Property near Duomo', '44444444-4444-4444-4444-444444444444'),
-('e9f803e2-89b1-40bc-8c9f-60e0dca8d953', 'Via Borgogna', true, '15:00:00', '10:00:00', 'Milano', 'IT', 'Close to San Babila, perfect for families.', 5, 190.00, 'Lovely property in Milan', '44444444-4444-4444-4444-444444444444'),
+('e9f803e2-89b1-40bc-8c9f-60e0dca8d953', 'Via Borgogna', false, '15:00:00', '10:00:00', 'Milano', 'IT', 'Close to San Babila, perfect for families.', 5, 190.00, 'Lovely property in Milan', '44444444-4444-4444-4444-444444444444'),
 ('426d603e-3af4-431e-a7c7-ebdd1db1b83a', 'Piazza del Colosseo', true, '15:00:00', '10:00:00', 'Roma', 'IT', 'Perfect for couples who want to plan a romantic escape in Rome.', 2, 210.00, 'Romantic property near Colosseum', '44444444-4444-4444-4444-444444444444'),
 ('dae58c39-bd49-4511-bf9f-5f0333a6287a', 'Via S. Pasquale', true, '15:00:00', '10:00:00', 'Napoli', 'IT', 'Perfect for families! Enjoy a walk in the promenade.', 4, 85.00, 'Seaside property in Naples', '44444444-4444-4444-4444-444444444444'),
-('ad2ba064-1026-4e09-9e40-23c7e36db8be', 'Piazza Municipio', true, '15:00:00', '10:00:00', 'Napoli', 'IT', 'The property is situated near an underground station.', 3, 70.00, 'Perfect property in Naples!', '44444444-4444-4444-4444-444444444444')
+('ad2ba064-1026-4e09-9e40-23c7e36db8be', 'Piazza Municipio', false, '15:00:00', '10:00:00', 'Napoli', 'IT', 'The property is situated near an underground station.', 3, 70.00, 'Perfect property in Naples!', '44444444-4444-4444-4444-444444444444'),
+('4dce23f8-f569-4fc3-a9e4-afbdf64efc7c', 'Somewhere in the World.', false, '15:00:00', '10:00:00', 'Roma', 'IT', 'This is just a test property, will be used for deletion.', 2, 100.00, 'Dummy property', '44444444-4444-4444-4444-444444444444')
 ON CONFLICT (property_id) DO NOTHING;
 
 ---- Property images
@@ -145,11 +153,15 @@ VALUES
 ('d09786f6-fde8-4752-b70c-2aa145ef118a', 'https://images.pexels.com/photos/2183521/pexels-photo-2183521.jpeg', true, 'dae58c39-bd49-4511-bf9f-5f0333a6287a'),
 ('48d9bbad-2a73-411d-b9de-2eb2be1b6de6', 'https://images.pexels.com/photos/3225527/pexels-photo-3225527.jpeg', false, 'dae58c39-bd49-4511-bf9f-5f0333a6287a'),
 ('b4562244-3471-417a-8e27-4d1d76cdcff7', 'https://images.pexels.com/photos/459057/pexels-photo-459057.jpeg', false, 'dae58c39-bd49-4511-bf9f-5f0333a6287a'),
-('0ec1f2be-b935-4d8c-b12c-21a8ddaec7c9', 'https://images.pexels.com/photos/2527556/pexels-photo-2527556.jpeg', false, 'dae58c39-bd49-4511-bf9f-5f0333a6287a')
+('0ec1f2be-b935-4d8c-b12c-21a8ddaec7c9', 'https://images.pexels.com/photos/2527556/pexels-photo-2527556.jpeg', false, 'dae58c39-bd49-4511-bf9f-5f0333a6287a'),
+('7042758f-1b44-4490-9616-04c6ba04a172', 'https://images.pexels.com/photos/459057/pexels-photo-459057.jpeg', false, '4dce23f8-f569-4fc3-a9e4-afbdf64efc7c'),
+('1c184271-cef1-444b-abba-9d10b915ea6e', 'https://images.pexels.com/photos/2527556/pexels-photo-2527556.jpeg', false, '4dce23f8-f569-4fc3-a9e4-afbdf64efc7c'),
+('4c971bd7-6e98-43d4-98e3-22509b3bed95', 'https://images.pexels.com/photos/2183521/pexels-photo-2183521.jpeg', true, '4dce23f8-f569-4fc3-a9e4-afbdf64efc7c'),
+('83142d21-2f65-4c72-9420-095ea1449cbd', 'https://images.pexels.com/photos/3225527/pexels-photo-3225527.jpeg', false, '4dce23f8-f569-4fc3-a9e4-afbdf64efc7c')
 ON CONFLICT (property_image_id) DO NOTHING;
 
 ---- Property amenities
-INSERT INTO public.property_amenity
+INSERT INTO property_amenity
 (property_id, amenity_id)
 VALUES
 ('8164dd55-a730-4a84-a376-4c6f697aeadb', '0ab6b4ad-2fd6-41c0-a4a2-209408a56833'),
@@ -182,5 +194,38 @@ VALUES
 ('dae58c39-bd49-4511-bf9f-5f0333a6287a', '13537009-d406-4b27-80cf-e4099d21048c'),
 ('dae58c39-bd49-4511-bf9f-5f0333a6287a', '43bd47c6-8202-4d4d-aed9-0521be7af9ea'),
 ('dae58c39-bd49-4511-bf9f-5f0333a6287a', 'c21fabcf-2a2a-4e72-a8fd-8256cce59b13'),
-('dae58c39-bd49-4511-bf9f-5f0333a6287a', '30b5db79-3225-489d-9df0-bb3902b4392b')
+('dae58c39-bd49-4511-bf9f-5f0333a6287a', '30b5db79-3225-489d-9df0-bb3902b4392b'),
+('4dce23f8-f569-4fc3-a9e4-afbdf64efc7c', '4693d14e-6e4c-4fbe-ba80-2e30f8731ddc'),
+('4dce23f8-f569-4fc3-a9e4-afbdf64efc7c', 'd6f42610-af3b-4409-b6dd-ccde196a20ae'),
+('4dce23f8-f569-4fc3-a9e4-afbdf64efc7c', 'c9325e70-e5be-4b59-ac21-7f33e0f94b43')
 ON CONFLICT (property_id, amenity_id) DO NOTHING;
+-----------------------------------------------------------------
+
+--------------------- Bookings (2) ---------------------
+INSERT INTO bookings (booking_id, status, total_price, property_id, user_id, check_in_date, check_out_date)
+VALUES
+('7d83e72a-d0ec-4476-9e0e-4d895593bf25', 'CONFIRMED', 180.00, '8164dd55-a730-4a84-a376-4c6f697aeadb', '33333333-3333-3333-3333-333333333333', '2026-03-01', '2026-03-04'),
+('f2a263d3-2ba2-40e2-9643-cedffca6a7ec', 'CONFIRMED', 180.00, 'fb53eed4-b6c3-467f-b89a-e0babaaa92e0', '33333333-3333-3333-3333-333333333333', '2026-03-27', '2026-03-29'),
+('e8595a6e-d8d6-4aa6-a146-cc77afaa9439', 'PENDING', 760.00, 'e9f803e2-89b1-40bc-8c9f-60e0dca8d953', '33333333-3333-3333-3333-333333333333', '2026-04-01', '2026-04-05')
+ON CONFLICT (booking_id) DO NOTHING;
+
+---- Payments
+INSERT INTO payments (payment_id, created_at, booking_id, status, amount_charged, amount_eur, currency)
+VALUES
+('743d6ca8-714a-4d9f-9706-e6e167b3d2a8', '2026-01-06 20:34:38.952675', '7d83e72a-d0ec-4476-9e0e-4d895593bf25', 'CONFIRMED', 6597.79, 180.00, 'THB'),
+('a26c8957-774d-4126-953a-2ee3cf1b5ac7', '2026-01-06 20:38:15.743043', 'f2a263d3-2ba2-40e2-9643-cedffca6a7ec', 'CONFIRMED', 290.14, 180.00, 'CAD'),
+('de45343d-1469-4664-9e0a-db719e52ccce', '2026-01-06 21:01:50.9326', 'e8595a6e-d8d6-4aa6-a146-cc77afaa9439', 'ON_HOLD', 889.35, 760.00, 'USD')
+ON CONFLICT (payment_id) DO NOTHING;
+
+-- Card & PayPal Payments
+INSERT INTO card_payments(card_holder, card_number, expiry, payment_id)
+VALUES
+('Jacob Weimann', '4931-1234-5678-9012', 'March 2035', '743d6ca8-714a-4d9f-9706-e6e167b3d2a8'),
+('Ms. Rachael Gerhold', '7033-1234-5678-9012', 'April 2035', 'de45343d-1469-4664-9e0a-db719e52ccce')
+ON CONFLICT (payment_id) DO NOTHING;
+
+INSERT INTO paypal_payments(paypal_email, transaction_id, payment_id)
+VALUES
+('Sabina.Stehr@example.com', 'PP-f533d25d-579e-4400-a4d8-3d75de27afc2', 'a26c8957-774d-4126-953a-2ee3cf1b5ac7')
+ON CONFLICT (payment_id) DO NOTHING;
+-----------------------------------------------------------------
