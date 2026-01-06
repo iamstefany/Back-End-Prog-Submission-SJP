@@ -2,6 +2,8 @@ package stefany.piccaro.submission.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import stefany.piccaro.submission.dto.BookingInfoDTO;
+
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.*;
@@ -158,6 +160,23 @@ public class Property {
 
 
     // ----- Derived fields -----
+    @Transient
+    public List<BookingInfoDTO> getBookingsInfo() {
+        if (bookings == null || bookings.isEmpty()) {
+            return List.of();
+        }
+
+        return bookings.stream()
+                .map(booking -> new BookingInfoDTO(
+                        booking.getId(),
+                        booking.getUser().getFirstName() + " " + booking.getUser().getLastName(),
+                        booking.getStatus(),
+                        booking.getCheckInDate(),
+                        booking.getCheckOutDate()
+                ))
+                .toList();
+    }
+
     @Transient
     public String getListedBy() {
         if (user == null) {

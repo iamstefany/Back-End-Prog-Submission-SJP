@@ -1,4 +1,6 @@
 package stefany.piccaro.submission.dto;
 
-public record LoginResponseDTO(String accessToken) {
+import java.util.UUID;
+
+public record LoginResponseDTO(String accessToken, UUID userId) {
 }

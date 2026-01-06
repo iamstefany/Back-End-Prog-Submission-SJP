@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import stefany.piccaro.submission.dto.AuthInfoDTO;
 import stefany.piccaro.submission.dto.LoginRequestDTO;
+import stefany.piccaro.submission.dto.LoginResponseDTO;
 import stefany.piccaro.submission.entities.Role;
 import stefany.piccaro.submission.entities.User;
 import stefany.piccaro.submission.exceptions.UnauthorizedException;
@@ -31,14 +32,14 @@ public class AuthService {
         return jwtTools.getAuthInfoFromHTTPRequest(httpRequest);
     }
 
-    public String attemptLogin(LoginRequestDTO request) {
+    public LoginResponseDTO attemptLogin(LoginRequestDTO request) {
         // Check if user exists
         User found = userService.findByEmail(request.email());
 
         // If user found -> check password
         if (bcrypt.matches(request.password(), found.getPassword())) {
             // If password matches > return token
-            return jwtTools.createToken(found);
+            return new LoginResponseDTO(jwtTools.createToken(found), found.getUserId());
         }
 
         // If password is incorrect -> throw exception

@@ -42,6 +42,11 @@ Please download Postman and import the collection located in:
 
 I have tried to make the Postman Collection as easy and usable as possible. 
 A few notes:
+- As there are quite a few endpoints, I have organized them in folders. Testing the endpoints by following the order and folder structure should make it easier:
+  - **Authentication & User Management**: authentication (login/register) and self user management (i.e. upload profile picture, edit info, reset password etc.)
+  - **Host Endpoints**: host-related actions (i.e. creating properties, approving/rejecting bookings etc.)
+  - **Guest Endpoints**: guest-related actions (i.e. property search, booking a property, etc.)
+  - **Admin Endpoints**: admin-related actions (i.e. creating admins, blocking/unblocking users, etc.)
 - All requests already include a `Authorization Bearer {{BearerToken}}` header. 
   - The collection includes a Post-Response script that 
   checks whether a request was made to the /auth/login endpoint, 

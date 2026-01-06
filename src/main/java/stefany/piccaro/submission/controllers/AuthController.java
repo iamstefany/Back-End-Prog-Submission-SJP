@@ -44,7 +44,7 @@ public class AuthController {
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public LoginResponseDTO login(@RequestBody LoginRequestDTO body) {
-        return new LoginResponseDTO(authService.attemptLogin(body));
+        return authService.attemptLogin(body);
     }
 
 

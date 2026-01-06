@@ -6,501 +6,44 @@
   },
   "item": [
     {
-      "name": "Get Current Auth Info (Ready to Use)",
-      "id": "93b6ceee-fe49-48cf-ba1b-c2de8ddc20eb",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/auth/info",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "info"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Register (Customizable)",
-      "id": "f9f0b75d-b10d-4a7a-800d-bae477fe9e14",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"<email>\",\r\n    \"password\": \"<password>\",\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"phoneNumber\": \"<phoneNumber>\",\r\n    \"dateOfBirth\": \"<YYYY-MM-DD>\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/auth/register/:role",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "register",
-            ":role"
-          ],
-          "variable": [
-            {
-              "key": "role",
-              "value": "",
-              "description": "String - either \"guest\" or \"host\""
-            }
-          ]
-        }
-      },
-      "response": [
+      "name": "Authentication & User Management",
+      "item": [
         {
-          "id": "8399e64d-886e-41a2-a32c-952582475778",
-          "name": "Register as Host",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"myhost.1@example.com\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/auth/register/:role",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "auth",
-                "register",
-                ":role"
-              ],
-              "variable": [
-                {
-                  "key": "role",
-                  "value": "host",
-                  "description": "String - either \"guest\" or \"host\""
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T21:44:37.483Z",
-          "body": null
-        },
-        {
-          "id": "168ea357-0969-4e48-b3c7-f5ec2c025d41",
-          "name": "Register as Guest",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"myguest.1@example.com\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n    \"dateOfBirth\": \"1970-12-01\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/auth/register/:role",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "auth",
-                "register",
-                ":role"
-              ],
-              "variable": [
-                {
-                  "key": "role",
-                  "value": "guest",
-                  "description": "String - either \"guest\" or \"host\""
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T21:56:44.833Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Login (Customizable)",
-      "id": "d7258866-3665-4fbf-8c96-b21c8aabae0c",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"<email>\",\r\n    \"password\": \"<password>\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/auth/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "auth",
-            "login"
-          ]
-        }
-      },
-      "response": [
-        {
-          "id": "6e91a993-eac5-41d9-b060-c779ff58eaf4",
-          "name": "Login as Pre-Populated Host (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"host.user@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/auth/login",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "auth",
-                "login"
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T21:45:28.921Z",
-          "body": null
-        },
-        {
-          "id": "379a8ca3-2d58-4f5b-85ae-6fad32bdb28c",
-          "name": "Login as Pre-Populated Guest (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"guest.user@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/auth/login",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "auth",
-                "login"
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T21:48:27.067Z",
-          "body": null
-        },
-        {
-          "id": "4129f621-cae4-41a9-9d94-8a030bd53c49",
-          "name": "Login as Pre-Populated Guest & Host (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"guest.host@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/auth/login",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "auth",
-                "login"
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T21:49:11.834Z",
-          "body": null
-        },
-        {
-          "id": "80c32462-4c7b-498d-b79d-38d11663c249",
-          "name": "Login as Pre-Populated Basic Admin (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"basic.admin@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/auth/login",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "auth",
-                "login"
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T21:50:18.321Z",
-          "body": null
-        },
-        {
-          "id": "c5fd2edb-14a5-4bb1-87c4-f3f6b0b3f820",
-          "name": "Login as Pre-Populated Super Admin (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"super.admin@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/auth/login",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "auth",
-                "login"
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T21:50:50.809Z",
-          "body": null
-        },
-        {
-          "id": "524d8275-298a-40fd-a2fe-fdab365bf3a5",
-          "name": "Login as Pre-Populated Blocked User (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"blocked.user@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/auth/login",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "auth",
-                "login"
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T21:51:12.657Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Get All Users (Ready to Use)",
-      "id": "7c030b73-f771-43b1-9b97-c26d9be1e91e",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/user/list",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "user",
-            "list"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get User by ID (Customizable)",
-      "id": "9cd5669f-a833-4d8f-9198-d62336b63fd9",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/user/:UUID",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "user",
-            ":UUID"
-          ],
-          "variable": [
-            {
-              "key": "UUID",
-              "value": ""
-            }
-          ]
-        }
-      },
-      "response": [
-        {
-          "id": "5b136e28-19dc-475c-ab32-2690289a5b10",
-          "name": "Get Pre-Populated User (Ready to Use)",
-          "originalRequest": {
+          "name": "Get Current Auth Info (Ready to Use)",
+          "id": "93b6ceee-fe49-48cf-ba1b-c2de8ddc20eb",
+          "request": {
             "method": "GET",
             "header": [
               {
                 "key": "Authorization",
                 "value": "Bearer {{BearerToken}}",
-                "type": "text",
-                "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+                "type": "text"
               }
             ],
+            "url": {
+              "raw": "http://localhost:3001/auth/info",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register (Customizable)",
+          "id": "f9f0b75d-b10d-4a7a-800d-bae477fe9e14",
+          "request": {
+            "method": "POST",
+            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "",
+              "raw": "{\r\n    \"email\": \"<email>\",\r\n    \"password\": \"<password>\",\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"phoneNumber\": \"<phoneNumber>\",\r\n    \"dateOfBirth\": \"<YYYY-MM-DD>\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -508,94 +51,368 @@
               }
             },
             "url": {
-              "raw": "http://localhost:3001/user/:UUID",
+              "raw": "http://localhost:3001/auth/register/:role",
               "protocol": "http",
               "host": [
                 "localhost"
               ],
               "port": "3001",
               "path": [
-                "user",
-                ":UUID"
+                "auth",
+                "register",
+                ":role"
               ],
               "variable": [
                 {
-                  "key": "UUID",
-                  "value": "33333333-3333-3333-3333-333333333333"
+                  "key": "role",
+                  "value": "",
+                  "description": "String - either \"guest\" or \"host\""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T23:25:02.106Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Upload Profile Picture (Customizable)",
-      "id": "c4a3d8bf-2154-427f-be5c-e361a8f354ec",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "0779da9f-c32f-4762-b8ed-43a7ac844daf"
-          },
-          {
-            "key": "Content-Type",
-            "value": "multipart/form-data",
-            "type": "text",
-            "uuid": "9a386f8b-cd28-4e6c-8f74-3b963a4882bf"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
+          "response": [
             {
-              "key": "file",
-              "type": "file",
-              "uuid": "a83d5382-e82d-4842-8266-fa3ded67539f",
-              "src": []
-            }
-          ],
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/user/:user_id/upload-profile-picture",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "user",
-            ":user_id",
-            "upload-profile-picture"
-          ],
-          "variable": [
+              "id": "8399e64d-886e-41a2-a32c-952582475778",
+              "name": "Register as Host",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"myhost.1@example.com\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/auth/register/:role",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "auth",
+                    "register",
+                    ":role"
+                  ],
+                  "variable": [
+                    {
+                      "key": "role",
+                      "value": "host",
+                      "description": "String - either \"guest\" or \"host\""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T21:44:37.483Z",
+              "body": null
+            },
             {
-              "key": "user_id",
-              "value": ""
+              "id": "168ea357-0969-4e48-b3c7-f5ec2c025d41",
+              "name": "Register as Guest",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"myguest.1@example.com\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n    \"dateOfBirth\": \"1970-12-01\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/auth/register/:role",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "auth",
+                    "register",
+                    ":role"
+                  ],
+                  "variable": [
+                    {
+                      "key": "role",
+                      "value": "guest",
+                      "description": "String - either \"guest\" or \"host\""
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T21:56:44.833Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": [
+        },
         {
-          "id": "44717a8e-a205-4696-82ec-5d94911a519d",
-          "name": "Upload Profile Picture (Ready to Use)",
-          "originalRequest": {
+          "name": "Login (Customizable)",
+          "id": "d7258866-3665-4fbf-8c96-b21c8aabae0c",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"<email>\",\r\n    \"password\": \"<password>\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6e91a993-eac5-41d9-b060-c779ff58eaf4",
+              "name": "Login as Pre-Populated Host (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"host.user@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T21:45:28.921Z",
+              "body": null
+            },
+            {
+              "id": "379a8ca3-2d58-4f5b-85ae-6fad32bdb28c",
+              "name": "Login as Pre-Populated Guest (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"guest.user@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T21:48:27.067Z",
+              "body": null
+            },
+            {
+              "id": "4129f621-cae4-41a9-9d94-8a030bd53c49",
+              "name": "Login as Pre-Populated Guest & Host (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"guest.host@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T21:49:11.834Z",
+              "body": null
+            },
+            {
+              "id": "80c32462-4c7b-498d-b79d-38d11663c249",
+              "name": "Login as Pre-Populated Basic Admin (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"basic.admin@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T21:50:18.321Z",
+              "body": null
+            },
+            {
+              "id": "c5fd2edb-14a5-4bb1-87c4-f3f6b0b3f820",
+              "name": "Login as Pre-Populated Super Admin (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"super.admin@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T21:50:50.809Z",
+              "body": null
+            },
+            {
+              "id": "524d8275-298a-40fd-a2fe-fdab365bf3a5",
+              "name": "Login as Pre-Populated Blocked User (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"blocked.user@example.com\",\r\n    \"password\": \"Password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T21:51:12.657Z",
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Upload Profile Picture (Customizable)",
+          "id": "c4a3d8bf-2154-427f-be5c-e361a8f354ec",
+          "request": {
             "method": "POST",
             "header": [
               {
@@ -618,9 +435,7 @@
                   "key": "file",
                   "type": "file",
                   "uuid": "a83d5382-e82d-4842-8266-fa3ded67539f",
-                  "src": [
-                    "postman-cloud:///1f0eb334-f9f6-4130-9cac-e185f9aba853"
-                  ]
+                  "src": []
                 }
               ],
               "options": {
@@ -644,67 +459,83 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "33333333-3333-3333-3333-333333333333"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-06T19:01:25.679Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Edit User (Customizable)",
-      "id": "0152bb5e-857b-4aba-a551-b4f0bba22a27",
-      "request": {
-        "method": "PATCH",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "5aecc99b-d0a2-4586-a8d8-1e72c5c31d4c"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"dateOfBirth\": \"<YYYY-MM-DD>\",\r\n    \"phoneNumber\": \"<phoneNumber>\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/user/:user_id",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "user",
-            ":user_id"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "user_id",
-              "value": ""
+              "id": "44717a8e-a205-4696-82ec-5d94911a519d",
+              "name": "Upload Profile Picture (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "0779da9f-c32f-4762-b8ed-43a7ac844daf"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data",
+                    "type": "text",
+                    "uuid": "9a386f8b-cd28-4e6c-8f74-3b963a4882bf"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "uuid": "a83d5382-e82d-4842-8266-fa3ded67539f",
+                      "src": [
+                        "postman-cloud:///1f0eb493-02a3-4da0-8b7b-7366b80c0d2e"
+                      ]
+                    }
+                  ],
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/user/:user_id/upload-profile-picture",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "user",
+                    ":user_id",
+                    "upload-profile-picture"
+                  ],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "{{AuthUserID}}"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-06T19:01:25.679Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": [
+        },
         {
-          "id": "1be14378-a924-4448-becc-9f15a193b807",
-          "name": "Edit Pre-Populated User (Ready to Use)",
-          "originalRequest": {
+          "name": "Edit User (Customizable)",
+          "id": "0152bb5e-857b-4aba-a551-b4f0bba22a27",
+          "request": {
             "method": "PATCH",
             "header": [
               {
@@ -716,7 +547,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"dateOfBirth\": \"1970-05-01\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\"\r\n}",
+              "raw": "{\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"dateOfBirth\": \"<YYYY-MM-DD>\",\r\n    \"phoneNumber\": \"<phoneNumber>\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -737,84 +568,78 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "33333333-3333-3333-3333-333333333333"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-06T18:59:49.008Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Reset Password (Customizable)",
-      "id": "e8327236-b5dc-42cd-b0bd-e81b6973ff5e",
-      "request": {
-        "method": "PATCH",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"newPassword\": \"<newPassword>\", \r\n    \"oldPassword\": \"<oldPassword - only required if logged in as non-admin>\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/user/:user_id/password-reset",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "user",
-            ":user_id",
-            "password-reset"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "user_id",
-              "value": ""
+              "id": "1be14378-a924-4448-becc-9f15a193b807",
+              "name": "Edit Pre-Populated User (Ready to Use)",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "5aecc99b-d0a2-4586-a8d8-1e72c5c31d4c"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"dateOfBirth\": \"1970-05-01\",\r\n    \"phoneNumber\": \"{{$randomPhoneNumber}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/user/:user_id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "user",
+                    ":user_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "{{AuthUserID}}"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-06T18:59:49.008Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": [
+        },
         {
-          "id": "a368ff07-5cf4-44cf-88b4-c4620c3a2755",
-          "name": "Reset Password (Ready to Use)",
-          "originalRequest": {
+          "name": "Reset Password (Customizable)",
+          "id": "e8327236-b5dc-42cd-b0bd-e81b6973ff5e",
+          "request": {
             "method": "PATCH",
             "header": [
               {
                 "key": "Authorization",
                 "value": "Bearer {{BearerToken}}",
                 "type": "text"
-              },
-              {
-                "key": "Content-Type",
-                "name": "Content-Type",
-                "value": "application/json",
-                "type": "text"
               }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"newPassword\": \"NewPassword123\", \r\n    \"oldPassword\": \"AAAA\"\r\n}",
+              "raw": "{\r\n    \"newPassword\": \"<newPassword>\", \r\n    \"oldPassword\": \"<oldPassword - only required if logged in as non-admin>\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -836,67 +661,73 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "33333333-3333-3333-3333-333333333333"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T15:16:04.010Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Delete User (Customizable)",
-      "id": "4351d691-7e40-4f97-a044-3ba4d44fe7a5",
-      "request": {
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "5aecc99b-d0a2-4586-a8d8-1e72c5c31d4c"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/user/:user_id",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "user",
-            ":user_id"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "user_id",
-              "value": ""
+              "id": "a368ff07-5cf4-44cf-88b4-c4620c3a2755",
+              "name": "Reset Password (Ready to Use)",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"newPassword\": \"NewPassword123\", \r\n    \"oldPassword\": \"AAAA\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/user/:user_id/password-reset",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "user",
+                    ":user_id",
+                    "password-reset"
+                  ],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "{{AuthUserID}}"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-04T15:16:04.010Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": [
+        },
         {
-          "id": "1c733b3c-fc38-4438-8fb4-3099a962a447",
-          "name": "Delete Pre-Populated User (Ready to Use)",
-          "originalRequest": {
+          "name": "Delete User (Customizable)",
+          "id": "4351d691-7e40-4f97-a044-3ba4d44fe7a5",
+          "request": {
             "method": "DELETE",
             "header": [
               {
@@ -929,67 +760,100 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "77777777-7777-7777-7777-777777777777"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-06T19:11:42.167Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Get Property by ID (Customizable)",
-      "id": "3eb36097-63e0-4a2d-aa8b-f7b4f63354f3",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/property/:UUID",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "property",
-            ":UUID"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "UUID",
-              "value": ""
+              "id": "1c733b3c-fc38-4438-8fb4-3099a962a447",
+              "name": "Delete Pre-Populated User (Ready to Use)",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "5aecc99b-d0a2-4586-a8d8-1e72c5c31d4c"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/user/:user_id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "user",
+                    ":user_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "77777777-7777-7777-7777-777777777777"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-06T19:11:42.167Z",
+              "body": null
             }
           ]
         }
-      },
-      "response": [
+      ],
+      "id": "8b4c9041-d4ba-4468-9a97-1294d0791174"
+    },
+    {
+      "name": "Host Endpoints",
+      "item": [
         {
-          "id": "6fd6b5f0-d543-41ec-9aa8-de426c530484",
-          "name": "Get Pre-Populated Property By ID (Ready to Use)",
-          "originalRequest": {
+          "name": "Get My Properties (Ready to Use)",
+          "id": "8382e9d4-8b01-43c2-8c10-ba3e38ee5384",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/property/my",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Property by ID (Customizable)",
+          "id": "3eb36097-63e0-4a2d-aa8b-f7b4f63354f3",
+          "request": {
             "method": "GET",
             "header": [
               {
@@ -1022,200 +886,67 @@
               "variable": [
                 {
                   "key": "UUID",
-                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T23:15:05.276Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Get My Properties (Ready to Use)",
-      "id": "8382e9d4-8b01-43c2-8c10-ba3e38ee5384",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/property/my",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "property",
-            "my"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Search Properties (Ready to Use)",
-      "id": "8c2b8344-aa61-49f0-958b-f11ea02092c3",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/property/search?city=Torino&country=IT&amenities=Wi-Fi,Parking&hostVerified=true&minPrice=50&maxPrice=200&minGuests=2&page=0&size=10&sortBy=pricePerNight&direction=asc",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "property",
-            "search"
-          ],
-          "query": [
+          "response": [
             {
-              "key": "city",
-              "value": "Torino",
-              "uuid": "ae9f5ed5-f577-4dc4-bd3c-b68905a02a67"
-            },
-            {
-              "key": "country",
-              "value": "IT",
-              "uuid": "e068aa18-2b0e-4446-9d6f-632fba230965"
-            },
-            {
-              "key": "amenities",
-              "value": "Wi-Fi,Parking",
-              "uuid": "1dfcdcbd-07bd-4bad-863f-c2cc40655f8e"
-            },
-            {
-              "key": "hostVerified",
-              "value": "true",
-              "uuid": "3afd55fd-274c-4ab6-9470-92a1f91805cd"
-            },
-            {
-              "key": "minPrice",
-              "value": "50",
-              "uuid": "fa25ac15-66bf-4cd0-b70f-7a893074b598"
-            },
-            {
-              "key": "maxPrice",
-              "value": "200",
-              "uuid": "a171e5d4-f11e-45d0-b537-b9a32c507e85"
-            },
-            {
-              "key": "minGuests",
-              "value": "2",
-              "uuid": "effe5068-827b-491c-bbbd-b44660ca1c77"
-            },
-            {
-              "key": "page",
-              "value": "0",
-              "uuid": "9e6a5ab1-dc81-4f26-8eda-0376b035c724"
-            },
-            {
-              "key": "size",
-              "value": "10",
-              "uuid": "4a4e6cd0-58c9-43c8-9541-205da95af535"
-            },
-            {
-              "key": "sortBy",
-              "value": "pricePerNight",
-              "uuid": "b5addee0-b29f-497f-aa26-e727958023af"
-            },
-            {
-              "key": "direction",
-              "value": "asc",
-              "uuid": "eced2eb2-a181-47be-894c-49411a7aff84"
+              "id": "6fd6b5f0-d543-41ec-9aa8-de426c530484",
+              "name": "Get Pre-Populated Property By ID (Ready to Use)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/property/:UUID",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "property",
+                    ":UUID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "UUID",
+                      "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T23:15:05.276Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Properties Statistics by City (Ready to Use)",
-      "id": "178a2e22-691d-4799-babc-59ff36f71952",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/property/stats",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "property",
-            "stats"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Create Property (Customizable)",
-      "id": "604b0a69-866c-4fb3-a97f-c9ccbec5a390",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"title\": \"<title>\",\r\n    \"description\": \"<description>\",\r\n    \"address\": \"<address>\",\r\n    \"city\": \"<city>\",\r\n    \"country\": \"<country>\",\r\n    \"pricePerNight\": 0,\r\n    \"maxGuests\": 0\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
         },
-        "url": {
-          "raw": "http://localhost:3001/property",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "property"
-          ]
-        }
-      },
-      "response": [
         {
-          "id": "957e17c4-6253-49a9-82e3-c619e3b583b0",
-          "name": "Create a Property (Ready to Use)",
-          "originalRequest": {
+          "name": "Create Property (Customizable)",
+          "id": "604b0a69-866c-4fb3-a97f-c9ccbec5a390",
+          "request": {
             "method": "POST",
             "header": [
               {
@@ -1227,7 +958,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"title\": \"Come stay at this amazing property!\",\r\n    \"description\": \"Perfect for couples looking for a romantic escape.\",\r\n    \"address\": \"Viale di Trastevere\",\r\n    \"city\": \"Roma\",\r\n    \"country\": \"IT\",\r\n    \"pricePerNight\": 120,\r\n    \"maxGuests\": 2,\r\n    \"automaticConfirmation\": true,\r\n    \"checkInTime\": \"14:00\", \r\n    \"checkOutTime\": \"11:00\"\r\n}",
+              "raw": "{\r\n    \"title\": \"<title>\",\r\n    \"description\": \"<description>\",\r\n    \"address\": \"<address>\",\r\n    \"city\": \"<city>\",\r\n    \"country\": \"<country>\",\r\n    \"pricePerNight\": 0,\r\n    \"maxGuests\": 0\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1246,62 +977,55 @@
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2025-12-28T23:17:41.867Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Edit Property (Customizable)",
-      "id": "01a64140-b9d6-45ab-a001-5198057686e9",
-      "request": {
-        "method": "PATCH",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"title\": \"<title>\",\r\n    \"description\": \"<description>\",\r\n    \"address\": \"<address>\",\r\n    \"pricePerNight\": \"<pricePerNight>\",\r\n    \"maxGuests\": \"<maxGuests>\",\r\n    \"automaticConfirmation\": \"<true/false>\",\r\n    \"checkInTime\": \"<HH:mm>\",\r\n    \"checkOutTime\": \"<HH:mm>\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/property/:property_id",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "property",
-            ":property_id"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "property_id",
-              "value": ""
+              "id": "957e17c4-6253-49a9-82e3-c619e3b583b0",
+              "name": "Create a Property (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Come stay at this amazing property!\",\r\n    \"description\": \"Perfect for couples looking for a romantic escape.\",\r\n    \"address\": \"Viale di Trastevere\",\r\n    \"city\": \"Roma\",\r\n    \"country\": \"IT\",\r\n    \"pricePerNight\": 120,\r\n    \"maxGuests\": 2,\r\n    \"automaticConfirmation\": true,\r\n    \"checkInTime\": \"14:00\", \r\n    \"checkOutTime\": \"11:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/property",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "property"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T23:17:41.867Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": [
+        },
         {
-          "id": "0dd139d2-975f-4c9b-a34d-3d8d6c11c8fb",
-          "name": "Edit Property (Ready to Use)",
-          "originalRequest": {
+          "name": "Edit Property (Customizable)",
+          "id": "01a64140-b9d6-45ab-a001-5198057686e9",
+          "request": {
             "method": "PATCH",
             "header": [
               {
@@ -1313,7 +1037,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"title\": \"Your dream property in Naples!\",\r\n    \"description\": \"Perfect location, quite area! And the property is situated near an underground station.\",\r\n    \"address\": \"Piazza Municipio 10\",\r\n    \"pricePerNight\": 85,\r\n    \"maxGuests\": 3,\r\n    \"automaticConfirmation\": true,\r\n    \"checkInTime\": \"14:00\",\r\n    \"checkOutTime\": \"11:00\"\r\n}",
+              "raw": "{\r\n    \"title\": \"<title>\",\r\n    \"description\": \"<description>\",\r\n    \"address\": \"<address>\",\r\n    \"pricePerNight\": \"<pricePerNight>\",\r\n    \"maxGuests\": \"<maxGuests>\",\r\n    \"automaticConfirmation\": \"<true/false>\",\r\n    \"checkInTime\": \"<HH:mm>\",\r\n    \"checkOutTime\": \"<HH:mm>\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1334,57 +1058,67 @@
               "variable": [
                 {
                   "key": "property_id",
-                  "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-03T11:35:22.403Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Delete Property (Customizable)",
-      "id": "da7e22a8-45f3-4d1e-980a-3a517bf400b1",
-      "request": {
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/property/:property_id",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "property",
-            ":property_id"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "property_id",
-              "value": ""
+              "id": "0dd139d2-975f-4c9b-a34d-3d8d6c11c8fb",
+              "name": "Edit Property (Ready to Use)",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Your dream property in Naples!\",\r\n    \"description\": \"Perfect location, quite area! And the property is situated near an underground station.\",\r\n    \"address\": \"Piazza Municipio 10\",\r\n    \"pricePerNight\": 85,\r\n    \"maxGuests\": 3,\r\n    \"automaticConfirmation\": true,\r\n    \"checkInTime\": \"14:00\",\r\n    \"checkOutTime\": \"11:00\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/property/:property_id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "property",
+                    ":property_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "property_id",
+                      "value": "ad2ba064-1026-4e09-9e40-23c7e36db8be"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-03T11:35:22.403Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": [
+        },
         {
-          "id": "7f652eda-ca9c-4c70-a0dd-1b075a304a22",
-          "name": "Delete Property (Ready to Use)",
-          "originalRequest": {
+          "name": "Delete Property (Customizable)",
+          "id": "da7e22a8-45f3-4d1e-980a-3a517bf400b1",
+          "request": {
             "method": "DELETE",
             "header": [
               {
@@ -1407,414 +1141,57 @@
               "variable": [
                 {
                   "key": "property_id",
-                  "value": "4dce23f8-f569-4fc3-a9e4-afbdf64efc7c"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-03T12:33:03.873Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Get My Bookings (Ready to Use)",
-      "id": "8d2325a9-239f-453b-8a39-e9de096651ba",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/booking/my",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "booking",
-            "my"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Booking by Id (Customizable)",
-      "id": "14e252f6-47ba-4112-9d2b-1a19e5c9cc1e",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/booking/:booking_id",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "booking",
-            ":booking_id"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "booking_id",
-              "value": ""
-            }
-          ]
-        }
-      },
-      "response": [
-        {
-          "id": "616c5a27-ae28-409d-a180-e198e9f26010",
-          "name": "Get Booking by Id (Ready to Use)",
-          "originalRequest": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{BearerToken}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3001/booking/:booking_id",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "booking",
-                ":booking_id"
-              ],
-              "variable": [
-                {
-                  "key": "booking_id",
-                  "value": "7d83e72a-d0ec-4476-9e0e-4d895593bf25"
+              "id": "7f652eda-ca9c-4c70-a0dd-1b075a304a22",
+              "name": "Delete Property (Ready to Use)",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3001/property/:property_id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "property",
+                    ":property_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "property_id",
+                      "value": "4dce23f8-f569-4fc3-a9e4-afbdf64efc7c"
+                    }
+                  ]
                 }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T12:42:22.755Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Book a Property (Customizable)",
-      "id": "fca0d3cb-0e45-436d-a07d-9308fff30047",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"checkInDate\": \"<YYYY-MM-DD>\",\r\n    \"checkOutDate\": \"<YYYY-MM-DD>\",\r\n    \"paymentType\": \"<String - 'PayPal' or 'Card'>\",\r\n    \"currency\": \"<3-character currency>\",\r\n\r\n    \"cardNumber\": \"<cardNumber - required only for paymentType=card>\",\r\n    \"cardHolder\": \"<cardHolder - required only for paymentType=card>\",\r\n    \"cardExpiry\": \"<cardExpiry - required only for paymentType=card>\",\r\n\r\n    \"paypalEmail\": \"<paypalEmail - required only for paymentType=paypal>\",\r\n    \"paypalTransactionId\": \"<paypalTransactionId - required only for paymentType=paypal>\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/property/:property_id/book",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "property",
-            ":property_id",
-            "book"
-          ],
-          "variable": [
-            {
-              "key": "property_id",
-              "value": ""
-            }
-          ]
-        }
-      },
-      "response": [
-        {
-          "id": "9af504d7-d602-430c-b52b-46b3ffcbb7ee",
-          "name": "Book a Property - Card Payment (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{BearerToken}}",
-                "type": "text",
-                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"checkInDate\": \"2026-05-01\",\r\n    \"checkOutDate\": \"2026-05-12\",\r\n    \"paymentType\": \"Card\",\r\n    \"currency\": \"THB\",\r\n\r\n    \"cardNumber\": \"{{$randomCreditCardMask}}-1234-5678-9012\",\r\n    \"cardHolder\": \"{{$randomFullName}}\",\r\n    \"cardExpiry\": \"{{$randomMonth}} 2035\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/property/:property_id/book",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "property",
-                ":property_id",
-                "book"
-              ],
-              "variable": [
-                {
-                  "key": "property_id",
-                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-03T20:12:47.616Z",
-          "body": null
-        },
-        {
-          "id": "44794bc4-1a6a-4268-92ee-70d8fd1dbac5",
-          "name": "Book a Property - PayPal Payment (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{BearerToken}}",
-                "type": "text",
-                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"checkInDate\": \"2026-07-03\",\r\n    \"checkOutDate\": \"2026-07-09\",\r\n    \"paymentType\": \"PayPal\",\r\n    \"currency\": \"CAD\",\r\n\r\n    \"paypalEmail\": \"{{$randomExampleEmail}}\",\r\n    \"paypalTransactionId\": \"PP-{{$randomUUID}}\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/property/:property_id/book",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "property",
-                ":property_id",
-                "book"
-              ],
-              "variable": [
-                {
-                  "key": "property_id",
-                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-03T20:12:47.616Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Create Property Review (Customizable)",
-      "id": "c9da8323-6214-4581-b190-359eac7efca2",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"rating\": \"<rating>\",\r\n    \"comment\": \"<comment>\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/property/:property_id/review",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "property",
-            ":property_id",
-            "review"
-          ],
-          "variable": [
-            {
-              "key": "property_id",
-              "value": ""
-            }
-          ]
-        }
-      },
-      "response": [
-        {
-          "id": "5a48bc0d-fce6-4e40-b9a4-3232b0d27b2e",
-          "name": "Create Property Review (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{BearerToken}}",
-                "type": "text",
-                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
               },
-              {
-                "key": "Content-Type",
-                "name": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"rating\": 5,\r\n    \"comment\": \"I loved my stay at this amazing property!\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/property/:property_id/review",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "property",
-                ":property_id",
-                "review"
-              ],
-              "variable": [
-                {
-                  "key": "property_id",
-                  "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-03T18:48:42.679Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Approve Booking (Customizable)",
-      "id": "0613e5bd-8c97-4b7e-be09-1aa83f37e35c",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/booking/:booking_id/approve",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "booking",
-            ":booking_id",
-            "approve"
-          ],
-          "variable": [
-            {
-              "key": "booking_id",
-              "value": ""
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-03T12:33:03.873Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": [
+        },
         {
-          "id": "c51099fd-9793-438c-abf1-51e19e621958",
-          "name": "Approve Booking (Ready to Use)",
-          "originalRequest": {
+          "name": "Approve Booking (Customizable)",
+          "id": "0613e5bd-8c97-4b7e-be09-1aa83f37e35c",
+          "request": {
             "method": "POST",
             "header": [
               {
@@ -1848,68 +1225,68 @@
               "variable": [
                 {
                   "key": "booking_id",
-                  "value": "7d83e72a-d0ec-4476-9e0e-4d895593bf25"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T12:00:09.957Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Reject Booking (Customizable)",
-      "id": "4b4306fd-3121-4cfa-a199-3ed4145b2778",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text",
-            "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/booking/:booking_id/reject",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "booking",
-            ":booking_id",
-            "reject"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "booking_id",
-              "value": ""
+              "id": "c51099fd-9793-438c-abf1-51e19e621958",
+              "name": "Approve Booking (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/booking/:booking_id/approve",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "booking",
+                    ":booking_id",
+                    "approve"
+                  ],
+                  "variable": [
+                    {
+                      "key": "booking_id",
+                      "value": "7d83e72a-d0ec-4476-9e0e-4d895593bf25"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-04T12:00:09.957Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": [
+        },
         {
-          "id": "1046a2aa-943e-44b9-b51f-e02b5e4e3040",
-          "name": "Reject Booking (Ready to Use)",
-          "originalRequest": {
+          "name": "Reject Booking (Customizable)",
+          "id": "4b4306fd-3121-4cfa-a199-3ed4145b2778",
+          "request": {
             "method": "POST",
             "header": [
               {
@@ -1943,57 +1320,533 @@
               "variable": [
                 {
                   "key": "booking_id",
-                  "value": "e8595a6e-d8d6-4aa6-a146-cc77afaa9439"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T12:16:23.281Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Delete Booking (Customizable)",
-      "id": "4a13bcdf-2971-46f3-8b6d-4ff39c086fac",
-      "request": {
-        "method": "DELETE",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/booking/:booking_id",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "booking",
-            ":booking_id"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "booking_id",
-              "value": ""
+              "id": "1046a2aa-943e-44b9-b51f-e02b5e4e3040",
+              "name": "Reject Booking (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/booking/:booking_id/reject",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "booking",
+                    ":booking_id",
+                    "reject"
+                  ],
+                  "variable": [
+                    {
+                      "key": "booking_id",
+                      "value": "e8595a6e-d8d6-4aa6-a146-cc77afaa9439"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-04T12:16:23.281Z",
+              "body": null
             }
           ]
         }
-      },
-      "response": [
+      ],
+      "id": "c71108fd-f322-4645-b247-bc1726824c75"
+    },
+    {
+      "name": "Guest Endpoints",
+      "item": [
         {
-          "id": "90d27b19-1ab7-4206-9b6b-bd149b82df7d",
-          "name": "Delete Booking (Ready to Use)",
-          "originalRequest": {
+          "name": "Search Properties (Ready to Use)",
+          "id": "8c2b8344-aa61-49f0-958b-f11ea02092c3",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/property/search?city=Torino&country=IT&amenities=Wi-Fi,Parking&hostVerified=true&minPrice=50&maxPrice=200&minGuests=2&page=0&size=10&sortBy=pricePerNight&direction=asc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "Torino",
+                  "uuid": "ae9f5ed5-f577-4dc4-bd3c-b68905a02a67"
+                },
+                {
+                  "key": "country",
+                  "value": "IT",
+                  "uuid": "e068aa18-2b0e-4446-9d6f-632fba230965"
+                },
+                {
+                  "key": "amenities",
+                  "value": "Wi-Fi,Parking",
+                  "uuid": "1dfcdcbd-07bd-4bad-863f-c2cc40655f8e"
+                },
+                {
+                  "key": "hostVerified",
+                  "value": "true",
+                  "uuid": "3afd55fd-274c-4ab6-9470-92a1f91805cd"
+                },
+                {
+                  "key": "minPrice",
+                  "value": "50",
+                  "uuid": "fa25ac15-66bf-4cd0-b70f-7a893074b598"
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "200",
+                  "uuid": "a171e5d4-f11e-45d0-b537-b9a32c507e85"
+                },
+                {
+                  "key": "minGuests",
+                  "value": "2",
+                  "uuid": "effe5068-827b-491c-bbbd-b44660ca1c77"
+                },
+                {
+                  "key": "page",
+                  "value": "0",
+                  "uuid": "9e6a5ab1-dc81-4f26-8eda-0376b035c724"
+                },
+                {
+                  "key": "size",
+                  "value": "10",
+                  "uuid": "4a4e6cd0-58c9-43c8-9541-205da95af535"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "pricePerNight",
+                  "uuid": "b5addee0-b29f-497f-aa26-e727958023af"
+                },
+                {
+                  "key": "direction",
+                  "value": "asc",
+                  "uuid": "eced2eb2-a181-47be-894c-49411a7aff84"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Properties Statistics by City (Ready to Use)",
+          "id": "178a2e22-691d-4799-babc-59ff36f71952",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/property/stats",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                "stats"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Bookings (Ready to Use)",
+          "id": "8d2325a9-239f-453b-8a39-e9de096651ba",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/booking/my",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "booking",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Booking by Id (Customizable)",
+          "id": "14e252f6-47ba-4112-9d2b-1a19e5c9cc1e",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3001/booking/:booking_id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "booking",
+                ":booking_id"
+              ],
+              "variable": [
+                {
+                  "key": "booking_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "616c5a27-ae28-409d-a180-e198e9f26010",
+              "name": "Get Booking by Id (Ready to Use)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3001/booking/:booking_id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "booking",
+                    ":booking_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "booking_id",
+                      "value": "7d83e72a-d0ec-4476-9e0e-4d895593bf25"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-04T12:42:22.755Z",
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Book a Property (Customizable)",
+          "id": "fca0d3cb-0e45-436d-a07d-9308fff30047",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"checkInDate\": \"<YYYY-MM-DD>\",\r\n    \"checkOutDate\": \"<YYYY-MM-DD>\",\r\n    \"paymentType\": \"<String - 'PayPal' or 'Card'>\",\r\n    \"currency\": \"<3-character currency>\",\r\n\r\n    \"cardNumber\": \"<cardNumber - required only for paymentType=card>\",\r\n    \"cardHolder\": \"<cardHolder - required only for paymentType=card>\",\r\n    \"cardExpiry\": \"<cardExpiry - required only for paymentType=card>\",\r\n\r\n    \"paypalEmail\": \"<paypalEmail - required only for paymentType=paypal>\",\r\n    \"paypalTransactionId\": \"<paypalTransactionId - required only for paymentType=paypal>\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/property/:property_id/book",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                ":property_id",
+                "book"
+              ],
+              "variable": [
+                {
+                  "key": "property_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9af504d7-d602-430c-b52b-46b3ffcbb7ee",
+              "name": "Book a Property - Card Payment (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"checkInDate\": \"2026-05-01\",\r\n    \"checkOutDate\": \"2026-05-12\",\r\n    \"paymentType\": \"Card\",\r\n    \"currency\": \"THB\",\r\n\r\n    \"cardNumber\": \"{{$randomCreditCardMask}}-1234-5678-9012\",\r\n    \"cardHolder\": \"{{$randomFullName}}\",\r\n    \"cardExpiry\": \"{{$randomMonth}} 2035\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/property/:property_id/book",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "property",
+                    ":property_id",
+                    "book"
+                  ],
+                  "variable": [
+                    {
+                      "key": "property_id",
+                      "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-03T20:12:47.616Z",
+              "body": null
+            },
+            {
+              "id": "44794bc4-1a6a-4268-92ee-70d8fd1dbac5",
+              "name": "Book a Property - PayPal Payment (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"checkInDate\": \"2026-07-03\",\r\n    \"checkOutDate\": \"2026-07-09\",\r\n    \"paymentType\": \"PayPal\",\r\n    \"currency\": \"CAD\",\r\n\r\n    \"paypalEmail\": \"{{$randomExampleEmail}}\",\r\n    \"paypalTransactionId\": \"PP-{{$randomUUID}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/property/:property_id/book",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "property",
+                    ":property_id",
+                    "book"
+                  ],
+                  "variable": [
+                    {
+                      "key": "property_id",
+                      "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-03T20:12:47.616Z",
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Create Property Review (Customizable)",
+          "id": "c9da8323-6214-4581-b190-359eac7efca2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"rating\": \"<rating>\",\r\n    \"comment\": \"<comment>\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/property/:property_id/review",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "property",
+                ":property_id",
+                "review"
+              ],
+              "variable": [
+                {
+                  "key": "property_id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5a48bc0d-fce6-4e40-b9a4-3232b0d27b2e",
+              "name": "Create Property Review (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "04a9c51e-9f45-4e48-b30e-45e0a9209ae9"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"rating\": 5,\r\n    \"comment\": \"I loved my stay at this amazing property!\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/property/:property_id/review",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "property",
+                    ":property_id",
+                    "review"
+                  ],
+                  "variable": [
+                    {
+                      "key": "property_id",
+                      "value": "8164dd55-a730-4a84-a376-4c6f697aeadb"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-03T18:48:42.679Z",
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Delete Booking (Customizable)",
+          "id": "4a13bcdf-2971-46f3-8b6d-4ff39c086fac",
+          "request": {
             "method": "DELETE",
             "header": [
               {
@@ -2016,176 +1869,311 @@
               "variable": [
                 {
                   "key": "booking_id",
-                  "value": "f2a263d3-2ba2-40e2-9643-cedffca6a7ec"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T12:54:34.914Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Create Admin (Customizable)",
-      "id": "60e71702-ee24-451c-989e-cfcdb25f8138",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"<email>\",\r\n    \"password\": \"<password>\",\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"isSuperAdmin\": \"<isSuperAdmin>\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:3001/admin",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "admin"
-          ]
-        }
-      },
-      "response": [
-        {
-          "id": "4ba7249b-2831-427a-87c5-78f4351a3a91",
-          "name": "Create Basic Admin (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{BearerToken}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"isSuperAdmin\": false\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/admin",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "admin"
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T14:51:52.027Z",
-          "body": null
-        },
-        {
-          "id": "e4356272-c0a7-403a-a23a-79df3273f8d5",
-          "name": "Create Super Admin (Ready to Use)",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{BearerToken}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"isSuperAdmin\": true\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3001/admin",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3001",
-              "path": [
-                "admin"
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T14:51:52.027Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Block User (Customizable)",
-      "id": "f9393583-1d81-4d14-952e-19374df01730",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/admin/:user_id/block",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "admin",
-            ":user_id",
-            "block"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "user_id",
-              "value": ""
+              "id": "90d27b19-1ab7-4206-9b6b-bd149b82df7d",
+              "name": "Delete Booking (Ready to Use)",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3001/booking/:booking_id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "booking",
+                    ":booking_id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "booking_id",
+                      "value": "f2a263d3-2ba2-40e2-9643-cedffca6a7ec"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-04T12:54:34.914Z",
+              "body": null
             }
           ]
         }
-      },
-      "response": [
+      ],
+      "id": "37ddc7a1-2fdb-460e-bcf2-9b7c4a9ce4d7"
+    },
+    {
+      "name": "Admin Endpoints",
+      "item": [
         {
-          "id": "3f3771a3-af0f-4c3b-868b-735948a980ee",
-          "name": "Block User (Ready to Use)",
-          "originalRequest": {
+          "name": "Get All Users (Ready to Use)",
+          "id": "7c030b73-f771-43b1-9b97-c26d9be1e91e",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/user/list",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "user",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID (Customizable)",
+          "id": "9cd5669f-a833-4d8f-9198-d62336b63fd9",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text",
+                "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/user/:UUID",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "user",
+                ":UUID"
+              ],
+              "variable": [
+                {
+                  "key": "UUID",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5b136e28-19dc-475c-ab32-2690289a5b10",
+              "name": "Get Pre-Populated User (Ready to Use)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text",
+                    "uuid": "c850885f-8fd9-457e-8f64-dd6d06db24b8"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/user/:UUID",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "user",
+                    ":UUID"
+                  ],
+                  "variable": [
+                    {
+                      "key": "UUID",
+                      "value": "33333333-3333-3333-3333-333333333333"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2025-12-28T23:25:02.106Z",
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Create Admin (Customizable)",
+          "id": "60e71702-ee24-451c-989e-cfcdb25f8138",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{BearerToken}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"<email>\",\r\n    \"password\": \"<password>\",\r\n    \"firstName\": \"<firstName>\",\r\n    \"lastName\": \"<lastName>\",\r\n    \"isSuperAdmin\": \"<isSuperAdmin>\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3001/admin",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "admin"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4ba7249b-2831-427a-87c5-78f4351a3a91",
+              "name": "Create Basic Admin (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"isSuperAdmin\": false\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/admin",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "admin"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-04T14:51:52.027Z",
+              "body": null
+            },
+            {
+              "id": "e4356272-c0a7-403a-a23a-79df3273f8d5",
+              "name": "Create Super Admin (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"password\": \"Password123\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"isSuperAdmin\": true\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3001/admin",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "admin"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-04T14:51:52.027Z",
+              "body": null
+            }
+          ]
+        },
+        {
+          "name": "Block User (Customizable)",
+          "id": "f9393583-1d81-4d14-952e-19374df01730",
+          "request": {
             "method": "POST",
             "header": [
               {
@@ -2209,58 +2197,58 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "66666666-6666-6666-6666-666666666666"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T13:23:22.083Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Unblock User (Customizable)",
-      "id": "2d2c5b16-bd5d-4641-b700-90e110b68d8c",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/admin/:user_id/unblock",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "admin",
-            ":user_id",
-            "unblock"
-          ],
-          "variable": [
+          "response": [
             {
-              "key": "user_id",
-              "value": ""
+              "id": "3f3771a3-af0f-4c3b-868b-735948a980ee",
+              "name": "Block User (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3001/admin/:user_id/block",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "admin",
+                    ":user_id",
+                    "block"
+                  ],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "66666666-6666-6666-6666-666666666666"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-04T13:23:22.083Z",
+              "body": null
             }
           ]
-        }
-      },
-      "response": [
+        },
         {
-          "id": "0ac2f883-6877-4a7f-8a98-80391473a5ab",
-          "name": "Unblock User (Ready to Use)",
-          "originalRequest": {
+          "name": "Unblock User (Customizable)",
+          "id": "2d2c5b16-bd5d-4641-b700-90e110b68d8c",
+          "request": {
             "method": "POST",
             "header": [
               {
@@ -2284,54 +2272,63 @@
               "variable": [
                 {
                   "key": "user_id",
-                  "value": "66666666-6666-6666-6666-666666666666"
+                  "value": ""
                 }
               ]
             }
           },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [],
-          "cookie": [],
-          "responseTime": "2026-01-04T13:32:31.251Z",
-          "body": null
-        }
-      ]
-    },
-    {
-      "name": "Get Amenities",
-      "id": "f9ebc96e-88fa-434e-ae36-88b9cfb86364",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{BearerToken}}",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "http://localhost:3001/amenity/list",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "3001",
-          "path": [
-            "amenity",
-            "list"
+          "response": [
+            {
+              "id": "0ac2f883-6877-4a7f-8a98-80391473a5ab",
+              "name": "Unblock User (Ready to Use)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{BearerToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:3001/admin/:user_id/unblock",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3001",
+                  "path": [
+                    "admin",
+                    ":user_id",
+                    "unblock"
+                  ],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "66666666-6666-6666-6666-666666666666"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [],
+              "cookie": [],
+              "responseTime": "2026-01-04T13:32:31.251Z",
+              "body": null
+            }
           ]
         }
-      },
-      "response": []
+      ],
+      "id": "da25e5b9-0614-4a1a-87a8-cb80812580c4"
     }
   ],
   "event": [
     {
       "listen": "prerequest",
       "script": {
-        "id": "19c00bcd-d198-448d-a04a-8531b10a76a6",
+        "id": "854b85a6-8a31-41cd-babd-0d36221c4942",
         "type": "text/javascript",
         "packages": {},
         "requests": {},
@@ -2343,7 +2340,7 @@
     {
       "listen": "test",
       "script": {
-        "id": "32948a8a-13fd-4caf-9aaa-434c9bb13904",
+        "id": "76022875-df7a-4c43-af66-4753b930baf3",
         "type": "text/javascript",
         "packages": {},
         "requests": {},
@@ -2355,11 +2352,13 @@
           "    let jsonData = pm.response.json(); \r",
           "    \r",
           "    // Set only if successfull response, set as empty otherwise\r",
-          "    if (pm.response.code === 200 && jsonData.accessToken) {\r",
+          "    if (pm.response.code === 200 && jsonData.accessToken && jsonData.userId) {\r",
           "        pm.globals.set(\"BearerToken\", `${jsonData.accessToken}`);\r",
+          "        pm.globals.set(\"AuthUserID\", `${jsonData.userId}`);\r",
           "    } \r",
           "    else {\r",
           "        pm.globals.set(\"BearerToken\", \"\");\r",
+          "        pm.globals.set(\"AuthUserID\", \"\");\r",
           "    }\r",
           "}"
         ]

@@ -2,6 +2,9 @@ package stefany.piccaro.submission.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import stefany.piccaro.submission.dto.BookingInfoDTO;
+import stefany.piccaro.submission.dto.PropertyInfoDTO;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class Booking {
 
     @ManyToOne // N bookings -> 1 property
     @JoinColumn(name = "property_id", nullable = false)
+    @JsonIgnore
     private Property property;
 
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -88,6 +92,22 @@ public class Booking {
 
     public List<Payment> getPayments() { return payments; }
     public void setPayments(List<Payment> payments) { this.payments = payments; }
+
+
+    // ----- Derived fields -----
+    @Transient
+    public PropertyInfoDTO getBookingsInfo() {
+        if (property == null) {
+            return null;
+        }
+
+        return new PropertyInfoDTO(
+                property.getPropertyId(),
+                property.getListedBy(),
+                property.getTitle(),
+                property.getAddress() + ", " + property.getCity() + ", " + property.getCountry()
+        );
+    }
 
 
     // ----- String Conversion -----

@@ -34,7 +34,7 @@ public class ReviewService {
         // Check user has ever booked this property
         boolean hasBooked = bookingService.existsCompletedBooking(userId, propertyId);
         if (!hasBooked) {
-            throw new ForbiddenException("You can only review properties you have booked.");
+            throw new ForbiddenException("Reviews are only allowed for completed stays on properties you have booked.");
         }
 
         // Prevent multiple reviews on same property for same user

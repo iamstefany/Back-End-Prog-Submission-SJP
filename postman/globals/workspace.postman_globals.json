@@ -8,9 +8,16 @@
       "enabled": true,
       "type": "any",
       "description": ""
+    },
+    {
+      "key": "AuthUserID",
+      "value": "",
+      "enabled": true,
+      "type": "any",
+      "description": ""
     }
   ],
   "_postman_variable_scope": "globals",
-  "_postman_exported_at": "2025-12-27T13:43:20.740Z",
+  "_postman_exported_at": "2026-01-06T21:59:25.437Z",
   "_postman_exported_using": "Postman/11.0.0"
 }
